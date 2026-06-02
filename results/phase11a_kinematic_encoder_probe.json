@@ -1,0 +1,93 @@
+{
+  "dataset_shape": [
+    20,
+    10000,
+    64,
+    64
+  ],
+  "train_sequences": 220,
+  "test_sequences": 20,
+  "candidate_names": [
+    "simple",
+    "token",
+    "kinematic",
+    "max_simple_token",
+    "max_simple_kin",
+    "max_token_kin",
+    "max_all",
+    "blend_simple_token",
+    "blend_simple_kin",
+    "blend_token_kin",
+    "blend_all",
+    "wide_simple",
+    "wide_token",
+    "wide_kinematic",
+    "wide_max_all",
+    "very_wide_max_all"
+  ],
+  "ranker_stats": {
+    "1": {
+      "n": 220,
+      "oracle_mean": 0.6828261017799377
+    },
+    "5": {
+      "n": 220,
+      "oracle_mean": 0.3553830087184906
+    },
+    "10": {
+      "n": 220,
+      "oracle_mean": 0.2880242168903351
+    },
+    "17": {
+      "n": 220,
+      "oracle_mean": 0.21820388734340668
+    }
+  },
+  "metrics": {
+    "1": {
+      "simple": 0.5975707354941511,
+      "token": 0.5988762473837598,
+      "kinematic": 0.5766122637014357,
+      "max_all": 0.6146518723366378,
+      "wide_max_all": 0.4801683754586553,
+      "rf_ranker": 0.6087186798453331,
+      "extra_ranker": 0.5889343738555908,
+      "ensemble_ranker": 0.6098249539732933,
+      "oracle": 0.680400350689888
+    },
+    "5": {
+      "simple": 0.2778806411995483,
+      "token": 0.2561642681136952,
+      "kinematic": 0.27680843560053076,
+      "max_all": 0.30491685964124415,
+      "wide_max_all": 0.3032165231556652,
+      "rf_ranker": 0.30925441794097425,
+      "extra_ranker": 0.31321345791220667,
+      "ensemble_ranker": 0.31628694050014017,
+      "oracle": 0.3702284462749958
+    },
+    "10": {
+      "simple": 0.2167800467049527,
+      "token": 0.16882572487008968,
+      "kinematic": 0.21081774861899244,
+      "max_all": 0.22170040574285452,
+      "wide_max_all": 0.20794272009066161,
+      "rf_ranker": 0.23599114827811718,
+      "extra_ranker": 0.2324333067983389,
+      "ensemble_ranker": 0.23402199931442738,
+      "oracle": 0.27196251042187214
+    },
+    "17": {
+      "simple": 0.1981334888690264,
+      "token": 0.15456817008959273,
+      "kinematic": 0.19815445945974278,
+      "max_all": 0.19447839352547147,
+      "wide_max_all": 0.18671527229176688,
+      "rf_ranker": 0.21500612841919065,
+      "extra_ranker": 0.20465761804953217,
+      "ensemble_ranker": 0.20390365021303297,
+      "oracle": 0.26238979026675224
+    }
+  },
+  "elapsed_seconds": 98.48528500000248
+}

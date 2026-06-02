@@ -1,0 +1,1165 @@
+{
+  "dataset_shape": [
+    20,
+    10000,
+    64,
+    64
+  ],
+  "train_sequences": 220,
+  "test_sequences": 20,
+  "selection_fit_sequences": 165,
+  "selection_calibration_sequences": 55,
+  "pairwise_ranker_enabled": false,
+  "candidate_names": [
+    "simple",
+    "token",
+    "max_beta_0.00",
+    "blend_beta_0.00",
+    "max_beta_0.25",
+    "blend_beta_0.25",
+    "max_beta_0.50",
+    "blend_beta_0.50",
+    "max_beta_0.75",
+    "blend_beta_0.75",
+    "max_beta_1.00",
+    "blend_beta_1.00",
+    "wide_simple",
+    "wide_token",
+    "wide_max_beta_1.00",
+    "wide_blend_beta_0.75",
+    "very_wide_max_beta_1.00",
+    "very_wide_blend_beta_0.75",
+    "shift_simple_mid",
+    "shift_token_mid",
+    "shift_simple_anti",
+    "shift_token_anti",
+    "max_shift_mid"
+  ],
+  "candidate_pair_count": 529,
+  "ranker_stats": {
+    "1": {
+      "n": 440,
+      "class_hist": {
+        "0": 136,
+        "1": 129,
+        "4": 15,
+        "5": 8,
+        "6": 5,
+        "7": 11,
+        "8": 3,
+        "9": 26,
+        "10": 6,
+        "12": 41,
+        "13": 7,
+        "14": 2,
+        "15": 3,
+        "16": 14,
+        "17": 6,
+        "18": 9,
+        "19": 8,
+        "20": 8,
+        "21": 3
+      },
+      "slot_oracle_mean": 0.6894208192825317
+    },
+    "5": {
+      "n": 440,
+      "class_hist": {
+        "0": 46,
+        "1": 12,
+        "5": 3,
+        "7": 1,
+        "8": 2,
+        "9": 1,
+        "10": 5,
+        "12": 75,
+        "13": 57,
+        "15": 3,
+        "16": 49,
+        "17": 17,
+        "18": 39,
+        "19": 31,
+        "20": 40,
+        "21": 35,
+        "22": 24
+      },
+      "slot_oracle_mean": 0.35368403792381287
+    },
+    "10": {
+      "n": 440,
+      "class_hist": {
+        "0": 90,
+        "1": 18,
+        "4": 1,
+        "7": 1,
+        "12": 60,
+        "13": 34,
+        "14": 2,
+        "15": 4,
+        "16": 55,
+        "17": 9,
+        "18": 41,
+        "19": 31,
+        "20": 43,
+        "21": 33,
+        "22": 18
+      },
+      "slot_oracle_mean": 0.2513095438480377
+    },
+    "17": {
+      "n": 440,
+      "class_hist": {
+        "0": 116,
+        "1": 15,
+        "5": 1,
+        "12": 43,
+        "13": 25,
+        "15": 5,
+        "16": 48,
+        "17": 12,
+        "18": 39,
+        "19": 53,
+        "20": 29,
+        "21": 32,
+        "22": 22
+      },
+      "slot_oracle_mean": 0.17048479616641998
+    }
+  },
+  "frame_slot_ranker_stats": {
+    "1": {
+      "n": 440,
+      "class_hist": {
+        "0": 148,
+        "1": 127,
+        "4": 18,
+        "5": 13,
+        "6": 2,
+        "7": 15,
+        "8": 3,
+        "9": 28,
+        "10": 6,
+        "12": 32,
+        "13": 6,
+        "14": 3,
+        "15": 1,
+        "16": 7,
+        "17": 3,
+        "18": 9,
+        "19": 7,
+        "20": 9,
+        "21": 2,
+        "22": 1
+      },
+      "frame_marginal_oracle_mean": 0.7035120129585266
+    },
+    "5": {
+      "n": 440,
+      "class_hist": {
+        "0": 61,
+        "1": 19,
+        "5": 1,
+        "6": 2,
+        "7": 1,
+        "8": 2,
+        "9": 1,
+        "10": 3,
+        "12": 65,
+        "13": 33,
+        "14": 4,
+        "15": 5,
+        "16": 23,
+        "17": 12,
+        "18": 55,
+        "19": 40,
+        "20": 38,
+        "21": 44,
+        "22": 31
+      },
+      "frame_marginal_oracle_mean": 0.4286746382713318
+    },
+    "10": {
+      "n": 440,
+      "class_hist": {
+        "0": 69,
+        "1": 23,
+        "4": 1,
+        "5": 1,
+        "9": 4,
+        "10": 1,
+        "12": 51,
+        "13": 22,
+        "14": 4,
+        "15": 2,
+        "16": 39,
+        "17": 11,
+        "18": 60,
+        "19": 43,
+        "20": 46,
+        "21": 35,
+        "22": 28
+      },
+      "frame_marginal_oracle_mean": 0.3413868844509125
+    },
+    "17": {
+      "n": 440,
+      "class_hist": {
+        "0": 64,
+        "1": 11,
+        "4": 1,
+        "5": 2,
+        "6": 1,
+        "10": 1,
+        "12": 54,
+        "13": 22,
+        "14": 3,
+        "15": 1,
+        "16": 44,
+        "17": 14,
+        "18": 70,
+        "19": 67,
+        "20": 32,
+        "21": 31,
+        "22": 22
+      },
+      "frame_marginal_oracle_mean": 0.2633996903896332
+    }
+  },
+  "pair_ranker_stats": {
+    "1": {
+      "n": 220,
+      "pair_oracle_mean": 0.7035120129585266
+    },
+    "5": {
+      "n": 220,
+      "pair_oracle_mean": 0.4286746680736542
+    },
+    "10": {
+      "n": 220,
+      "pair_oracle_mean": 0.3413868844509125
+    },
+    "17": {
+      "n": 220,
+      "pair_oracle_mean": 0.26339972019195557
+    }
+  },
+  "calibration_metrics": {
+    "1": {
+      "simple": 0.5995931075377898,
+      "token": 0.6380562253973701,
+      "max_beta_1.00": 0.6369369019161571,
+      "slot_class_ranker": 0.5977435625204786,
+      "slot_reg_ranker": 0.6384759691054805,
+      "slot_frame_class_ranker": 0.5994175670871937,
+      "slot_frame_reg_ranker": 0.6378691555473166,
+      "slot_frame_extra_ranker": 0.6400684913262242,
+      "slot_frame_ensemble_ranker": 0.6395420783876766,
+      "slot_frame_ensemble_w25_ranker": 0.6417852540648455,
+      "slot_frame_ensemble_w75_ranker": 0.6382496217001613,
+      "slot_hybrid_ranker": 0.6433166734297482,
+      "slot_hybrid_extra_ranker": 0.6404177823593256,
+      "slot_pair_reg_ranker": 0.6358082368327473,
+      "slot_object_oracle": 0.7047674568234723,
+      "slot_frame_oracle": 0.7147531994364479,
+      "frame_oracle": 0.693730510093949,
+      "slot_class_choice": {
+        "simple": 15,
+        "token": 11,
+        "max_beta_0.25": 15,
+        "blend_beta_0.25": 6,
+        "max_beta_0.50": 3,
+        "blend_beta_0.50": 4,
+        "max_beta_0.75": 1,
+        "blend_beta_0.75": 7,
+        "max_beta_1.00": 11,
+        "wide_simple": 1,
+        "wide_token": 6,
+        "wide_max_beta_1.00": 3,
+        "wide_blend_beta_0.75": 4,
+        "very_wide_max_beta_1.00": 4,
+        "very_wide_blend_beta_0.75": 7,
+        "shift_simple_mid": 3,
+        "shift_token_mid": 4,
+        "shift_simple_anti": 3,
+        "shift_token_anti": 2
+      },
+      "slot_reg_choice": {
+        "simple": 3,
+        "token": 5,
+        "max_beta_0.50": 1,
+        "max_beta_0.75": 1,
+        "blend_beta_0.75": 4,
+        "max_beta_1.00": 7,
+        "wide_simple": 6,
+        "shift_token_mid": 67,
+        "max_shift_mid": 16
+      },
+      "slot_frame_class_choice": {
+        "simple": 18,
+        "token": 2,
+        "max_beta_0.25": 21,
+        "blend_beta_0.25": 7,
+        "max_beta_0.50": 6,
+        "blend_beta_0.50": 9,
+        "max_beta_0.75": 3,
+        "blend_beta_0.75": 11,
+        "max_beta_1.00": 3,
+        "wide_max_beta_1.00": 2,
+        "wide_blend_beta_0.75": 3,
+        "very_wide_max_beta_1.00": 1,
+        "very_wide_blend_beta_0.75": 11,
+        "shift_token_mid": 3,
+        "shift_simple_anti": 4,
+        "shift_token_anti": 6
+      },
+      "slot_frame_reg_choice": {
+        "simple": 3,
+        "blend_beta_0.25": 4,
+        "max_beta_0.50": 1,
+        "max_beta_0.75": 7,
+        "blend_beta_0.75": 6,
+        "max_beta_1.00": 3,
+        "shift_token_mid": 47,
+        "max_shift_mid": 39
+      },
+      "slot_frame_extra_choice": {
+        "simple": 4,
+        "token": 2,
+        "max_beta_0.25": 4,
+        "blend_beta_0.25": 2,
+        "max_beta_0.50": 1,
+        "max_beta_0.75": 3,
+        "blend_beta_0.75": 7,
+        "max_beta_1.00": 5,
+        "shift_token_mid": 46,
+        "max_shift_mid": 36
+      },
+      "slot_frame_ensemble_choice": {
+        "simple": 3,
+        "max_beta_0.25": 3,
+        "blend_beta_0.25": 3,
+        "max_beta_0.75": 5,
+        "blend_beta_0.75": 7,
+        "max_beta_1.00": 4,
+        "shift_token_mid": 47,
+        "max_shift_mid": 38
+      },
+      "slot_frame_ensemble_w25_choice": {
+        "simple": 3,
+        "token": 1,
+        "max_beta_0.25": 4,
+        "blend_beta_0.25": 2,
+        "max_beta_0.50": 1,
+        "max_beta_0.75": 3,
+        "blend_beta_0.75": 7,
+        "max_beta_1.00": 6,
+        "shift_token_mid": 44,
+        "max_shift_mid": 39
+      },
+      "slot_frame_ensemble_w75_choice": {
+        "simple": 1,
+        "max_beta_0.25": 1,
+        "blend_beta_0.25": 4,
+        "max_beta_0.50": 1,
+        "max_beta_0.75": 7,
+        "blend_beta_0.75": 6,
+        "max_beta_1.00": 4,
+        "shift_token_mid": 46,
+        "max_shift_mid": 40
+      },
+      "slot_hybrid_choice": {
+        "simple": 4,
+        "max_beta_0.50": 2,
+        "max_beta_0.75": 2,
+        "blend_beta_0.75": 3,
+        "max_beta_1.00": 11,
+        "wide_simple": 2,
+        "shift_token_mid": 69,
+        "max_shift_mid": 17
+      },
+      "slot_hybrid_extra_choice": {
+        "simple": 5,
+        "max_beta_0.25": 1,
+        "max_beta_0.50": 1,
+        "max_beta_0.75": 1,
+        "blend_beta_0.75": 6,
+        "max_beta_1.00": 14,
+        "wide_simple": 1,
+        "shift_token_mid": 62,
+        "max_shift_mid": 19
+      }
+    },
+    "5": {
+      "simple": 0.268733383749019,
+      "token": 0.2636836006898772,
+      "max_beta_1.00": 0.30108778178691864,
+      "slot_class_ranker": 0.3148982580257579,
+      "slot_reg_ranker": 0.3252806670315407,
+      "slot_frame_class_ranker": 0.3241656505488015,
+      "slot_frame_reg_ranker": 0.32556241371847244,
+      "slot_frame_extra_ranker": 0.32604183282250393,
+      "slot_frame_ensemble_ranker": 0.3260361969991763,
+      "slot_frame_ensemble_w25_ranker": 0.32570392507275714,
+      "slot_frame_ensemble_w75_ranker": 0.3248805704192209,
+      "slot_hybrid_ranker": 0.33296057798677287,
+      "slot_hybrid_extra_ranker": 0.3306411375617363,
+      "slot_pair_reg_ranker": 0.3224550413853871,
+      "slot_object_oracle": 0.4026261061218711,
+      "slot_frame_oracle": 0.43078982748768546,
+      "frame_oracle": 0.40126678401773624,
+      "slot_class_choice": {
+        "simple": 8,
+        "token": 13,
+        "blend_beta_0.25": 2,
+        "max_beta_0.75": 5,
+        "blend_beta_0.75": 2,
+        "max_beta_1.00": 3,
+        "wide_simple": 2,
+        "wide_token": 7,
+        "very_wide_max_beta_1.00": 18,
+        "very_wide_blend_beta_0.75": 6,
+        "shift_simple_mid": 12,
+        "shift_token_mid": 12,
+        "shift_simple_anti": 6,
+        "shift_token_anti": 4,
+        "max_shift_mid": 10
+      },
+      "slot_reg_choice": {
+        "wide_simple": 15,
+        "wide_token": 4,
+        "wide_max_beta_1.00": 5,
+        "wide_blend_beta_0.75": 13,
+        "very_wide_blend_beta_0.75": 2,
+        "shift_simple_mid": 1,
+        "max_shift_mid": 70
+      },
+      "slot_frame_class_choice": {
+        "simple": 20,
+        "token": 3,
+        "max_beta_0.50": 3,
+        "blend_beta_0.50": 6,
+        "max_beta_0.75": 4,
+        "blend_beta_0.75": 4,
+        "max_beta_1.00": 6,
+        "wide_simple": 1,
+        "wide_token": 2,
+        "wide_max_beta_1.00": 3,
+        "wide_blend_beta_0.75": 6,
+        "very_wide_max_beta_1.00": 4,
+        "very_wide_blend_beta_0.75": 7,
+        "shift_simple_mid": 8,
+        "shift_token_mid": 8,
+        "shift_simple_anti": 9,
+        "shift_token_anti": 8,
+        "max_shift_mid": 8
+      },
+      "slot_frame_reg_choice": {
+        "wide_simple": 8,
+        "shift_simple_mid": 61,
+        "max_shift_mid": 41
+      },
+      "slot_frame_extra_choice": {
+        "wide_simple": 8,
+        "shift_simple_mid": 56,
+        "shift_token_mid": 4,
+        "max_shift_mid": 42
+      },
+      "slot_frame_ensemble_choice": {
+        "wide_simple": 5,
+        "shift_simple_mid": 63,
+        "shift_token_mid": 2,
+        "max_shift_mid": 40
+      },
+      "slot_frame_ensemble_w25_choice": {
+        "wide_simple": 8,
+        "shift_simple_mid": 57,
+        "shift_token_mid": 2,
+        "max_shift_mid": 43
+      },
+      "slot_frame_ensemble_w75_choice": {
+        "wide_simple": 7,
+        "shift_simple_mid": 66,
+        "max_shift_mid": 37
+      },
+      "slot_hybrid_choice": {
+        "wide_simple": 11,
+        "wide_blend_beta_0.75": 2,
+        "shift_simple_mid": 6,
+        "max_shift_mid": 91
+      },
+      "slot_hybrid_extra_choice": {
+        "wide_simple": 8,
+        "shift_simple_mid": 17,
+        "shift_token_mid": 1,
+        "max_shift_mid": 84
+      }
+    },
+    "10": {
+      "simple": 0.19370554531501097,
+      "token": 0.17823589122430844,
+      "max_beta_1.00": 0.21165543991056354,
+      "slot_class_ranker": 0.22114213435197738,
+      "slot_reg_ranker": 0.2610458618162031,
+      "slot_frame_class_ranker": 0.24355119757896607,
+      "slot_frame_reg_ranker": 0.23021848806272638,
+      "slot_frame_extra_ranker": 0.22990834495608428,
+      "slot_frame_ensemble_ranker": 0.23269241560622939,
+      "slot_frame_ensemble_w25_ranker": 0.2279794090111903,
+      "slot_frame_ensemble_w75_ranker": 0.2327334399487564,
+      "slot_hybrid_ranker": 0.24568971006565235,
+      "slot_hybrid_extra_ranker": 0.24424937738725722,
+      "slot_pair_reg_ranker": 0.23750090279852878,
+      "slot_object_oracle": 0.27437402127021915,
+      "slot_frame_oracle": 0.31811273341829127,
+      "frame_oracle": 0.2926962661472234,
+      "slot_class_choice": {
+        "simple": 5,
+        "token": 4,
+        "blend_beta_0.50": 2,
+        "wide_simple": 1,
+        "wide_token": 8,
+        "wide_max_beta_1.00": 5,
+        "wide_blend_beta_0.75": 2,
+        "very_wide_max_beta_1.00": 23,
+        "very_wide_blend_beta_0.75": 9,
+        "shift_simple_mid": 14,
+        "shift_token_mid": 14,
+        "shift_simple_anti": 6,
+        "shift_token_anti": 7,
+        "max_shift_mid": 10
+      },
+      "slot_reg_choice": {
+        "simple": 5,
+        "max_beta_0.75": 2,
+        "wide_simple": 54,
+        "wide_token": 24,
+        "wide_max_beta_1.00": 1,
+        "wide_blend_beta_0.75": 2,
+        "very_wide_blend_beta_0.75": 2,
+        "max_shift_mid": 20
+      },
+      "slot_frame_class_choice": {
+        "simple": 8,
+        "token": 4,
+        "max_beta_0.25": 7,
+        "blend_beta_0.75": 1,
+        "wide_simple": 4,
+        "wide_token": 8,
+        "wide_max_beta_1.00": 2,
+        "wide_blend_beta_0.75": 1,
+        "very_wide_max_beta_1.00": 19,
+        "very_wide_blend_beta_0.75": 2,
+        "shift_simple_mid": 20,
+        "shift_token_mid": 10,
+        "shift_simple_anti": 5,
+        "shift_token_anti": 9,
+        "max_shift_mid": 10
+      },
+      "slot_frame_reg_choice": {
+        "simple": 30,
+        "wide_simple": 19,
+        "shift_simple_mid": 39,
+        "shift_token_mid": 2,
+        "max_shift_mid": 20
+      },
+      "slot_frame_extra_choice": {
+        "simple": 27,
+        "token": 1,
+        "blend_beta_0.50": 1,
+        "wide_simple": 24,
+        "shift_simple_mid": 31,
+        "shift_token_mid": 9,
+        "max_shift_mid": 17
+      },
+      "slot_frame_ensemble_choice": {
+        "simple": 28,
+        "wide_simple": 22,
+        "shift_simple_mid": 36,
+        "shift_token_mid": 7,
+        "max_shift_mid": 17
+      },
+      "slot_frame_ensemble_w25_choice": {
+        "simple": 27,
+        "blend_beta_0.50": 1,
+        "wide_simple": 23,
+        "shift_simple_mid": 35,
+        "shift_token_mid": 8,
+        "max_shift_mid": 16
+      },
+      "slot_frame_ensemble_w75_choice": {
+        "simple": 27,
+        "wide_simple": 22,
+        "shift_simple_mid": 39,
+        "shift_token_mid": 4,
+        "max_shift_mid": 18
+      },
+      "slot_hybrid_choice": {
+        "simple": 18,
+        "max_beta_0.50": 1,
+        "wide_simple": 40,
+        "wide_token": 4,
+        "shift_simple_mid": 5,
+        "shift_token_mid": 7,
+        "max_shift_mid": 35
+      },
+      "slot_hybrid_extra_choice": {
+        "simple": 18,
+        "blend_beta_0.50": 1,
+        "wide_simple": 36,
+        "shift_simple_mid": 14,
+        "shift_token_mid": 9,
+        "max_shift_mid": 32
+      }
+    },
+    "17": {
+      "simple": 0.16665214175697077,
+      "token": 0.14294821193272417,
+      "max_beta_1.00": 0.1723601545799862,
+      "slot_class_ranker": 0.20285721389338865,
+      "slot_reg_ranker": 0.20358997705100218,
+      "slot_frame_class_ranker": 0.20521001858990218,
+      "slot_frame_reg_ranker": 0.20951000500801067,
+      "slot_frame_extra_ranker": 0.1995794454429561,
+      "slot_frame_ensemble_ranker": 0.20583957659609387,
+      "slot_frame_ensemble_w25_ranker": 0.19940944075627046,
+      "slot_frame_ensemble_w75_ranker": 0.2047109878654108,
+      "slot_hybrid_ranker": 0.20310482535191665,
+      "slot_hybrid_extra_ranker": 0.20205194056949838,
+      "slot_pair_reg_ranker": 0.19713468414280055,
+      "slot_object_oracle": 0.24945056336733815,
+      "slot_frame_oracle": 0.28220089836554096,
+      "frame_oracle": 0.2454135225577788,
+      "slot_class_choice": {
+        "simple": 15,
+        "token": 3,
+        "wide_simple": 5,
+        "wide_token": 10,
+        "wide_blend_beta_0.75": 3,
+        "very_wide_max_beta_1.00": 22,
+        "very_wide_blend_beta_0.75": 3,
+        "shift_simple_mid": 15,
+        "shift_token_mid": 13,
+        "shift_simple_anti": 10,
+        "shift_token_anti": 6,
+        "max_shift_mid": 5
+      },
+      "slot_reg_choice": {
+        "wide_simple": 32,
+        "wide_token": 1,
+        "wide_max_beta_1.00": 4,
+        "very_wide_max_beta_1.00": 10,
+        "shift_simple_mid": 2,
+        "shift_token_mid": 10,
+        "max_shift_mid": 51
+      },
+      "slot_frame_class_choice": {
+        "simple": 8,
+        "token": 8,
+        "max_beta_0.25": 5,
+        "max_beta_1.00": 2,
+        "wide_simple": 8,
+        "wide_token": 5,
+        "wide_max_beta_1.00": 1,
+        "wide_blend_beta_0.75": 2,
+        "very_wide_max_beta_1.00": 15,
+        "very_wide_blend_beta_0.75": 7,
+        "shift_simple_mid": 12,
+        "shift_token_mid": 6,
+        "shift_simple_anti": 10,
+        "shift_token_anti": 12,
+        "max_shift_mid": 9
+      },
+      "slot_frame_reg_choice": {
+        "wide_simple": 7,
+        "shift_simple_mid": 62,
+        "shift_token_mid": 13,
+        "max_shift_mid": 28
+      },
+      "slot_frame_extra_choice": {
+        "simple": 3,
+        "wide_simple": 10,
+        "wide_token": 1,
+        "shift_simple_mid": 58,
+        "shift_token_mid": 26,
+        "max_shift_mid": 12
+      },
+      "slot_frame_ensemble_choice": {
+        "wide_simple": 8,
+        "shift_simple_mid": 61,
+        "shift_token_mid": 23,
+        "max_shift_mid": 18
+      },
+      "slot_frame_ensemble_w25_choice": {
+        "simple": 2,
+        "wide_simple": 10,
+        "wide_token": 1,
+        "shift_simple_mid": 59,
+        "shift_token_mid": 25,
+        "max_shift_mid": 13
+      },
+      "slot_frame_ensemble_w75_choice": {
+        "wide_simple": 8,
+        "shift_simple_mid": 61,
+        "shift_token_mid": 18,
+        "max_shift_mid": 23
+      },
+      "slot_hybrid_choice": {
+        "wide_simple": 19,
+        "shift_simple_mid": 19,
+        "shift_token_mid": 7,
+        "max_shift_mid": 65
+      },
+      "slot_hybrid_extra_choice": {
+        "wide_simple": 13,
+        "shift_simple_mid": 29,
+        "shift_token_mid": 16,
+        "max_shift_mid": 52
+      }
+    }
+  },
+  "best_learned_selection": {
+    "1": {
+      "selected_metric": "slot_hybrid_ranker",
+      "calibration_iou": 0.6433166734297482,
+      "test_iou": 0.6196219283944889
+    },
+    "5": {
+      "selected_metric": "slot_hybrid_ranker",
+      "calibration_iou": 0.33296057798677287,
+      "test_iou": 0.34426695732205054
+    },
+    "10": {
+      "selected_metric": "slot_reg_ranker",
+      "calibration_iou": 0.2610458618162031,
+      "test_iou": 0.2566009993189406
+    },
+    "17": {
+      "selected_metric": "slot_frame_reg_ranker",
+      "calibration_iou": 0.20951000500801067,
+      "test_iou": 0.20903575046987494
+    }
+  },
+  "metrics": {
+    "1": {
+      "simple": 0.5975707352161408,
+      "token": 0.5988762497901916,
+      "max_beta_1.00": 0.6200719460844993,
+      "slot_class_ranker": 0.5886238223712968,
+      "slot_reg_ranker": 0.6244810900870452,
+      "slot_frame_class_ranker": 0.6065717733832143,
+      "slot_frame_reg_ranker": 0.6274066025458118,
+      "slot_frame_extra_ranker": 0.6416598261604765,
+      "slot_frame_ensemble_ranker": 0.6323813228845966,
+      "slot_frame_ensemble_w25_ranker": 0.6375400944244795,
+      "slot_frame_ensemble_w75_ranker": 0.6316675922117752,
+      "slot_hybrid_ranker": 0.6196219283944889,
+      "slot_hybrid_extra_ranker": 0.6283456846589646,
+      "slot_pair_reg_ranker": 0.6304204602228975,
+      "slot_object_oracle": 0.6891802286382793,
+      "slot_frame_oracle": 0.695508037507534,
+      "frame_oracle": 0.6807371079921722,
+      "slot_class_choice": {
+        "simple": 6,
+        "token": 1,
+        "max_beta_0.25": 5,
+        "blend_beta_0.25": 6,
+        "blend_beta_0.50": 2,
+        "max_beta_0.75": 3,
+        "wide_simple": 1,
+        "very_wide_max_beta_1.00": 4,
+        "very_wide_blend_beta_0.75": 2,
+        "shift_simple_mid": 2,
+        "shift_token_mid": 3,
+        "shift_token_anti": 5
+      },
+      "slot_reg_choice": {
+        "simple": 3,
+        "token": 7,
+        "max_beta_0.75": 3,
+        "blend_beta_0.75": 1,
+        "max_beta_1.00": 4,
+        "wide_simple": 2,
+        "shift_token_mid": 16,
+        "max_shift_mid": 4
+      },
+      "slot_frame_class_choice": {
+        "simple": 3,
+        "max_beta_0.25": 3,
+        "blend_beta_0.25": 7,
+        "blend_beta_0.50": 5,
+        "max_beta_0.75": 4,
+        "blend_beta_0.75": 1,
+        "max_beta_1.00": 1,
+        "wide_simple": 2,
+        "wide_token": 1,
+        "very_wide_max_beta_1.00": 3,
+        "very_wide_blend_beta_0.75": 1,
+        "shift_simple_mid": 1,
+        "shift_token_mid": 3,
+        "shift_simple_anti": 2,
+        "shift_token_anti": 2,
+        "max_shift_mid": 1
+      },
+      "slot_frame_reg_choice": {
+        "simple": 1,
+        "max_beta_0.75": 2,
+        "blend_beta_0.75": 6,
+        "max_beta_1.00": 3,
+        "shift_token_mid": 19,
+        "max_shift_mid": 9
+      },
+      "slot_frame_extra_choice": {
+        "simple": 3,
+        "token": 2,
+        "max_beta_0.75": 1,
+        "blend_beta_0.75": 5,
+        "max_beta_1.00": 2,
+        "wide_simple": 1,
+        "shift_token_mid": 19,
+        "max_shift_mid": 7
+      },
+      "slot_frame_ensemble_choice": {
+        "simple": 3,
+        "max_beta_0.25": 1,
+        "blend_beta_0.75": 5,
+        "max_beta_1.00": 5,
+        "shift_token_mid": 22,
+        "max_shift_mid": 4
+      },
+      "slot_frame_ensemble_w25_choice": {
+        "simple": 4,
+        "token": 1,
+        "blend_beta_0.75": 5,
+        "max_beta_1.00": 4,
+        "shift_token_mid": 21,
+        "max_shift_mid": 5
+      },
+      "slot_frame_ensemble_w75_choice": {
+        "simple": 1,
+        "max_beta_0.75": 1,
+        "blend_beta_0.75": 4,
+        "max_beta_1.00": 5,
+        "shift_token_mid": 20,
+        "max_shift_mid": 9
+      },
+      "slot_hybrid_choice": {
+        "simple": 2,
+        "max_beta_0.25": 1,
+        "max_beta_0.75": 1,
+        "blend_beta_0.75": 4,
+        "max_beta_1.00": 6,
+        "wide_simple": 1,
+        "shift_token_mid": 23,
+        "max_shift_mid": 2
+      },
+      "slot_hybrid_extra_choice": {
+        "simple": 3,
+        "max_beta_0.75": 2,
+        "blend_beta_0.75": 4,
+        "max_beta_1.00": 5,
+        "wide_simple": 1,
+        "shift_token_mid": 21,
+        "max_shift_mid": 4
+      },
+      "best_learned_ranker": 0.6196219283944889
+    },
+    "5": {
+      "simple": 0.27788064144551755,
+      "token": 0.25616426663473246,
+      "max_beta_1.00": 0.3053033512085676,
+      "slot_class_ranker": 0.3243095983615375,
+      "slot_reg_ranker": 0.34202323829039366,
+      "slot_frame_class_ranker": 0.31450952704869495,
+      "slot_frame_reg_ranker": 0.3428092575789209,
+      "slot_frame_extra_ranker": 0.34574772618069466,
+      "slot_frame_ensemble_ranker": 0.34601725239211734,
+      "slot_frame_ensemble_w25_ranker": 0.34601725239211734,
+      "slot_frame_ensemble_w75_ranker": 0.3447352011100601,
+      "slot_hybrid_ranker": 0.34426695732205054,
+      "slot_hybrid_extra_ranker": 0.3493123529121729,
+      "slot_pair_reg_ranker": 0.3157216983082808,
+      "slot_object_oracle": 0.43953858390116524,
+      "slot_frame_oracle": 0.46526073291897774,
+      "frame_oracle": 0.41175114214420316,
+      "slot_class_choice": {
+        "simple": 2,
+        "token": 1,
+        "blend_beta_0.25": 2,
+        "max_beta_0.75": 1,
+        "wide_simple": 1,
+        "wide_token": 3,
+        "wide_blend_beta_0.75": 3,
+        "very_wide_max_beta_1.00": 5,
+        "very_wide_blend_beta_0.75": 3,
+        "shift_simple_mid": 4,
+        "shift_token_mid": 4,
+        "shift_simple_anti": 4,
+        "shift_token_anti": 1,
+        "max_shift_mid": 6
+      },
+      "slot_reg_choice": {
+        "wide_simple": 5,
+        "wide_token": 4,
+        "wide_blend_beta_0.75": 5,
+        "max_shift_mid": 26
+      },
+      "slot_frame_class_choice": {
+        "simple": 3,
+        "token": 3,
+        "blend_beta_0.25": 2,
+        "max_beta_0.50": 1,
+        "blend_beta_0.50": 3,
+        "max_beta_0.75": 1,
+        "wide_max_beta_1.00": 3,
+        "wide_blend_beta_0.75": 4,
+        "very_wide_max_beta_1.00": 4,
+        "very_wide_blend_beta_0.75": 4,
+        "shift_simple_mid": 3,
+        "shift_token_mid": 2,
+        "shift_simple_anti": 3,
+        "shift_token_anti": 1,
+        "max_shift_mid": 3
+      },
+      "slot_frame_reg_choice": {
+        "wide_simple": 1,
+        "shift_simple_mid": 12,
+        "max_shift_mid": 27
+      },
+      "slot_frame_extra_choice": {
+        "wide_simple": 1,
+        "shift_simple_mid": 5,
+        "max_shift_mid": 34
+      },
+      "slot_frame_ensemble_choice": {
+        "wide_simple": 1,
+        "shift_simple_mid": 5,
+        "max_shift_mid": 34
+      },
+      "slot_frame_ensemble_w25_choice": {
+        "wide_simple": 1,
+        "shift_simple_mid": 5,
+        "max_shift_mid": 34
+      },
+      "slot_frame_ensemble_w75_choice": {
+        "wide_simple": 1,
+        "shift_simple_mid": 7,
+        "max_shift_mid": 32
+      },
+      "slot_hybrid_choice": {
+        "wide_simple": 2,
+        "max_shift_mid": 38
+      },
+      "slot_hybrid_extra_choice": {
+        "wide_simple": 2,
+        "shift_simple_mid": 1,
+        "max_shift_mid": 37
+      },
+      "best_learned_ranker": 0.34426695732205054
+    },
+    "10": {
+      "simple": 0.21678005047142507,
+      "token": 0.1688257247209549,
+      "max_beta_1.00": 0.22225893046706915,
+      "slot_class_ranker": 0.21974163476854644,
+      "slot_reg_ranker": 0.2566009993189406,
+      "slot_frame_class_ranker": 0.21513620648530418,
+      "slot_frame_reg_ranker": 0.24819597662512943,
+      "slot_frame_extra_ranker": 0.237167723413525,
+      "slot_frame_ensemble_ranker": 0.24483077459710625,
+      "slot_frame_ensemble_w25_ranker": 0.2401687043976577,
+      "slot_frame_ensemble_w75_ranker": 0.24471702376839727,
+      "slot_hybrid_ranker": 0.24566821209241274,
+      "slot_hybrid_extra_ranker": 0.24161949501625762,
+      "slot_pair_reg_ranker": 0.2415321073332503,
+      "slot_object_oracle": 0.26035888967203014,
+      "slot_frame_oracle": 0.3374392785131931,
+      "frame_oracle": 0.2954517614096403,
+      "slot_class_choice": {
+        "simple": 2,
+        "token": 1,
+        "wide_token": 3,
+        "wide_max_beta_1.00": 3,
+        "very_wide_max_beta_1.00": 6,
+        "very_wide_blend_beta_0.75": 1,
+        "shift_simple_mid": 7,
+        "shift_token_mid": 6,
+        "shift_simple_anti": 6,
+        "shift_token_anti": 2,
+        "max_shift_mid": 3
+      },
+      "slot_reg_choice": {
+        "simple": 1,
+        "wide_simple": 22,
+        "wide_token": 12,
+        "wide_max_beta_1.00": 1,
+        "wide_blend_beta_0.75": 1,
+        "very_wide_max_beta_1.00": 1,
+        "max_shift_mid": 2
+      },
+      "slot_frame_class_choice": {
+        "simple": 2,
+        "blend_beta_0.25": 3,
+        "wide_token": 2,
+        "very_wide_max_beta_1.00": 6,
+        "very_wide_blend_beta_0.75": 5,
+        "shift_simple_mid": 5,
+        "shift_token_mid": 3,
+        "shift_simple_anti": 5,
+        "shift_token_anti": 6,
+        "max_shift_mid": 3
+      },
+      "slot_frame_reg_choice": {
+        "simple": 10,
+        "wide_simple": 8,
+        "wide_token": 2,
+        "shift_simple_mid": 12,
+        "shift_token_mid": 2,
+        "max_shift_mid": 6
+      },
+      "slot_frame_extra_choice": {
+        "simple": 5,
+        "wide_simple": 13,
+        "shift_simple_mid": 10,
+        "shift_token_mid": 4,
+        "max_shift_mid": 8
+      },
+      "slot_frame_ensemble_choice": {
+        "simple": 6,
+        "wide_simple": 12,
+        "shift_simple_mid": 11,
+        "shift_token_mid": 2,
+        "max_shift_mid": 9
+      },
+      "slot_frame_ensemble_w25_choice": {
+        "simple": 6,
+        "wide_simple": 12,
+        "shift_simple_mid": 10,
+        "shift_token_mid": 3,
+        "max_shift_mid": 9
+      },
+      "slot_frame_ensemble_w75_choice": {
+        "simple": 8,
+        "wide_simple": 11,
+        "wide_token": 1,
+        "shift_simple_mid": 12,
+        "shift_token_mid": 2,
+        "max_shift_mid": 6
+      },
+      "slot_hybrid_choice": {
+        "simple": 3,
+        "wide_simple": 18,
+        "wide_token": 5,
+        "shift_simple_mid": 3,
+        "shift_token_mid": 2,
+        "max_shift_mid": 9
+      },
+      "slot_hybrid_extra_choice": {
+        "simple": 3,
+        "wide_simple": 15,
+        "wide_token": 2,
+        "shift_simple_mid": 5,
+        "shift_token_mid": 2,
+        "max_shift_mid": 13
+      },
+      "best_learned_ranker": 0.2566009993189406
+    },
+    "17": {
+      "simple": 0.19813348695170135,
+      "token": 0.15456817008089274,
+      "max_beta_1.00": 0.19087237555067987,
+      "slot_class_ranker": 0.2088477974488891,
+      "slot_reg_ranker": 0.2206099745238304,
+      "slot_frame_class_ranker": 0.2240587670050873,
+      "slot_frame_reg_ranker": 0.20903575046987494,
+      "slot_frame_extra_ranker": 0.2189284783957577,
+      "slot_frame_ensemble_ranker": 0.22193865307227129,
+      "slot_frame_ensemble_w25_ranker": 0.22188253822481457,
+      "slot_frame_ensemble_w75_ranker": 0.21400030072963583,
+      "slot_hybrid_ranker": 0.22339516986569516,
+      "slot_hybrid_extra_ranker": 0.2204546420289716,
+      "slot_pair_reg_ranker": 0.21319007981072052,
+      "slot_object_oracle": 0.2838191133945844,
+      "slot_frame_oracle": 0.31690133875235915,
+      "frame_oracle": 0.2739547673612833,
+      "slot_class_choice": {
+        "simple": 1,
+        "token": 2,
+        "wide_simple": 1,
+        "wide_token": 4,
+        "wide_blend_beta_0.75": 1,
+        "very_wide_max_beta_1.00": 7,
+        "very_wide_blend_beta_0.75": 1,
+        "shift_simple_mid": 4,
+        "shift_token_mid": 3,
+        "shift_simple_anti": 9,
+        "shift_token_anti": 2,
+        "max_shift_mid": 5
+      },
+      "slot_reg_choice": {
+        "wide_simple": 18,
+        "wide_token": 1,
+        "very_wide_max_beta_1.00": 2,
+        "shift_simple_mid": 5,
+        "shift_token_mid": 9,
+        "max_shift_mid": 5
+      },
+      "slot_frame_class_choice": {
+        "simple": 3,
+        "blend_beta_0.25": 1,
+        "max_beta_0.50": 3,
+        "wide_token": 3,
+        "wide_max_beta_1.00": 3,
+        "wide_blend_beta_0.75": 5,
+        "very_wide_max_beta_1.00": 5,
+        "very_wide_blend_beta_0.75": 2,
+        "shift_simple_mid": 4,
+        "shift_simple_anti": 3,
+        "shift_token_anti": 4,
+        "max_shift_mid": 4
+      },
+      "slot_frame_reg_choice": {
+        "shift_simple_mid": 26,
+        "shift_token_mid": 3,
+        "max_shift_mid": 11
+      },
+      "slot_frame_extra_choice": {
+        "wide_simple": 3,
+        "shift_simple_mid": 24,
+        "shift_token_mid": 8,
+        "max_shift_mid": 5
+      },
+      "slot_frame_ensemble_choice": {
+        "wide_simple": 2,
+        "shift_simple_mid": 25,
+        "shift_token_mid": 7,
+        "max_shift_mid": 6
+      },
+      "slot_frame_ensemble_w25_choice": {
+        "wide_simple": 3,
+        "shift_simple_mid": 25,
+        "shift_token_mid": 7,
+        "max_shift_mid": 5
+      },
+      "slot_frame_ensemble_w75_choice": {
+        "wide_simple": 1,
+        "shift_simple_mid": 26,
+        "shift_token_mid": 4,
+        "max_shift_mid": 9
+      },
+      "slot_hybrid_choice": {
+        "wide_simple": 9,
+        "shift_simple_mid": 12,
+        "shift_token_mid": 5,
+        "max_shift_mid": 14
+      },
+      "slot_hybrid_extra_choice": {
+        "wide_simple": 4,
+        "shift_simple_mid": 17,
+        "shift_token_mid": 4,
+        "max_shift_mid": 15
+      },
+      "best_learned_ranker": 0.20903575046987494
+    }
+  },
+  "elapsed_seconds": 274.4725734000094
+}

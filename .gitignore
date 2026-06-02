@@ -1,0 +1,36 @@
+# Local Python/runtime artifacts
+__pycache__/
+*.py[cod]
+*.pyd
+*.dll
+.phase8_5_deps/
+
+# Downloaded datasets and model caches
+data/
+*.npy
+*.npz
+*.pt
+*.pth
+*.safetensors
+*.bin
+*.onnx
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+NEVER/build*/
+NEVER/outputs/
+
+# Logs and local temp files
+*.log
+*.tmp
+*.bak
+.pytest_cache/
+.mypy_cache/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

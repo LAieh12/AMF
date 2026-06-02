@@ -1,0 +1,81 @@
+{
+  "dataset_shape": [
+    20,
+    10000,
+    64,
+    64
+  ],
+  "train_sequences": 220,
+  "test_sequences": 20,
+  "branches": [
+    "simple_amf",
+    "token_amf",
+    "simple_ridge",
+    "token_ridge",
+    "simple_linear",
+    "token_linear",
+    "simple_cv",
+    "token_cv"
+  ],
+  "train_stats": {
+    "1": {
+      "n": 220,
+      "branch_oracle_mean": 0.7092385292053223
+    },
+    "5": {
+      "n": 220,
+      "branch_oracle_mean": 0.3213789165019989
+    },
+    "10": {
+      "n": 220,
+      "branch_oracle_mean": 0.2642497718334198
+    },
+    "17": {
+      "n": 220,
+      "branch_oracle_mean": 0.21877850592136383
+    }
+  },
+  "metrics": {
+    "1": {
+      "simple_amf": 0.5975707352161408,
+      "token_amf": 0.5988762497901916,
+      "simple_ridge": 0.5600862234830857,
+      "token_ridge": 0.5231324642896652,
+      "branch_oracle": 0.6912246122956276,
+      "rf_ranker": 0.6291898792281859,
+      "extra_ranker": 0.6227668761777065,
+      "ensemble_ranker": 0.6291898792281859
+    },
+    "5": {
+      "simple_amf": 0.27788064144551755,
+      "token_amf": 0.25616426663473246,
+      "simple_ridge": 0.20429140161722897,
+      "token_ridge": 0.19384371545165777,
+      "branch_oracle": 0.3465751431882381,
+      "rf_ranker": 0.29226910690593166,
+      "extra_ranker": 0.29472360052471597,
+      "ensemble_ranker": 0.3028525047777642
+    },
+    "10": {
+      "simple_amf": 0.21678005047142507,
+      "token_amf": 0.1688257247209549,
+      "simple_ridge": 0.10096415024599992,
+      "token_ridge": 0.10405330855865032,
+      "branch_oracle": 0.2601227842271328,
+      "rf_ranker": 0.23265324545803687,
+      "extra_ranker": 0.22184129256004503,
+      "ensemble_ranker": 0.2382476510524286
+    },
+    "17": {
+      "simple_amf": 0.19813348695170135,
+      "token_amf": 0.15456817008089274,
+      "simple_ridge": 0.08520136999431997,
+      "token_ridge": 0.09524871342582628,
+      "branch_oracle": 0.26551040895283223,
+      "rf_ranker": 0.203314673811727,
+      "extra_ranker": 0.18890913212910396,
+      "ensemble_ranker": 0.18654309870164365
+    }
+  },
+  "elapsed_seconds": 701.8302045000019
+}

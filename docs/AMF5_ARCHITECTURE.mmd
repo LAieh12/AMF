@@ -1,0 +1,20 @@
+flowchart TD
+    X["Input x in R^d"] --> S["Train-only standardization"]
+    S --> F["Fisher / variance feature ranking"]
+    F --> A["Top-m attentional subspace"]
+    S --> L["LSH candidate retrieval"]
+    A --> D["Weighted local distances"]
+    L --> D
+    D --> K["k nearest morphogenic cells"]
+    K --> W["Radius, importance, purity weighting"]
+    W --> P["Class probability field"]
+    P --> Y["Prediction argmax"]
+
+    T["Training sample (x, y)"] --> U["Nearest correct/local cell?"]
+    U -->|yes| AD["Adapt center, radius, histogram, usage"]
+    U -->|no| G["Grow new cell"]
+    AD --> M["Periodic merge / prune"]
+    G --> M
+    M --> C["Cell memory C"]
+    C --> L
+    C --> K

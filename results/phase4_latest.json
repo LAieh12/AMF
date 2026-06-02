@@ -1,0 +1,351 @@
+{
+  "title": "Phase 4 attentional morphogenic architecture",
+  "experiments": [
+    {
+      "name": "phase4_large_adversarial_improvement",
+      "dataset": {
+        "train": 4200,
+        "test": 1800,
+        "dimensions": 320,
+        "classes": 8,
+        "informative_dimensions": 26
+      },
+      "models": {
+        "phase3_nearest_cell": {
+          "clean_accuracy": 0.9938888888888889,
+          "adversarial_accuracy": 0.8022222222222222,
+          "fit_seconds": 21.48696789999667,
+          "predict_seconds": 0.3153906000079587,
+          "adversarial_predict_seconds": 0.32108370000787545,
+          "peak_ram_mb": 7.640522003173828,
+          "model_ram_mb": 1.07977294921875,
+          "summary": {
+            "cells": 280,
+            "avg_cell_radius": 0.9940804684489767,
+            "avg_importance": 1.7852552334677831,
+            "distance_calls": 86940,
+            "queries": 1800,
+            "avg_candidates": 48.3,
+            "index_misses": 0,
+            "top_weighted_features": [
+              91,
+              235,
+              238,
+              41,
+              150,
+              254,
+              279,
+              70,
+              206,
+              282,
+              40,
+              267,
+              112,
+              303,
+              207,
+              256,
+              107,
+              101,
+              119,
+              216
+            ]
+          }
+        },
+        "phase4_attention_field": {
+          "clean_accuracy": 1.0,
+          "adversarial_accuracy": 0.9883333333333333,
+          "fit_seconds": 24.101364700007252,
+          "predict_seconds": 0.31516199999896344,
+          "adversarial_predict_seconds": 0.26162180000392254,
+          "peak_ram_mb": 7.641292572021484,
+          "model_ram_mb": 0.83245849609375,
+          "summary": {
+            "cells": 280,
+            "top_features": 32,
+            "vote_k": 8,
+            "avg_candidates": 280.0,
+            "avg_votes": 8.0,
+            "effective_feature_ops": 8960,
+            "selected_features": [
+              91,
+              235,
+              238,
+              41,
+              150,
+              254,
+              279,
+              70,
+              206,
+              282,
+              40,
+              267,
+              112,
+              303,
+              207,
+              256,
+              107,
+              101,
+              119,
+              216,
+              22,
+              89,
+              111,
+              178,
+              187,
+              32,
+              153,
+              311,
+              228,
+              205,
+              144,
+              237
+            ]
+          }
+        },
+        "phase4_robust_field": {
+          "clean_accuracy": 1.0,
+          "adversarial_accuracy": 0.985,
+          "fit_seconds": 27.29379969999718,
+          "predict_seconds": 0.17529719999583904,
+          "adversarial_predict_seconds": 0.1582029999990482,
+          "peak_ram_mb": 7.637866973876953,
+          "model_ram_mb": 0.83245849609375,
+          "summary": {
+            "cells": 280,
+            "top_features": 32,
+            "vote_k": 8,
+            "avg_candidates": 280.0,
+            "avg_votes": 8.0,
+            "effective_feature_ops": 8960,
+            "selected_features": [
+              91,
+              235,
+              238,
+              41,
+              150,
+              254,
+              279,
+              70,
+              206,
+              282,
+              40,
+              267,
+              112,
+              303,
+              207,
+              256,
+              107,
+              101,
+              119,
+              216,
+              22,
+              89,
+              111,
+              178,
+              187,
+              32,
+              153,
+              311,
+              228,
+              205,
+              144,
+              237
+            ]
+          }
+        },
+        "random_forest_reference": {
+          "clean_accuracy": 0.9983333333333333,
+          "adversarial_accuracy": 0.945,
+          "fit_seconds": 51.34711390000302,
+          "predict_seconds": 0.1084878999972716,
+          "adversarial_predict_seconds": 0.11046840000199154,
+          "peak_ram_mb": 46.79719161987305,
+          "model_ram_mb": 0.8125,
+          "summary": {}
+        }
+      },
+      "sweep": [
+        {
+          "epsilon": 0.03,
+          "phase3": 0.9911111111111112,
+          "phase4": 1.0,
+          "phase4_robust": 1.0,
+          "random_forest": 0.9955555555555555
+        },
+        {
+          "epsilon": 0.06,
+          "phase3": 0.9783333333333334,
+          "phase4": 1.0,
+          "phase4_robust": 0.9994444444444445,
+          "random_forest": 0.9911111111111112
+        },
+        {
+          "epsilon": 0.09,
+          "phase3": 0.9372222222222222,
+          "phase4": 0.9977777777777778,
+          "phase4_robust": 0.9961111111111111,
+          "random_forest": 0.9766666666666667
+        },
+        {
+          "epsilon": 0.12,
+          "phase3": 0.8022222222222222,
+          "phase4": 0.9883333333333333,
+          "phase4_robust": 0.985,
+          "random_forest": 0.945
+        },
+        {
+          "epsilon": 0.16,
+          "phase3": 0.515,
+          "phase4": 0.8905555555555555,
+          "phase4_robust": 0.91,
+          "random_forest": 0.85
+        },
+        {
+          "epsilon": 0.2,
+          "phase3": 0.285,
+          "phase4": 0.5538888888888889,
+          "phase4_robust": 0.6966666666666667,
+          "random_forest": 0.6644444444444444
+        }
+      ]
+    },
+    {
+      "name": "phase4_incremental_new_classes",
+      "setup": {
+        "old_classes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "new_classes": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "few_shot_new_examples": 440,
+        "features": 192
+      },
+      "phase3": {
+        "old_before": 0.9988938053097345,
+        "old_after": 0.9911504424778761,
+        "new_after": 0.9363839285714286,
+        "forgetting": 0.007743362831858391,
+        "cells": 164,
+        "update_total_seconds": 3.28070519999892,
+        "model_ram_mb": 0.477294921875
+      },
+      "phase4": {
+        "old_before": 1.0,
+        "old_after": 1.0,
+        "new_after": 1.0,
+        "forgetting": 0.0,
+        "cells": 164,
+        "update_total_seconds": 3.4907281000050716,
+        "model_ram_mb": 0.3282470703125,
+        "summary": {
+          "cells": 164,
+          "top_features": 32,
+          "vote_k": 8,
+          "avg_candidates": 164.0,
+          "avg_votes": 8.0,
+          "effective_feature_ops": 5248,
+          "selected_features": [
+            146,
+            156,
+            142,
+            104,
+            36,
+            139,
+            83,
+            48,
+            165,
+            65,
+            151,
+            70,
+            37,
+            57,
+            180,
+            177,
+            84,
+            72,
+            80,
+            19,
+            3,
+            118,
+            1,
+            24,
+            175,
+            150,
+            119,
+            106,
+            144,
+            116,
+            107,
+            129
+          ]
+        }
+      }
+    },
+    {
+      "name": "phase4_temporal_drift",
+      "phase3": {
+        "mean_accuracy": 0.9997983870967742,
+        "last_chunk_accuracy": 1.0,
+        "mean_update_seconds": 0.020133500000156346,
+        "cells": 7,
+        "model_ram_mb": 0.1049957275390625
+      },
+      "phase4": {
+        "mean_accuracy": 0.9997983870967742,
+        "last_chunk_accuracy": 1.0,
+        "mean_update_seconds": 0.018891574994995608,
+        "cells": 7,
+        "model_ram_mb": 0.0144805908203125,
+        "summary": {
+          "cells": 7,
+          "top_features": 32,
+          "vote_k": 7,
+          "avg_candidates": 7.0,
+          "avg_votes": 7.0,
+          "effective_feature_ops": 224,
+          "selected_features": [
+            11,
+            47,
+            6,
+            37,
+            2,
+            35,
+            64,
+            44,
+            72,
+            81,
+            24,
+            9,
+            71,
+            34,
+            85,
+            25,
+            61,
+            84,
+            70,
+            77,
+            56,
+            46,
+            80,
+            17,
+            10,
+            93,
+            41,
+            68,
+            57,
+            19,
+            86,
+            4
+          ]
+        }
+      }
+    }
+  ]
+}

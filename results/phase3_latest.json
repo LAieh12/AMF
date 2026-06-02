@@ -1,0 +1,362 @@
+{
+  "title": "Phase 3 morphogenic stress and ablation suite",
+  "experiments": [
+    {
+      "name": "large_dataset_and_adversarial_noise",
+      "dataset": {
+        "train": 4200,
+        "test": 1800,
+        "dimensions": 320,
+        "classes": 8,
+        "informative_dimensions": 26,
+        "attack": "targeted prototype-boundary perturbation from the full morphogenic model",
+        "reported_attack_epsilon": 0.12
+      },
+      "models": [
+        {
+          "name": "morphogenic_full",
+          "clean_accuracy": 0.9938888888888889,
+          "adversarial_accuracy": 0.8022222222222222,
+          "fit_seconds": 31.368590099998983,
+          "predict_seconds": 0.35935820000304375,
+          "peak_ram_mb": 7.641315460205078,
+          "model_ram_mb": 1.07977294921875,
+          "clean_avg_candidates": 48.279444444444444,
+          "adversarial_avg_candidates": 48.3,
+          "cells": 280,
+          "index_misses": 0
+        },
+        {
+          "name": "exact_kNN_k5",
+          "clean_accuracy": 0.6838888888888889,
+          "adversarial_accuracy": 0.4033333333333333,
+          "fit_seconds": 0.008082100001047365,
+          "predict_seconds": 0.34829110000282526,
+          "peak_ram_mb": 20.57312774658203,
+          "model_ram_mb": 10.3179931640625,
+          "clean_avg_candidates": 4200.0,
+          "adversarial_avg_candidates": 4200.0
+        },
+        {
+          "name": "linear_SVM_sgd",
+          "clean_accuracy": 0.9627777777777777,
+          "adversarial_accuracy": 0.7944444444444444,
+          "fit_seconds": 0.3543236999976216,
+          "predict_seconds": 0.000723599994671531,
+          "peak_ram_mb": 0.7291488647460938,
+          "model_ram_mb": 0.01959228515625,
+          "clean_avg_candidates": null,
+          "adversarial_avg_candidates": null
+        },
+        {
+          "name": "random_forest_numpy",
+          "clean_accuracy": 0.9983333333333333,
+          "adversarial_accuracy": 0.945,
+          "fit_seconds": 49.152722200000426,
+          "predict_seconds": 0.14499240000441205,
+          "peak_ram_mb": 46.797760009765625,
+          "model_ram_mb": 0.8125,
+          "clean_avg_candidates": null,
+          "adversarial_avg_candidates": null
+        },
+        {
+          "name": "small_MLP",
+          "clean_accuracy": 0.81,
+          "adversarial_accuracy": 0.6411111111111111,
+          "fit_seconds": 2.117826399990008,
+          "predict_seconds": 0.00402619999658782,
+          "peak_ram_mb": 2.067626953125,
+          "model_ram_mb": 0.28118896484375,
+          "clean_avg_candidates": null,
+          "adversarial_avg_candidates": null
+        },
+        {
+          "name": "prototypical_network_centroid",
+          "clean_accuracy": 0.8855555555555555,
+          "adversarial_accuracy": 0.7422222222222222,
+          "fit_seconds": 0.03170520000276156,
+          "predict_seconds": 0.05551700000069104,
+          "peak_ram_mb": 3.9978485107421875,
+          "model_ram_mb": 0.02203369140625,
+          "clean_avg_candidates": null,
+          "adversarial_avg_candidates": null
+        }
+      ],
+      "adversarial_sweep": [
+        {
+          "epsilon": 0.03,
+          "accuracies": {
+            "morphogenic_full": 0.9911111111111112,
+            "exact_kNN_k5": 0.6177777777777778,
+            "linear_SVM_sgd": 0.9444444444444444,
+            "random_forest_numpy": 0.9955555555555555,
+            "small_MLP": 0.7727777777777778,
+            "prototypical_network_centroid": 0.8705555555555555
+          }
+        },
+        {
+          "epsilon": 0.06,
+          "accuracies": {
+            "morphogenic_full": 0.9783333333333334,
+            "exact_kNN_k5": 0.5438888888888889,
+            "linear_SVM_sgd": 0.9088888888888889,
+            "random_forest_numpy": 0.9911111111111112,
+            "small_MLP": 0.7344444444444445,
+            "prototypical_network_centroid": 0.8444444444444444
+          }
+        },
+        {
+          "epsilon": 0.09,
+          "accuracies": {
+            "morphogenic_full": 0.9372222222222222,
+            "exact_kNN_k5": 0.465,
+            "linear_SVM_sgd": 0.8611111111111112,
+            "random_forest_numpy": 0.9766666666666667,
+            "small_MLP": 0.6894444444444444,
+            "prototypical_network_centroid": 0.795
+          }
+        },
+        {
+          "epsilon": 0.12,
+          "accuracies": {
+            "morphogenic_full": 0.8022222222222222,
+            "exact_kNN_k5": 0.4033333333333333,
+            "linear_SVM_sgd": 0.7944444444444444,
+            "random_forest_numpy": 0.945,
+            "small_MLP": 0.6411111111111111,
+            "prototypical_network_centroid": 0.7422222222222222
+          }
+        },
+        {
+          "epsilon": 0.16,
+          "accuracies": {
+            "morphogenic_full": 0.515,
+            "exact_kNN_k5": 0.32666666666666666,
+            "linear_SVM_sgd": 0.675,
+            "random_forest_numpy": 0.85,
+            "small_MLP": 0.5633333333333334,
+            "prototypical_network_centroid": 0.6561111111111111
+          }
+        },
+        {
+          "epsilon": 0.2,
+          "accuracies": {
+            "morphogenic_full": 0.285,
+            "exact_kNN_k5": 0.2561111111111111,
+            "linear_SVM_sgd": 0.5461111111111111,
+            "random_forest_numpy": 0.6644444444444444,
+            "small_MLP": 0.48944444444444446,
+            "prototypical_network_centroid": 0.5733333333333334
+          }
+        }
+      ]
+    },
+    {
+      "name": "new_classes_after_training_and_catastrophic_forgetting",
+      "setup": {
+        "old_classes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "new_classes": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "few_shot_new_examples": 440,
+        "features": 192
+      },
+      "models": [
+        {
+          "name": "morphogenic_partial_fit",
+          "old_accuracy_before": 0.9988938053097345,
+          "old_accuracy_after": 0.9911504424778761,
+          "new_class_accuracy_after": 0.9363839285714286,
+          "forgetting_drop": 0.007743362831858391,
+          "cells_after_update": 164,
+          "old_fit_seconds": 2.9749608999991324,
+          "new_update_seconds": 0.6461706999980379,
+          "model_ram_mb": 0.477294921875
+        },
+        {
+          "name": "exact_kNN_append",
+          "old_accuracy_before": 0.9347345132743363,
+          "old_accuracy_after": 0.915929203539823,
+          "new_class_accuracy_after": 0.31919642857142855,
+          "forgetting_drop": 0.01880530973451333,
+          "model_ram_mb": 3.3376312255859375
+        },
+        {
+          "name": "small_MLP_finetune_new_only",
+          "old_accuracy_before": 0.9280973451327433,
+          "old_accuracy_after": 0.1415929203539823,
+          "new_class_accuracy_after": 0.6171875,
+          "forgetting_drop": 0.786504424778761,
+          "model_ram_mb": 0.14727783203125
+        },
+        {
+          "name": "linear_SVM_finetune_new_only",
+          "old_accuracy_before": 0.9944690265486725,
+          "old_accuracy_after": 0.8108407079646017,
+          "new_class_accuracy_after": 0.8895089285714286,
+          "forgetting_drop": 0.1836283185840708,
+          "model_ram_mb": 0.01177978515625
+        }
+      ]
+    },
+    {
+      "name": "temporal_drift_stream",
+      "setup": {
+        "chunks": 9,
+        "chunk_size": 620,
+        "dimensions": 96,
+        "classes": 4
+      },
+      "models": [
+        {
+          "name": "morphogenic_online",
+          "chunk_accuracies_before_update": [
+            1.0,
+            1.0,
+            1.0,
+            0.9983870967741936,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "mean_accuracy": 0.9997983870967742,
+          "last_chunk_accuracy": 1.0,
+          "mean_update_seconds": 0.01978462500301248,
+          "cells_after_stream": 7,
+          "model_ram_mb": 0.1049957275390625
+        },
+        {
+          "name": "exact_kNN_append",
+          "chunk_accuracies_before_append": [
+            1.0,
+            0.9870967741935484,
+            0.967741935483871,
+            0.9193548387096774,
+            0.9032258064516129,
+            0.9596774193548387,
+            0.9919354838709677,
+            1.0
+          ],
+          "mean_accuracy": 0.9661290322580645,
+          "last_chunk_accuracy": 1.0,
+          "model_ram_mb": 4.17205810546875
+        },
+        {
+          "name": "small_MLP_static",
+          "chunk_accuracies": [
+            0.967741935483871,
+            0.896774193548387,
+            0.6854838709677419,
+            0.4403225806451613,
+            0.16612903225806452,
+            0.05,
+            0.012903225806451613,
+            0.0016129032258064516
+          ],
+          "mean_accuracy": 0.40262096774193545,
+          "last_chunk_accuracy": 0.0016129032258064516,
+          "model_ram_mb": 0.049346923828125
+        },
+        {
+          "name": "linear_SVM_static",
+          "chunk_accuracies": [
+            1.0,
+            1.0,
+            0.885483870967742,
+            0.45645161290322583,
+            0.1,
+            0.0016129032258064516,
+            0.0,
+            0.0
+          ],
+          "mean_accuracy": 0.43044354838709675,
+          "last_chunk_accuracy": 0.0,
+          "model_ram_mb": 0.002960205078125
+        },
+        {
+          "name": "prototypical_static",
+          "chunk_accuracies": [
+            1.0,
+            1.0,
+            0.9451612903225807,
+            0.4612903225806452,
+            0.0935483870967742,
+            0.0032258064516129032,
+            0.0,
+            0.0
+          ],
+          "mean_accuracy": 0.4379032258064516,
+          "last_chunk_accuracy": 0.0,
+          "model_ram_mb": 0.003692626953125
+        }
+      ]
+    },
+    {
+      "name": "phase3_ablations",
+      "high_dimensional_components": [
+        {
+          "accuracy": 0.9588235294117647,
+          "predict_seconds": 0.23168739999528043,
+          "avg_candidates": 47.17411764705882,
+          "model_ram_mb": 1.7412261962890625,
+          "cells": 211,
+          "name": "full_fisher_lsh_prune",
+          "fit_seconds": 7.706219399988186
+        },
+        {
+          "accuracy": 0.1811764705882353,
+          "predict_seconds": 0.11107790000096429,
+          "avg_candidates": 4.588235294117647,
+          "model_ram_mb": 0.567138671875,
+          "cells": 6,
+          "name": "without_Fisher",
+          "fit_seconds": 9.569386500006658
+        },
+        {
+          "accuracy": 0.9847058823529412,
+          "predict_seconds": 2.525984099993366,
+          "avg_candidates": 202.0,
+          "model_ram_mb": 1.0590972900390625,
+          "cells": 202,
+          "name": "without_LSH",
+          "fit_seconds": 11.557297099992866
+        },
+        {
+          "accuracy": 0.9023529411764706,
+          "predict_seconds": 0.14424710000457708,
+          "avg_candidates": 24.581176470588236,
+          "model_ram_mb": 10.109909057617188,
+          "cells": 1900,
+          "name": "without_pruning",
+          "fit_seconds": 23.439640299999155
+        }
+      ],
+      "memory_ablation": {
+        "without_memory_accuracy": 0.47555555555555556,
+        "with_temporal_memory_accuracy": 1.0,
+        "without_memory_cells": 804,
+        "with_memory_cells": 2
+      },
+      "ridge_ablation": {
+        "without_ridge_accuracy": 0.7594303310238645,
+        "with_ridge_accuracy": 0.9080061585835257,
+        "gain": 0.14857582755966126
+      },
+      "pruning_ablation_growth_dataset": {
+        "with_pruning_accuracy": 1.0,
+        "without_pruning_accuracy": 1.0,
+        "with_pruning_cells": 117,
+        "without_pruning_cells": 437
+      }
+    }
+  ]
+}

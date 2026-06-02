@@ -1,0 +1,187 @@
+{
+  "dataset_shape": [
+    20,
+    10000,
+    64,
+    64
+  ],
+  "train_sequences": 650,
+  "test_sequences": 40,
+  "candidate_names": [
+    "simple",
+    "token",
+    "max_beta_0.00",
+    "blend_beta_0.00",
+    "max_beta_0.25",
+    "blend_beta_0.25",
+    "max_beta_0.50",
+    "blend_beta_0.50",
+    "max_beta_0.75",
+    "blend_beta_0.75",
+    "max_beta_1.00",
+    "blend_beta_1.00"
+  ],
+  "ranker_stats": {
+    "1": {
+      "n": 650,
+      "class_hist": {
+        "0": 186,
+        "1": 221,
+        "4": 42,
+        "5": 29,
+        "6": 11,
+        "7": 35,
+        "8": 18,
+        "9": 67,
+        "10": 41
+      },
+      "oracle_mean": 0.6681396961212158
+    },
+    "5": {
+      "n": 650,
+      "class_hist": {
+        "0": 191,
+        "1": 155,
+        "4": 21,
+        "5": 30,
+        "6": 25,
+        "7": 25,
+        "8": 45,
+        "9": 28,
+        "10": 130
+      },
+      "oracle_mean": 0.31187203526496887
+    },
+    "10": {
+      "n": 650,
+      "class_hist": {
+        "0": 246,
+        "1": 184,
+        "4": 24,
+        "5": 18,
+        "6": 23,
+        "7": 20,
+        "8": 33,
+        "9": 27,
+        "10": 75
+      },
+      "oracle_mean": 0.2570093274116516
+    },
+    "17": {
+      "n": 650,
+      "class_hist": {
+        "0": 261,
+        "1": 180,
+        "4": 32,
+        "5": 20,
+        "6": 25,
+        "7": 17,
+        "8": 22,
+        "9": 32,
+        "10": 61
+      },
+      "oracle_mean": 0.19550515711307526
+    }
+  },
+  "metrics": {
+    "1": {
+      "simple": 0.6028784655034543,
+      "token": 0.5999809088185429,
+      "max_beta_1.00": 0.6259050406515598,
+      "class_ranker": 0.6430418506264687,
+      "reg_ranker": 0.6361262865364552,
+      "oracle": 0.6797631576657295,
+      "class_choice": {
+        "simple": 6,
+        "token": 9,
+        "max_beta_0.25": 2,
+        "blend_beta_0.25": 6,
+        "blend_beta_0.50": 1,
+        "max_beta_0.75": 4,
+        "blend_beta_0.75": 6,
+        "max_beta_1.00": 6
+      },
+      "reg_choice": {
+        "simple": 2,
+        "blend_beta_0.75": 23,
+        "max_beta_1.00": 15
+      }
+    },
+    "5": {
+      "simple": 0.26225845105946066,
+      "token": 0.24109889385290445,
+      "max_beta_1.00": 0.29504665937274693,
+      "class_ranker": 0.2733692951500416,
+      "reg_ranker": 0.29504665937274693,
+      "oracle": 0.32187527175992725,
+      "class_choice": {
+        "simple": 7,
+        "token": 8,
+        "max_beta_0.25": 5,
+        "blend_beta_0.25": 2,
+        "max_beta_0.50": 1,
+        "blend_beta_0.50": 3,
+        "max_beta_0.75": 4,
+        "blend_beta_0.75": 6,
+        "max_beta_1.00": 4
+      },
+      "reg_choice": {
+        "max_beta_1.00": 40
+      }
+    },
+    "10": {
+      "simple": 0.19757736190222203,
+      "token": 0.19019546668278053,
+      "max_beta_1.00": 0.22313960697501897,
+      "class_ranker": 0.22513811034150422,
+      "reg_ranker": 0.2326078649610281,
+      "oracle": 0.2661163818091154,
+      "class_choice": {
+        "simple": 10,
+        "token": 9,
+        "max_beta_0.25": 2,
+        "blend_beta_0.25": 2,
+        "max_beta_0.50": 1,
+        "max_beta_0.75": 3,
+        "blend_beta_0.75": 6,
+        "max_beta_1.00": 7
+      },
+      "reg_choice": {
+        "simple": 14,
+        "token": 7,
+        "max_beta_0.50": 3,
+        "max_beta_0.75": 1,
+        "blend_beta_0.75": 2,
+        "max_beta_1.00": 13
+      }
+    },
+    "17": {
+      "simple": 0.17153858203382696,
+      "token": 0.15432005490583833,
+      "max_beta_1.00": 0.18286746811063495,
+      "class_ranker": 0.17566073677444366,
+      "reg_ranker": 0.1920990775892278,
+      "oracle": 0.22289545159728733,
+      "class_choice": {
+        "simple": 11,
+        "token": 10,
+        "max_beta_0.25": 4,
+        "blend_beta_0.25": 1,
+        "max_beta_0.50": 4,
+        "max_beta_0.75": 1,
+        "blend_beta_0.75": 5,
+        "max_beta_1.00": 4
+      },
+      "reg_choice": {
+        "simple": 8,
+        "token": 4,
+        "max_beta_0.25": 2,
+        "blend_beta_0.25": 1,
+        "max_beta_0.50": 1,
+        "max_beta_0.75": 1,
+        "max_beta_1.00": 23
+      }
+    }
+  },
+  "elapsed_seconds": 385.68540630000643
+}

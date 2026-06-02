@@ -1,0 +1,88 @@
+{
+  "probe": "phase11a_never_world_codec_probe",
+  "data_path": "data\\moving_mnist\\mnist_test_seq.npy",
+  "download_source": "http://www.cs.toronto.edu/~nitish/unsupervised_video/mnist_test_seq.npy",
+  "real_dataset": true,
+  "train_sequences": 80,
+  "test_sequences": 20,
+  "tune_sequences": 20,
+  "horizons": [
+    1,
+    5,
+    10,
+    17
+  ],
+  "best_params": {
+    "threshold": 0.1,
+    "min_pixels": 8,
+    "max_slots": 4,
+    "max_shift": 12,
+    "radius": 0.12,
+    "top_k": 8,
+    "max_cells": 8000,
+    "velocity_fallback": 0.5,
+    "cell_blend": 0.65
+  },
+  "transition_cells": 484,
+  "tune_metrics": {
+    "h1": {
+      "never_world_codec_mse": 0.030386036122217776,
+      "never_world_codec_mae": 0.04153535766527057,
+      "never_world_codec_iou": 0.5156350173653754,
+      "last_frame_mse": 0.04780533304437995,
+      "mse_skill_vs_last": 0.3643797838620017
+    },
+    "h5": {
+      "never_world_codec_mse": 0.06869519706815481,
+      "never_world_codec_mae": 0.08155063036829233,
+      "never_world_codec_iou": 0.160493539496328,
+      "last_frame_mse": 0.07726296205073595,
+      "mse_skill_vs_last": 0.11089097227407584
+    },
+    "h10": {
+      "never_world_codec_mse": 0.0808677276596427,
+      "never_world_codec_mae": 0.09415891245007516,
+      "never_world_codec_iou": 0.061254379539432635,
+      "last_frame_mse": 0.08104149475693703,
+      "mse_skill_vs_last": 0.0021441743864115534
+    },
+    "h17": {
+      "never_world_codec_mse": 0.0810763843357563,
+      "never_world_codec_mae": 0.09457773454487324,
+      "never_world_codec_iou": 0.06822518453363438,
+      "last_frame_mse": 0.07989036142826081,
+      "mse_skill_vs_last": -0.01484563201733045
+    }
+  },
+  "test_metrics": {
+    "h1": {
+      "never_world_codec_mse": 0.03557492843829095,
+      "never_world_codec_mae": 0.04601648668758571,
+      "never_world_codec_iou": 0.4508469553255039,
+      "last_frame_mse": 0.05174324754625559,
+      "mse_skill_vs_last": 0.31247205915150683
+    },
+    "h5": {
+      "never_world_codec_mse": 0.07214610315859318,
+      "never_world_codec_mae": 0.08443072196096182,
+      "never_world_codec_iou": 0.13226588197587655,
+      "last_frame_mse": 0.07788686510175466,
+      "mse_skill_vs_last": 0.0737064193771505
+    },
+    "h10": {
+      "never_world_codec_mse": 0.07893569059669972,
+      "never_world_codec_mae": 0.09143794421106577,
+      "never_world_codec_iou": 0.07489452634347778,
+      "last_frame_mse": 0.07808456122875214,
+      "mse_skill_vs_last": -0.01090009797780845
+    },
+    "h17": {
+      "never_world_codec_mse": 0.08236001450568438,
+      "never_world_codec_mae": 0.09486055411398411,
+      "never_world_codec_iou": 0.05264433339766474,
+      "last_frame_mse": 0.08014158289879561,
+      "mse_skill_vs_last": -0.027681404916724044
+    }
+  },
+  "elapsed_seconds": 85.3582911491394
+}

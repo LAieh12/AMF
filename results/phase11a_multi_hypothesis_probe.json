@@ -1,0 +1,94 @@
+{
+  "dataset_shape": [
+    20,
+    10000,
+    64,
+    64
+  ],
+  "train_sequences": 220,
+  "test_sequences": 20,
+  "weights": {
+    "1": 1.0,
+    "5": 1.0,
+    "10": 1.0,
+    "17": 1.0
+  },
+  "ridge_weights": {
+    "1": 0.25,
+    "5": 1.0,
+    "10": 1.0,
+    "17": 1.0
+  },
+  "dual_amf": {
+    "1": {
+      "frame_iou": 0.6200719486319308,
+      "soft_frame_iou": 0.5673047289252281,
+      "center_error_px": 1.411794251203537
+    },
+    "5": {
+      "frame_iou": 0.3053033514132308,
+      "soft_frame_iou": 0.2650923129171133,
+      "center_error_px": 6.435282047092914
+    },
+    "10": {
+      "frame_iou": 0.22225893032665875,
+      "soft_frame_iou": 0.1981747716665268,
+      "center_error_px": 12.810908484458924
+    },
+    "17": {
+      "frame_iou": 0.19087237653422603,
+      "soft_frame_iou": 0.16755766367423347,
+      "center_error_px": 14.598121014237403
+    }
+  },
+  "dual_ridge": {
+    "1": {
+      "frame_iou": 0.5695854423296041,
+      "soft_frame_iou": 0.49946981817483904,
+      "center_error_px": 1.4214947510510683
+    },
+    "5": {
+      "frame_iou": 0.22415747775223696,
+      "soft_frame_iou": 0.19235051646828652,
+      "center_error_px": 7.489294838905335
+    },
+    "10": {
+      "frame_iou": 0.11609974517493289,
+      "soft_frame_iou": 0.09953138824785128,
+      "center_error_px": 15.093625563383103
+    },
+    "17": {
+      "frame_iou": 0.10462685659718984,
+      "soft_frame_iou": 0.08591630242299289,
+      "center_error_px": 19.211318415403365
+    }
+  },
+  "dual_stability": {
+    "30": {
+      "stable": 1.0,
+      "identity_drift": 0.0,
+      "digit_consistency": 1.0
+    },
+    "60": {
+      "stable": 1.0,
+      "identity_drift": 0.0,
+      "digit_consistency": 1.0
+    },
+    "120": {
+      "stable": 1.0,
+      "identity_drift": 0.0,
+      "digit_consistency": 1.0
+    },
+    "240": {
+      "stable": 1.0,
+      "identity_drift": 0.0,
+      "digit_consistency": 1.0
+    },
+    "480": {
+      "stable": 1.0,
+      "identity_drift": 0.0,
+      "digit_consistency": 1.0
+    }
+  },
+  "elapsed_seconds": 1059.4093424999883
+}

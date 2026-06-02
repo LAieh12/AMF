@@ -1,0 +1,144 @@
+{
+  "title": "Phase 10a - AMF synthetic world model pretraining",
+  "simulator": {
+    "name": "ToyGravityBounceSimulator",
+    "state": [
+      "x",
+      "y",
+      "vx",
+      "vy"
+    ],
+    "action": [
+      "ax",
+      "ay"
+    ],
+    "dt": 0.08,
+    "gravity": -0.85,
+    "drag": 0.045,
+    "restitution": 0.82
+  },
+  "data": {
+    "trajectories": 900,
+    "steps_per_trajectory": 70,
+    "train_trajectories": 765,
+    "test_trajectories": 135,
+    "train_transitions": 53550,
+    "test_transitions": 9450,
+    "seed": 1007
+  },
+  "rules": {
+    "no_llm": true,
+    "no_dense_decoder": true,
+    "no_backprop": true,
+    "pure_python_numpy": true
+  },
+  "systems": [
+    {
+      "name": "amf_dynamics_world_model",
+      "fit_seconds": 5.596762000001036,
+      "one_step_mse": 0.01743033528327942,
+      "position_rmse": 0.014594005420804024,
+      "velocity_rmse": 0.18613888323307037,
+      "bounce_mse": 0.08504880964756012,
+      "eval_transitions": 3500,
+      "predict_seconds": 1.2168206000060309,
+      "ms_per_transition": 0.3476630285731517,
+      "rollout_mse": 0.28755887516308576,
+      "rollout_position_mse": 0.23281268938444555,
+      "rollout_final_mse": 0.558268757769838,
+      "rollout_trajectories": 32,
+      "rollout_horizon": 55,
+      "cells": 9000,
+      "cell_size": 0.43003897657672296,
+      "activation_radius": 0.055,
+      "top_k": 12,
+      "memory_mb_arrays": 0.6866455078125,
+      "metaplasticity_stats": {
+        "raw_cells": 26375,
+        "pruned_low_usage": 16090,
+        "fused_similar": 37,
+        "final_cells": 9000,
+        "min_cell_usage": 2,
+        "identity_frozen": true,
+        "identity_lr": 0.0,
+        "fast_dynamics_lr": 0.35,
+        "stores_delta": true
+      }
+    },
+    {
+      "name": "static_state",
+      "fit_seconds": 1.00000761449337e-06,
+      "one_step_mse": 0.06298554688692093,
+      "position_rmse": 0.0587739460170269,
+      "velocity_rmse": 0.35002389550209045,
+      "bounce_mse": 0.295767217874527,
+      "eval_transitions": 3500,
+      "predict_seconds": 6.699992809444666e-06,
+      "ms_per_transition": 1.914283659841333e-06,
+      "rollout_mse": 0.5126061858609319,
+      "rollout_position_mse": 0.32221443310845643,
+      "rollout_final_mse": 0.4873516734223813,
+      "rollout_trajectories": 32,
+      "rollout_horizon": 55
+    },
+    {
+      "name": "constant_velocity",
+      "fit_seconds": 1.00000761449337e-06,
+      "one_step_mse": 0.061372216790914536,
+      "position_rmse": 0.015090132132172585,
+      "velocity_rmse": 0.35002389550209045,
+      "bounce_mse": 0.2947738468647003,
+      "eval_transitions": 3500,
+      "predict_seconds": 0.01883410001755692,
+      "ms_per_transition": 0.0053811714335876915,
+      "rollout_mse": 0.6978887105360627,
+      "rollout_position_mse": 0.692779500852339,
+      "rollout_final_mse": 0.8163044084794819,
+      "rollout_trajectories": 32,
+      "rollout_horizon": 55
+    },
+    {
+      "name": "ridge_linear_dynamics",
+      "fit_seconds": 0.6109230000001844,
+      "one_step_mse": 0.04734745994210243,
+      "position_rmse": 0.015036983415484428,
+      "velocity_rmse": 0.3073577880859375,
+      "bounce_mse": 0.19699852168560028,
+      "eval_transitions": 3500,
+      "predict_seconds": 0.031236200011335313,
+      "ms_per_transition": 0.008924628574667233,
+      "rollout_mse": 0.3483606029767543,
+      "rollout_position_mse": 0.2971651569241658,
+      "rollout_final_mse": 0.6045328723266721,
+      "rollout_trajectories": 32,
+      "rollout_horizon": 55
+    }
+  ],
+  "export": {
+    "npz_path": "data\\phase10a_warm_amf.npz",
+    "metadata_path": "data\\phase10a_warm_amf.json",
+    "cells": 9000,
+    "memory_mb_arrays": 0.6866455078125,
+    "reload_max_abs_diff": 0.0
+  },
+  "metaplasticity_probe": {
+    "start_cells": 9000,
+    "max_cells": 9000,
+    "explained_status": "explained_by_existing_cell",
+    "after_explained_cells": 9000,
+    "first_noise_status": "buffered_possible_noise",
+    "after_first_noise_cells": 9000,
+    "confirmed_novelty_status": "created_confirmed_novelty",
+    "after_confirmed_cells": 9000,
+    "identity_frozen": true,
+    "identity_lr": 0.0,
+    "passed": true
+  },
+  "comparison": {
+    "amf_one_step_mse": 0.01743033528327942,
+    "best_baseline": "ridge_linear_dynamics",
+    "best_baseline_one_step_mse": 0.04734745994210243,
+    "amf_beats_best_baseline_one_step": true,
+    "amf_rollout_mse": 0.28755887516308576
+  }
+}
