@@ -71,6 +71,15 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   h10 `0.051417/0.281871`, and h17 `0.054018/0.268249`.
 - `results/FASE11A_NEVER_BOTTLENECK_AUDIT.md`: audit of best metrics and
   whether experiments use partial AMF pieces or a fuller Never world model.
+- `results/FASE12A_PHYSICALAI_DATASET.md`: NVIDIA PhysicalAI manifest, scene
+  ladder, shard counts, and streaming smoke for the next world-model stage.
+- `results/FASE12A_PHYSICALAI_PHYSICS_SMOKE.md`: real `objects_falling`
+  physics-shard inspection, confirming usable `com`, `velocity`, `spin`, and
+  `rot` arrays without downloading RGB/depth shards.
+- `results/FASE12A_PHYSICALAI_WORLD_PROBE.md`: first PhysicalAI physics world
+  probe. On `objects_falling` physics shard `00007`, AMF residual reaches
+  h1/h5/h15 MSE `0.000109/0.003526/0.069023`; h30 exposes the next long-horizon
+  bottleneck where Ridge is better at `0.314095`.
 
 ## What Fase 6 measures
 

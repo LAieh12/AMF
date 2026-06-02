@@ -1,0 +1,234 @@
+{
+  "repo_id": "nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes",
+  "repo_file": "physics/objects_falling/physics-objects_falling-00007.tar",
+  "inspection": {
+    "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00007.tar",
+    "tar_size_bytes": 69283840,
+    "listed_members": 20,
+    "suffix_counts_first_members": {
+      ".npz": 16,
+      ".json": 4
+    },
+    "members": [
+      {
+        "name": "objects_falling_c8917ca2_871/Corner_com.npz",
+        "size": 12294,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                19,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                19,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -12.850132942199707,
+              "max": 5.966682434082031
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -12.850132942199707,
+              "max": -0.9649797081947327
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.0,
+              "max": 2.0490121841430664
+            }
+          }
+        }
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Corner_rot.npz",
+        "size": 16213,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                19,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                19,
+                150,
+                4
+              ],
+              "dtype": "float32",
+              "min": -0.9272323846817017,
+              "max": 0.9444342255592346
+            }
+          }
+        }
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Corner_spin.npz",
+        "size": 13868,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                19,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                19,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -2131.604248046875,
+              "max": 2632.371826171875
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -2131.604248046875,
+              "max": -766.3021850585938
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 883.4943237304688,
+              "max": 2632.371826171875
+            }
+          }
+        }
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Corner_static.json",
+        "size": 10385
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Corner_velocity.npz",
+        "size": 19978
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/OtherSide_com.npz",
+        "size": 12466
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/OtherSide_rot.npz",
+        "size": 16454
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/OtherSide_spin.npz",
+        "size": 13794
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/OtherSide_static.json",
+        "size": 10388
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/OtherSide_velocity.npz",
+        "size": 19957
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Side_com.npz",
+        "size": 12542
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Side_rot.npz",
+        "size": 15965
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Side_spin.npz",
+        "size": 13850
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Side_static.json",
+        "size": 10383
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/Side_velocity.npz",
+        "size": 19951
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/TopDown_com.npz",
+        "size": 12087
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/TopDown_rot.npz",
+        "size": 16136
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/TopDown_spin.npz",
+        "size": 13886
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/TopDown_static.json",
+        "size": 10386
+      },
+      {
+        "name": "objects_falling_c8917ca2_871/TopDown_velocity.npz",
+        "size": 19989
+      }
+    ]
+  },
+  "elapsed_seconds": 4.184436082839966
+}

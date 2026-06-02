@@ -1,0 +1,434 @@
+{
+  "repo_id": "nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes",
+  "repo_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes",
+  "sha": "ff9b2b0a93243d84925c6c7474ee8a5bc02886cb",
+  "siblings": 9520,
+  "modalities": {
+    "cameras": 81,
+    "captions": 81,
+    "depths": 7653,
+    "physics": 81,
+    "scene": 81,
+    "segmentation": 770,
+    "videos": 770
+  },
+  "scenes": {
+    "ball_mixer": {
+      "cameras": 2,
+      "captions": 2,
+      "depths": 158,
+      "physics": 2,
+      "scene": 2,
+      "segmentation": 16,
+      "videos": 16
+    },
+    "billiards": {
+      "cameras": 9,
+      "captions": 9,
+      "depths": 876,
+      "physics": 9,
+      "scene": 9,
+      "segmentation": 88,
+      "videos": 88
+    },
+    "bowling": {
+      "cameras": 9,
+      "captions": 9,
+      "depths": 846,
+      "physics": 9,
+      "scene": 9,
+      "segmentation": 85,
+      "videos": 85
+    },
+    "dominoes": {
+      "cameras": 9,
+      "captions": 9,
+      "depths": 878,
+      "physics": 9,
+      "scene": 9,
+      "segmentation": 88,
+      "videos": 88
+    },
+    "objects_falling": {
+      "cameras": 8,
+      "captions": 8,
+      "depths": 715,
+      "physics": 8,
+      "scene": 8,
+      "segmentation": 72,
+      "videos": 72
+    },
+    "obstruction": {
+      "cameras": 9,
+      "captions": 9,
+      "depths": 811,
+      "physics": 9,
+      "scene": 9,
+      "segmentation": 82,
+      "videos": 82
+    },
+    "rolling_ramp_objects": {
+      "cameras": 7,
+      "captions": 7,
+      "depths": 670,
+      "physics": 7,
+      "scene": 7,
+      "segmentation": 67,
+      "videos": 67
+    },
+    "rolling_ramp_obstruct": {
+      "cameras": 9,
+      "captions": 9,
+      "depths": 881,
+      "physics": 9,
+      "scene": 9,
+      "segmentation": 89,
+      "videos": 89
+    },
+    "towers": {
+      "cameras": 8,
+      "captions": 8,
+      "depths": 767,
+      "physics": 8,
+      "scene": 8,
+      "segmentation": 77,
+      "videos": 77
+    },
+    "wrecking_ball": {
+      "cameras": 11,
+      "captions": 11,
+      "depths": 1051,
+      "physics": 11,
+      "scene": 11,
+      "segmentation": 106,
+      "videos": 106
+    }
+  },
+  "phase_ladder": {
+    "12A": {
+      "name": "clean multi-object physics",
+      "scenes": [
+        "objects_falling",
+        "billiards"
+      ],
+      "reason": "gravity, bounce, settling, and clean elastic collisions with direct physics labels.",
+      "scene_counts": {
+        "objects_falling": {
+          "cameras": 8,
+          "captions": 8,
+          "depths": 715,
+          "physics": 8,
+          "scene": 8,
+          "segmentation": 72,
+          "videos": 72
+        },
+        "billiards": {
+          "cameras": 9,
+          "captions": 9,
+          "depths": 876,
+          "physics": 9,
+          "scene": 9,
+          "segmentation": 88,
+          "videos": 88
+        }
+      },
+      "first_files": {
+        "objects_falling": {
+          "cameras": "cameras/objects_falling/cameras-objects_falling-00000.tar",
+          "captions": "captions/objects_falling/captions-objects_falling-00000.tar",
+          "depths": "depths/objects_falling/depths-objects_falling-00000.tar",
+          "physics": "physics/objects_falling/physics-objects_falling-00000.tar",
+          "scene": "scene/objects_falling/scene-objects_falling-00000.tar",
+          "segmentation": "segmentation/objects_falling/segmentation-objects_falling-00000.tar",
+          "videos": "videos/objects_falling/videos-objects_falling-00000.tar"
+        },
+        "billiards": {
+          "cameras": "cameras/billiards/cameras-billiards-00000.tar",
+          "captions": "captions/billiards/captions-billiards-00000.tar",
+          "depths": "depths/billiards/depths-billiards-00000.tar",
+          "physics": "physics/billiards/physics-billiards-00000.tar",
+          "scene": "scene/billiards/scene-billiards-00000.tar",
+          "segmentation": "segmentation/billiards/segmentation-billiards-00000.tar",
+          "videos": "videos/billiards/videos-billiards-00000.tar"
+        }
+      },
+      "first_file_sizes_bytes": {
+        "objects_falling": {
+          "cameras": 411658240,
+          "physics": 477818880,
+          "videos": 2991759360
+        },
+        "billiards": {
+          "cameras": 419471360,
+          "physics": 176343040,
+          "videos": 1459087360
+        }
+      }
+    },
+    "12B": {
+      "name": "causality and structured collisions",
+      "scenes": [
+        "dominoes",
+        "bowling",
+        "rolling_ramp_objects",
+        "rolling_ramp_obstruct",
+        "obstruction"
+      ],
+      "reason": "trigger chains, ramps, fixed obstacles, directed impact, and scatter.",
+      "scene_counts": {
+        "dominoes": {
+          "cameras": 9,
+          "captions": 9,
+          "depths": 878,
+          "physics": 9,
+          "scene": 9,
+          "segmentation": 88,
+          "videos": 88
+        },
+        "bowling": {
+          "cameras": 9,
+          "captions": 9,
+          "depths": 846,
+          "physics": 9,
+          "scene": 9,
+          "segmentation": 85,
+          "videos": 85
+        },
+        "rolling_ramp_objects": {
+          "cameras": 7,
+          "captions": 7,
+          "depths": 670,
+          "physics": 7,
+          "scene": 7,
+          "segmentation": 67,
+          "videos": 67
+        },
+        "rolling_ramp_obstruct": {
+          "cameras": 9,
+          "captions": 9,
+          "depths": 881,
+          "physics": 9,
+          "scene": 9,
+          "segmentation": 89,
+          "videos": 89
+        },
+        "obstruction": {
+          "cameras": 9,
+          "captions": 9,
+          "depths": 811,
+          "physics": 9,
+          "scene": 9,
+          "segmentation": 82,
+          "videos": 82
+        }
+      },
+      "first_files": {
+        "dominoes": {
+          "cameras": "cameras/dominoes/cameras-dominoes-00000.tar",
+          "captions": "captions/dominoes/captions-dominoes-00000.tar",
+          "depths": "depths/dominoes/depths-dominoes-00000.tar",
+          "physics": "physics/dominoes/physics-dominoes-00000.tar",
+          "scene": "scene/dominoes/scene-dominoes-00000.tar",
+          "segmentation": "segmentation/dominoes/segmentation-dominoes-00000.tar",
+          "videos": "videos/dominoes/videos-dominoes-00000.tar"
+        },
+        "bowling": {
+          "cameras": "cameras/bowling/cameras-bowling-00000.tar",
+          "captions": "captions/bowling/captions-bowling-00000.tar",
+          "depths": "depths/bowling/depths-bowling-00000.tar",
+          "physics": "physics/bowling/physics-bowling-00000.tar",
+          "scene": "scene/bowling/scene-bowling-00000.tar",
+          "segmentation": "segmentation/bowling/segmentation-bowling-00000.tar",
+          "videos": "videos/bowling/videos-bowling-00000.tar"
+        },
+        "rolling_ramp_objects": {
+          "cameras": "cameras/rolling_ramp_objects/cameras-rolling_ramp_objects-00000.tar",
+          "captions": "captions/rolling_ramp_objects/captions-rolling_ramp_objects-00000.tar",
+          "depths": "depths/rolling_ramp_objects/depths-rolling_ramp_objects-00000.tar",
+          "physics": "physics/rolling_ramp_objects/physics-rolling_ramp_objects-00000.tar",
+          "scene": "scene/rolling_ramp_objects/scene-rolling_ramp_objects-00000.tar",
+          "segmentation": "segmentation/rolling_ramp_objects/segmentation-rolling_ramp_objects-00000.tar",
+          "videos": "videos/rolling_ramp_objects/videos-rolling_ramp_objects-00000.tar"
+        },
+        "rolling_ramp_obstruct": {
+          "cameras": "cameras/rolling_ramp_obstruct/cameras-rolling_ramp_obstruct-00000.tar",
+          "captions": "captions/rolling_ramp_obstruct/captions-rolling_ramp_obstruct-00000.tar",
+          "depths": "depths/rolling_ramp_obstruct/depths-rolling_ramp_obstruct-00000.tar",
+          "physics": "physics/rolling_ramp_obstruct/physics-rolling_ramp_obstruct-00000.tar",
+          "scene": "scene/rolling_ramp_obstruct/scene-rolling_ramp_obstruct-00000.tar",
+          "segmentation": "segmentation/rolling_ramp_obstruct/segmentation-rolling_ramp_obstruct-00000.tar",
+          "videos": "videos/rolling_ramp_obstruct/videos-rolling_ramp_obstruct-00000.tar"
+        },
+        "obstruction": {
+          "cameras": "cameras/obstruction/cameras-obstruction-00000.tar",
+          "captions": "captions/obstruction/captions-obstruction-00000.tar",
+          "depths": "depths/obstruction/depths-obstruction-00000.tar",
+          "physics": "physics/obstruction/physics-obstruction-00000.tar",
+          "scene": "scene/obstruction/scene-obstruction-00000.tar",
+          "segmentation": "segmentation/obstruction/segmentation-obstruction-00000.tar",
+          "videos": "videos/obstruction/videos-obstruction-00000.tar"
+        }
+      },
+      "first_file_sizes_bytes": {
+        "dominoes": {
+          "cameras": 408217600,
+          "physics": 449157120,
+          "videos": 2319646720
+        },
+        "bowling": {
+          "cameras": 407050240,
+          "physics": 194949120,
+          "videos": 1143500800
+        },
+        "rolling_ramp_objects": {
+          "cameras": 430807040,
+          "physics": 6861158400,
+          "videos": 6710681600
+        },
+        "rolling_ramp_obstruct": {
+          "cameras": 425338880,
+          "physics": 580280320,
+          "videos": 2927237120
+        },
+        "obstruction": {
+          "cameras": 406579200,
+          "physics": 959488000,
+          "videos": 2762291200
+        }
+      }
+    },
+    "12C": {
+      "name": "chaos and collapse",
+      "scenes": [
+        "ball_mixer",
+        "towers",
+        "wrecking_ball"
+      ],
+      "reason": "persistent mixing, structural collapse, pendulum constraints, and chaotic secondary motion.",
+      "scene_counts": {
+        "ball_mixer": {
+          "cameras": 2,
+          "captions": 2,
+          "depths": 158,
+          "physics": 2,
+          "scene": 2,
+          "segmentation": 16,
+          "videos": 16
+        },
+        "towers": {
+          "cameras": 8,
+          "captions": 8,
+          "depths": 767,
+          "physics": 8,
+          "scene": 8,
+          "segmentation": 77,
+          "videos": 77
+        },
+        "wrecking_ball": {
+          "cameras": 11,
+          "captions": 11,
+          "depths": 1051,
+          "physics": 11,
+          "scene": 11,
+          "segmentation": 106,
+          "videos": 106
+        }
+      },
+      "first_files": {
+        "ball_mixer": {
+          "cameras": "cameras/ball_mixer/cameras-ball_mixer-00000.tar",
+          "captions": "captions/ball_mixer/captions-ball_mixer-00000.tar",
+          "depths": "depths/ball_mixer/depths-ball_mixer-00000.tar",
+          "physics": "physics/ball_mixer/physics-ball_mixer-00000.tar",
+          "scene": "scene/ball_mixer/scene-ball_mixer-00000.tar",
+          "segmentation": "segmentation/ball_mixer/segmentation-ball_mixer-00000.tar",
+          "videos": "videos/ball_mixer/videos-ball_mixer-00000.tar"
+        },
+        "towers": {
+          "cameras": "cameras/towers/cameras-towers-00000.tar",
+          "captions": "captions/towers/captions-towers-00000.tar",
+          "depths": "depths/towers/depths-towers-00000.tar",
+          "physics": "physics/towers/physics-towers-00000.tar",
+          "scene": "scene/towers/scene-towers-00000.tar",
+          "segmentation": "segmentation/towers/segmentation-towers-00000.tar",
+          "videos": "videos/towers/videos-towers-00000.tar"
+        },
+        "wrecking_ball": {
+          "cameras": "cameras/wrecking_ball/cameras-wrecking_ball-00000.tar",
+          "captions": "captions/wrecking_ball/captions-wrecking_ball-00000.tar",
+          "depths": "depths/wrecking_ball/depths-wrecking_ball-00000.tar",
+          "physics": "physics/wrecking_ball/physics-wrecking_ball-00000.tar",
+          "scene": "scene/wrecking_ball/scene-wrecking_ball-00000.tar",
+          "segmentation": "segmentation/wrecking_ball/segmentation-wrecking_ball-00000.tar",
+          "videos": "videos/wrecking_ball/videos-wrecking_ball-00000.tar"
+        }
+      },
+      "first_file_sizes_bytes": {
+        "ball_mixer": {
+          "cameras": 601610240,
+          "physics": 7234560000,
+          "videos": 12110592000
+        },
+        "towers": {
+          "cameras": 380426240,
+          "physics": 1637980160,
+          "videos": 3155937280
+        },
+        "wrecking_ball": {
+          "cameras": 379914240,
+          "physics": 350085120,
+          "videos": 3082639360
+        }
+      }
+    }
+  },
+  "size_probe": true,
+  "elapsed_seconds": 13.261918783187866,
+  "streaming_smoke_rows": [
+    {
+      "index": 0,
+      "__key__": "ball_mixer_9af0e375_0/camera_e",
+      "__url__": "hf://datasets/nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes@ff9b2b0a93243d84925c6c7474ee8a5bc02886cb/cameras/ball_mixer/cameras-ball_mixer-00000.tar",
+      "payload_key": "json",
+      "payload_type": "dict",
+      "payload_fields": [
+        "camera",
+        "camera_name",
+        "frame_count",
+        "usd_transform"
+      ],
+      "frame_count": 240,
+      "camera_name": "camera_e"
+    },
+    {
+      "index": 1,
+      "__key__": "ball_mixer_9af0e375_0/camera_n",
+      "__url__": "hf://datasets/nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes@ff9b2b0a93243d84925c6c7474ee8a5bc02886cb/cameras/ball_mixer/cameras-ball_mixer-00000.tar",
+      "payload_key": "json",
+      "payload_type": "dict",
+      "payload_fields": [
+        "camera",
+        "camera_name",
+        "frame_count",
+        "usd_transform"
+      ],
+      "frame_count": 240,
+      "camera_name": "camera_n"
+    },
+    {
+      "index": 2,
+      "__key__": "ball_mixer_9af0e375_0/camera_s",
+      "__url__": "hf://datasets/nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes@ff9b2b0a93243d84925c6c7474ee8a5bc02886cb/cameras/ball_mixer/cameras-ball_mixer-00000.tar",
+      "payload_key": "json",
+      "payload_type": "dict",
+      "payload_fields": [
+        "camera",
+        "camera_name",
+        "frame_count",
+        "usd_transform"
+      ],
+      "frame_count": 240,
+      "camera_name": "camera_s"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "probe": "phase12a_physicalai_world_probe",
+  "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00007.tar",
+  "track_count": 19036,
+  "sequence_count": 142,
+  "train_sequences": 106,
+  "test_sequences": 36,
+  "horizons": [
+    1,
+    5,
+    15,
+    30
+  ],
+  "stride": 5,
+  "max_cells": 12000,
+  "test_metrics": {
+    "h1": {
+      "samples": 134280,
+      "never12a_physics_mse": 0.00010927775292657316,
+      "never12a_physics_mae": 0.002280313754454255,
+      "best_candidate": "amf_residual",
+      "last_mse": 0.0019031804986298084,
+      "constant_velocity_mse": 0.00012432319635991007,
+      "ridge_mse": 0.00012047078053001314,
+      "amf_residual_mse": 0.00010927775292657316,
+      "ridge_amf_mean_mse": 0.00011173132224939764,
+      "mse_skill_vs_last": 0.9425815086875641
+    },
+    "h5": {
+      "samples": 129804,
+      "never12a_physics_mse": 0.003526248037815094,
+      "never12a_physics_mae": 0.016348443925380707,
+      "best_candidate": "amf_residual",
+      "last_mse": 0.04536404833197594,
+      "constant_velocity_mse": 0.008487138897180557,
+      "ridge_mse": 0.00692561361938715,
+      "amf_residual_mse": 0.003526248037815094,
+      "ridge_amf_mean_mse": 0.004596390761435032,
+      "mse_skill_vs_last": 0.9222677832452283
+    },
+    "h15": {
+      "samples": 120852,
+      "never12a_physics_mse": 0.0690234825015068,
+      "never12a_physics_mae": 0.08912788331508636,
+      "best_candidate": "amf_residual",
+      "last_mse": 0.345906525850296,
+      "constant_velocity_mse": 0.20863807201385498,
+      "ridge_mse": 0.103250652551651,
+      "amf_residual_mse": 0.0690234825015068,
+      "ridge_amf_mean_mse": 0.07057469338178635,
+      "mse_skill_vs_last": 0.8004562581413127
+    },
+    "h30": {
+      "samples": 107424,
+      "never12a_physics_mse": 0.3140953481197357,
+      "never12a_physics_mae": 0.26348555088043213,
+      "best_candidate": "ridge",
+      "last_mse": 0.8633855581283569,
+      "constant_velocity_mse": 1.260606288909912,
+      "ridge_mse": 0.3140953481197357,
+      "amf_residual_mse": 1.1889300346374512,
+      "ridge_amf_mean_mse": 0.44192031025886536,
+      "mse_skill_vs_last": 0.6362050011577329
+    }
+  },
+  "elapsed_seconds": 181.5748791694641
+}
