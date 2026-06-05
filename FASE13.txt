@@ -1,0 +1,333 @@
+Comienza **Phase 13 — Formal AMF World Model Training**.
+
+Contexto:
+Las fases 12A/12B/12C/12D fueron probes de arquitectura. Ya quedó demostrado que el núcleo ganador actual es:
+
+* AMF residual
+* temporal-energy
+* identity/orientation
+* energy/constraint features
+* AMF-LTM residual/router
+
+12D cerró el problema inicial de memoria larga porque AMF-LTM residual superó al champion temporal-energy en h1/h5/h15/h30/h60 sobre `wrecking_ball`. Ahora deja de tratarlo como probe aislado: toca entrenamiento formal multi-escena del AMF World Model.
+
+## Objetivo principal
+
+Entrenar y evaluar formalmente un **AMF World Model multi-escena** usando datos físicos reales de NVIDIA PhysicalAI.
+
+El modelo debe aprender:
+
+`S(t) + contexto físico + memoria → ΔS(t) → S(t+1)`
+
+Prioridad principal:
+mejorar y estabilizar horizontes largos, especialmente `h30`, `h60` y si se puede `h120`.
+
+## Arquitectura base obligatoria
+
+Usar como modelo principal:
+
+`AMF-LTM residual sobre temporal-energy`
+
+No volver a LTM como concatenación densa de features. Esa ruta ya se diagnosticó como ruidosa.
+
+La memoria debe operar como:
+
+* router
+* retrieval
+* residual correction
+* regime/context selector
+
+No como “más columnas pegadas al vector”.
+
+## Componentes del modelo
+
+Implementar o reutilizar:
+
+### 1. Base temporal-energy
+
+Debe ser el predictor base fuerte.
+
+Incluye señales como:
+
+* posición / center of mass
+* velocidad
+* historia temporal reciente
+* energía aproximada
+* energía de spin
+* constraint/radio si aplica
+* velocidad radial/tangencial si aplica
+* orientación/rotación si existe
+
+### 2. AMF residual
+
+El AMF debe seguir aprendiendo `ΔS`, no `S(t+1)` completo.
+
+Debe guardar memoria local de transiciones:
+
+* source state
+* context/action/regime
+* delta target
+* confidence
+* usage
+* error history
+
+### 3. AMF-LTM residual/router
+
+Mantener los 4 niveles:
+
+#### H_fast
+
+Memoria rápida:
+
+* velocidad reciente
+* aceleración
+* tendencia de energía
+* fase de movimiento
+* error acumulado reciente
+
+#### H_event
+
+Memoria de eventos:
+
+* contacto
+* impacto
+* rebote
+* colisión
+* cambio brusco de velocidad/energía
+* inicio de cadena causal
+
+Debe servir principalmente para routing/retrieval, no como feature densa dominante.
+
+#### H_regime
+
+Memoria de régimen:
+
+* caída libre
+* péndulo
+* domino chain
+* colisión elástica
+* rolling/ramp
+* post-impact scatter
+* near rest
+* constrained motion
+
+Esta es importante para `h30+`.
+
+#### H_workspace
+
+Memoria de escena:
+
+* objetos activos
+* relaciones objeto-objeto
+* identidad
+* orientación
+* constraints
+* cámara si está disponible
+* contexto global de escena
+
+Debe servir como contexto/selector.
+
+## Datasets / escenas
+
+No hace falta descargar todo el dataset completo todavía. Trabaja por shards acotados, pero de varias escenas.
+
+Orden recomendado:
+
+### Tier 1 obligatorio
+
+* `objects_falling`
+* `dominoes`
+* `wrecking_ball`
+
+### Tier 2 recomendado si hay tiempo
+
+* `billiards`
+* `rolling_ramp_objects`
+* `rolling_ramp_obstruct`
+* `bowling`
+
+### Tier 3 solo si el pipeline está estable
+
+* `ball_mixer`
+* `towers`
+* `obstruction`
+
+La idea no es correr una sola escena grande. La idea es ver si el AMF World Model generaliza por tipo de física.
+
+## Split correcto
+
+Para cada escena:
+
+* train
+* validation
+* test
+
+Nada de elegir pesos usando test.
+
+Toda mezcla, routing, pesos de ensemble, umbrales y residuals deben calibrarse con train/validation.
+
+El test solo se usa al final.
+
+## Baselines obligatorios
+
+Comparar contra:
+
+1. `last_state` o `last_delta`
+2. `ridge`
+3. `energy`
+4. `temporal_energy`
+5. `AMF residual`
+6. `AMF ensemble 12C`
+7. `AMF-LTM residual` nuevo
+
+El rival principal no es Ridge. El rival principal es el mejor champion anterior por escena/horizonte.
+
+## Métricas obligatorias
+
+Reportar por escena y por horizonte:
+
+* h1
+* h5
+* h15
+* h30
+* h60
+* h120 si es viable
+
+Para cada horizonte:
+
+* MSE
+* skill vs last
+* gain vs Ridge
+* gain vs temporal-energy
+* gain vs best previous AMF
+* selected branch / model
+* número de células AMF usadas
+* número de memorias LTM creadas
+* número de memorias recuperadas por predicción
+* eventos detectados
+* regímenes detectados
+* memoria MB
+* tiempo de entrenamiento
+* tiempo de inferencia
+
+## Métricas agregadas
+
+Además de tablas por escena, crear resumen global:
+
+* promedio por horizonte
+* win/tie/loss vs temporal-energy
+* win/tie/loss vs best previous AMF
+* promedio de mejora en h30/h60
+* mejor escena
+* peor escena
+* escena donde LTM aporta más
+* escena donde LTM mete ruido
+
+## Diagnósticos necesarios
+
+Crear diagnóstico de:
+
+### 1. Regime detection
+
+Por escena:
+
+* cuántos frames/transiciones detectó como caída, impacto, péndulo, reposo, rolling, domino chain, etc.
+* si esos regímenes se correlacionan con mejoras o errores.
+
+### 2. LTM retrieval
+
+Medir:
+
+* cuántas memorias recupera por predicción.
+* qué tipo de memoria recupera.
+* si el residual LTM mejora o empeora.
+* si la confianza está bien calibrada.
+
+### 3. Residual safety
+
+Si LTM no tiene confianza, no debe corregir.
+
+Reportar:
+
+* veces que LTM corrigió.
+* veces que LTM se apagó.
+* veces que el residual empeoró.
+* veces que el residual mejoró.
+
+### 4. Horizon breakdown
+
+Separar resultados por:
+
+* corto plazo: h1/h5
+* medio plazo: h15
+* largo plazo: h30/h60/h120
+
+La prioridad de Phase 13 es largo plazo.
+
+## Ablations
+
+Correr al menos estas variantes:
+
+1. temporal-energy solo
+2. AMF residual sin LTM
+3. AMF-LTM residual sin H_event
+4. AMF-LTM residual sin H_regime
+5. AMF-LTM residual sin H_workspace
+6. AMF-LTM residual completo
+7. oracle selector solo como diagnóstico, marcado claramente como `oracle_no_valid`
+
+El oracle no cuenta como resultado final. Solo sirve para ver techo posible.
+
+## Archivos esperados
+
+Crear o adaptar:
+
+* `phase13_scene_loader.py`
+* `phase13_amf_ltm_model.py`
+* `phase13_world_model_train.py`
+* `phase13_eval_horizons.py`
+* `phase13_cross_scene_eval.py`
+* `phase13_ltm_diagnostics.py`
+* `run_phase13.py`
+
+Resultados:
+
+* `results/phase13_latest.json`
+* `results/FASE13_WORLD_MODEL_TRAINING.md`
+* `results/FASE13_CROSS_SCENE_EVAL.md`
+* `results/FASE13_LTM_DIAGNOSTIC.md`
+* `FASE13_COMPLETADA.md`
+
+Actualizar:
+
+* `README.md`
+* `roadmap` si existe
+* `CHANGELOG.md` si existe
+
+Commit al final.
+
+## Criterio de éxito
+
+Phase 13 pasa si:
+
+1. AMF-LTM residual gana o empata contra el mejor modelo anterior en la mayoría de escenas.
+2. Mejora h30/h60 de forma consistente.
+3. No depende solo de `wrecking_ball`.
+4. No hay leakage.
+5. La memoria no explota.
+6. El reporte identifica en qué escenas/régimen LTM ayuda y en cuáles no.
+
+Si no mejora, no maquillar. Reportar el fallo y decir si el problema fue:
+
+* detector de régimen débil
+* memoria recuperada incorrecta
+* residual demasiado agresivo
+* falta de contacto explícito
+* falta de relación objeto-objeto
+* horizonte demasiado largo
+* escena demasiado caótica
+* datos insuficientes
+
+## Nota importante
+
+No descargar dataset completo todavía salvo que sea necesario. Primero usar shards controlados de varias escenas. La meta de Phase 13 no es tamaño bruto; es confirmar entrenamiento formal multi-escena con memoria larga útil.

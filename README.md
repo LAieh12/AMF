@@ -138,6 +138,12 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   `0.000024/0.002925/0.066685/0.347153/0.967422`, beating temporal-energy by
   `17.53%/9.99%/9.19%/11.65%/9.45%`; oracle selector is reported only as an
   invalid diagnostic ceiling.
+- `results/FASE13_WORLD_MODEL_TRAINING.md`: formal multi-scene AMF World Model
+  training on real PhysicalAI `objects_falling`, `dominoes`, and
+  `wrecking_ball` shards with h1/h5/h15/h30/h60/h120. AMF-LTM selected wins or
+  ties temporal-energy on all long-horizon checks, but the strict phase gate is
+  not passed because it wins/ties only 3/9 long-horizon checks against the best
+  previous AMF per scene/horizon.
 
 ## What Fase 6 measures
 
@@ -205,6 +211,8 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
 - `NEVER/src/engine/action_orchestrator.hpp`: prompt-to-action fallback.
 - `phase12d_ltm_router_probe.py`: AMF-LTM episodic router/retriever over the
   frozen temporal-energy PhysicalAI world-model baseline.
+- `run_phase13.py`: formal multi-scene AMF World Model training runner with
+  AMF-LTM residual/router ablations and cross-scene diagnostics.
 
 ## Fase 7
 
