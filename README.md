@@ -79,8 +79,12 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
 - `results/FASE12A_PHYSICALAI_WORLD_PROBE.md`: PhysicalAI physics world
   probe. On `objects_falling` physics shard `00007`, the validation-selected
   hybrid AMF/Ridge world model reaches h1/h5/h15/h30 MSE
-  `0.000118/0.005272/0.037346/0.184980`, beating Ridge at every horizon with
-  h30 gain-vs-Ridge `0.351889`.
+  `0.000194/0.006390/0.054260/0.225712`, beating Ridge at every horizon with
+  h30 gain-vs-Ridge `0.149995` under a deterministic shuffled sequence split.
+- `results/FASE12A_BILLIARDS_WORLD_PROBE.md`: second real PhysicalAI 12A
+  scene. On `billiards` physics shard `00000`, the same validation-selected
+  world probe reaches h1/h5/h15/h30 MSE
+  `0.000003/0.000347/0.006750/0.051179`; h30 beats Ridge by `0.169266`.
 
 ## What Fase 6 measures
 

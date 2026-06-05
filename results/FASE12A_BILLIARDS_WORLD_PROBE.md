@@ -1,18 +1,18 @@
 # Fase 12A - PhysicalAI world probe
 
-Tar: `data\physicalai_hf_cache\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\snapshots\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\physics\objects_falling\physics-objects_falling-00007.tar`
-Tracks: 19036
-Sequences: 142 (106 train / 36 test)
-Fit/validation/test: 85 / 21 / 36 (seed 123)
+Tar: `data\physicalai_hf_cache\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\snapshots\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\physics\billiards\physics-billiards-00000.tar`
+Tracks: 40028
+Sequences: 1000 (750 train / 250 test)
+Fit/validation/test: 600 / 150 / 250 (seed 123)
 
 ## Metrics
 
 | horizon | selected | MSE | MAE | last MSE | Ridge MSE | gain vs Ridge | skill vs last |
 |---|---|---:|---:|---:|---:|---:|---:|
-| h1 | ridge_amf_0.25 | 0.000194 | 0.003547 | 0.001812 | 0.000197 | 0.018836 | 0.893101 |
-| h5 | ridge_amf_0.5 | 0.006390 | 0.028117 | 0.042789 | 0.008028 | 0.204043 | 0.850660 |
-| h15 | cv_amf | 0.054260 | 0.081414 | 0.316270 | 0.095757 | 0.433353 | 0.828436 |
-| h30 | cv_amf | 0.225712 | 0.189970 | 0.746230 | 0.265542 | 0.149995 | 0.697530 |
+| h1 | constant_velocity | 0.000003 | 0.000119 | 0.002442 | 0.000006 | 0.519399 | 0.998893 |
+| h5 | ridge | 0.000347 | 0.005801 | 0.058515 | 0.000347 | 0.000000 | 0.994063 |
+| h15 | ridge_amf_0.25 | 0.006750 | 0.030308 | 0.494746 | 0.007350 | 0.081616 | 0.986357 |
+| h30 | ridge_amf_0.5 | 0.051179 | 0.066987 | 1.832920 | 0.061607 | 0.169266 | 0.972078 |
 
 ## Selector
 

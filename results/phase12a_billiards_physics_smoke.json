@@ -1,0 +1,313 @@
+{
+  "repo_id": "nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes",
+  "repo_file": "physics/billiards/physics-billiards-00000.tar",
+  "inspection": {
+    "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\billiards\\physics-billiards-00000.tar",
+    "tar_size_bytes": 176343040,
+    "listed_members": 24,
+    "suffix_counts_first_members": {
+      ".npz": 19,
+      ".json": 5
+    },
+    "members": [
+      {
+        "name": "billiards_452790ee_0/BehindCue_com.npz",
+        "size": 6205,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -4.588768005371094,
+              "max": 1.400251030921936
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -4.588768005371094,
+              "max": -0.30610892176628113
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.0,
+              "max": 1.400251030921936
+            }
+          }
+        }
+      },
+      {
+        "name": "billiards_452790ee_0/BehindCue_rot.npz",
+        "size": 7403,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                4
+              ],
+              "dtype": "float32",
+              "min": -0.8802263736724854,
+              "max": 0.8434653878211975
+            }
+          }
+        }
+      },
+      {
+        "name": "billiards_452790ee_0/BehindCue_spin.npz",
+        "size": 6119,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -3059.329345703125,
+              "max": 722.9945068359375
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -3059.329345703125,
+              "max": -28.997148513793945
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 127.12030029296875,
+              "max": 722.9945068359375
+            }
+          }
+        }
+      },
+      {
+        "name": "billiards_452790ee_0/BehindCue_static.json",
+        "size": 4626
+      },
+      {
+        "name": "billiards_452790ee_0/BehindCue_velocity.npz",
+        "size": 11544,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "velocities",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "velocities": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -2.515937089920044,
+              "max": 0.3373613953590393
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -2.515937089920044,
+              "max": 0.3373613953590393
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -2.515937089920044,
+              "max": -0.12695571780204773
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.007285023108124733,
+              "max": 0.3373613953590393
+            }
+          }
+        }
+      },
+      {
+        "name": "billiards_452790ee_0/Corner_com.npz",
+        "size": 6109
+      },
+      {
+        "name": "billiards_452790ee_0/Corner_rot.npz",
+        "size": 7397
+      },
+      {
+        "name": "billiards_452790ee_0/Corner_spin.npz",
+        "size": 6171
+      },
+      {
+        "name": "billiards_452790ee_0/Corner_static.json",
+        "size": 4623
+      },
+      {
+        "name": "billiards_452790ee_0/Corner_velocity.npz",
+        "size": 11478
+      },
+      {
+        "name": "billiards_452790ee_0/ImpactZone_com.npz",
+        "size": 6248
+      },
+      {
+        "name": "billiards_452790ee_0/ImpactZone_rot.npz",
+        "size": 7283
+      },
+      {
+        "name": "billiards_452790ee_0/ImpactZone_spin.npz",
+        "size": 6214
+      },
+      {
+        "name": "billiards_452790ee_0/ImpactZone_static.json",
+        "size": 4627
+      },
+      {
+        "name": "billiards_452790ee_0/ImpactZone_velocity.npz",
+        "size": 11412
+      },
+      {
+        "name": "billiards_452790ee_0/TopDown_com.npz",
+        "size": 6106
+      },
+      {
+        "name": "billiards_452790ee_0/TopDown_rot.npz",
+        "size": 7441
+      },
+      {
+        "name": "billiards_452790ee_0/TopDown_spin.npz",
+        "size": 6163
+      },
+      {
+        "name": "billiards_452790ee_0/TopDown_static.json",
+        "size": 4624
+      },
+      {
+        "name": "billiards_452790ee_0/TopDown_velocity.npz",
+        "size": 11404
+      },
+      {
+        "name": "billiards_452790ee_1/BehindCue_com.npz",
+        "size": 4401
+      },
+      {
+        "name": "billiards_452790ee_1/BehindCue_rot.npz",
+        "size": 5122
+      },
+      {
+        "name": "billiards_452790ee_1/BehindCue_spin.npz",
+        "size": 4416
+      },
+      {
+        "name": "billiards_452790ee_1/BehindCue_static.json",
+        "size": 2409
+      }
+    ]
+  },
+  "elapsed_seconds": 8.346850395202637
+}

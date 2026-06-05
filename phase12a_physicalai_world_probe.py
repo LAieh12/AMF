@@ -204,10 +204,13 @@ class ResidualMemory:
         return ((self.y[idx] * weights[:, :, None]).sum(axis=1) / denom).astype(np.float32)
 
 
-def split_train_validation(sequences: list[str], train_fraction: float) -> tuple[set[str], set[str], set[str]]:
-    split = max(1, min(len(sequences) - 1, int(len(sequences) * train_fraction)))
-    train_all = sequences[:split]
-    test_sequences = set(sequences[split:])
+def split_train_validation(sequences: list[str], train_fraction: float, split_seed: int) -> tuple[set[str], set[str], set[str]]:
+    shuffled = list(sequences)
+    rng = np.random.default_rng(split_seed)
+    rng.shuffle(shuffled)
+    split = max(1, min(len(shuffled) - 1, int(len(shuffled) * train_fraction)))
+    train_all = shuffled[:split]
+    test_sequences = set(shuffled[split:])
     val_count = max(1, min(len(train_all) - 1, int(len(train_all) * 0.2)))
     fit_sequences = set(train_all[:-val_count])
     val_sequences = set(train_all[-val_count:])
@@ -258,9 +261,16 @@ def select_candidate(
     target: np.ndarray,
     cv: np.ndarray,
     candidates: tuple[str, ...],
+    tie_tolerance: float,
 ) -> tuple[str, dict[str, float]]:
     losses = {name: mse(predict_family(model, x, cv, name), target) for name in candidates}
-    return min(losses.items(), key=lambda item: item[1])[0], losses
+    best_name, best = min(losses.items(), key=lambda item: item[1])
+    threshold = best * (1.0 + tie_tolerance)
+    if best_name == "constant_velocity":
+        for preferred in ("ridge", "ridge_amf_0.25", "ridge_amf_0.5"):
+            if preferred in losses and losses[preferred] <= threshold:
+                return preferred, losses
+    return best_name, losses
 
 
 def mse(pred: np.ndarray, target: np.ndarray) -> float:
@@ -313,11 +323,21 @@ def evaluate(
     return results
 
 
-def run_probe(tar_path: Path, train_fraction: float, stride: int, max_cells: int, ridge: float, radius: float, top_k: int) -> dict[str, Any]:
+def run_probe(
+    tar_path: Path,
+    train_fraction: float,
+    stride: int,
+    max_cells: int,
+    ridge: float,
+    radius: float,
+    top_k: int,
+    tie_tolerance: float,
+    split_seed: int,
+) -> dict[str, Any]:
     started = time.time()
     tracks = load_tracks(tar_path)
     sequences = sorted({track.sequence for track in tracks})
-    fit_sequences, val_sequences, train_sequences, test_sequences = split_train_validation(sequences, train_fraction)
+    fit_sequences, val_sequences, train_sequences, test_sequences = split_train_validation(sequences, train_fraction, split_seed)
     fit_samples = make_samples(tracks, fit_sequences, HORIZONS, stride)
     val_samples = make_samples(tracks, val_sequences, HORIZONS, stride)
     train_samples = make_samples(tracks, train_sequences, HORIZONS, stride)
@@ -328,7 +348,9 @@ def run_probe(tar_path: Path, train_fraction: float, stride: int, max_cells: int
     for horizon, (x_fit, target_fit, _last_fit, cv_fit) in fit_samples.items():
         val_x, val_target, _val_last, val_cv = val_samples[horizon]
         selector_model = fit_model_family(x_fit, target_fit, cv_fit, max_cells=max_cells, ridge=ridge, radius=radius, top_k=top_k)
-        selected_candidate, val_losses = select_candidate(selector_model, val_x, val_target, val_cv, candidates)
+        selected_candidate, val_losses = select_candidate(
+            selector_model, val_x, val_target, val_cv, candidates, tie_tolerance=tie_tolerance
+        )
 
         x_train, target_train, _last_train, cv_train = train_samples[horizon]
         model = fit_model_family(x_train, target_train, cv_train, max_cells=max_cells, ridge=ridge, radius=radius, top_k=top_k)
@@ -351,6 +373,8 @@ def run_probe(tar_path: Path, train_fraction: float, stride: int, max_cells: int
         "max_cells": max_cells,
         "radius": radius,
         "top_k": top_k,
+        "tie_tolerance": tie_tolerance,
+        "split_seed": split_seed,
         "test_metrics": metrics,
         "elapsed_seconds": time.time() - started,
     }
@@ -363,6 +387,7 @@ def render_report(result: dict[str, Any]) -> str:
         f"Tar: `{result['tar_path']}`",
         f"Tracks: {result['track_count']}",
         f"Sequences: {result['sequence_count']} ({result['train_sequences']} train / {result['test_sequences']} test)",
+        f"Fit/validation/test: {result['fit_sequences']} / {result['validation_sequences']} / {result['test_sequences']} (seed {result['split_seed']})",
         "",
         "## Metrics",
         "",
@@ -381,6 +406,7 @@ def render_report(result: dict[str, Any]) -> str:
             "## Selector",
             "",
             "El candidato activo se elige en validacion y luego se reentrena sobre todo el bloque train antes del test.",
+            "Si velocidad constante gana validacion pero Ridge o Ridge+AMF quedan cerca, el selector prefiere el candidato global/interpolado mas estable.",
             "Esto evita elegir el mejor metodo mirando el test y hace mas justa la comparacion contra Ridge.",
             "",
             "## Lectura",
@@ -401,11 +427,23 @@ def main() -> None:
     parser.add_argument("--ridge", type=float, default=1e-3)
     parser.add_argument("--radius", type=float, default=0.75)
     parser.add_argument("--top-k", type=int, default=32)
+    parser.add_argument("--tie-tolerance", type=float, default=0.10)
+    parser.add_argument("--split-seed", type=int, default=123)
     parser.add_argument("--out-json", default="results/phase12a_physicalai_world_probe.json")
     parser.add_argument("--out-report", default="results/FASE12A_PHYSICALAI_WORLD_PROBE.md")
     args = parser.parse_args()
 
-    result = run_probe(Path(args.tar_path), args.train_fraction, args.stride, args.max_cells, args.ridge, args.radius, args.top_k)
+    result = run_probe(
+        Path(args.tar_path),
+        args.train_fraction,
+        args.stride,
+        args.max_cells,
+        args.ridge,
+        args.radius,
+        args.top_k,
+        args.tie_tolerance,
+        args.split_seed,
+    )
     out_json = Path(args.out_json)
     out_json.parent.mkdir(parents=True, exist_ok=True)
     out_json.write_text(json.dumps(result, indent=2), encoding="utf-8")
