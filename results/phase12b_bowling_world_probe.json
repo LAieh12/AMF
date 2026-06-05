@@ -1,0 +1,117 @@
+{
+  "probe": "phase12a_physicalai_world_probe",
+  "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\bowling\\physics-bowling-00000.tar",
+  "track_count": 61312,
+  "sequence_count": 1000,
+  "fit_sequences": 600,
+  "validation_sequences": 150,
+  "train_sequences": 750,
+  "test_sequences": 250,
+  "horizons": [
+    1,
+    5,
+    15,
+    30
+  ],
+  "stride": 5,
+  "max_cells": 20000,
+  "radius": 0.75,
+  "top_k": 32,
+  "tie_tolerance": 0.1,
+  "split_seed": 123,
+  "test_metrics": {
+    "h1": {
+      "samples": 473880,
+      "never12a_physics_mse": 6.279986700974405e-05,
+      "never12a_physics_mae": 0.0022044640500098467,
+      "selected_candidate": "ridge_amf_0.5",
+      "validation_losses": {
+        "ridge": 0.00014261773321777582,
+        "constant_velocity": 0.00015127303777262568,
+        "cv_amf": 0.00011639114381978288,
+        "ridge_amf_0.25": 0.00011242149048484862,
+        "ridge_amf_0.5": 9.704675176180899e-05,
+        "ridge_amf_1.0": 0.00011076193914050236
+      },
+      "last_mse": 0.001734641962684691,
+      "constant_velocity_mse": 0.0001102280366467312,
+      "ridge_mse": 0.00010151400056201965,
+      "cv_amf_mse": 9.308649168815464e-05,
+      "ridge_amf_0.25_mse": 7.397667650366202e-05,
+      "ridge_amf_0.5_mse": 6.279986700974405e-05,
+      "ridge_amf_1.0_mse": 8.95278571988456e-05,
+      "mse_skill_vs_last": 0.9637966402516003,
+      "mse_gain_vs_ridge": 0.38136743048190014
+    },
+    "h5": {
+      "samples": 458084,
+      "never12a_physics_mse": 0.0022843610495328903,
+      "never12a_physics_mae": 0.013532846234738827,
+      "selected_candidate": "ridge_amf_0.25",
+      "validation_losses": {
+        "ridge": 0.0039232391864061356,
+        "constant_velocity": 0.004161076620221138,
+        "cv_amf": 0.005474478006362915,
+        "ridge_amf_0.25": 0.0032672141678631306,
+        "ridge_amf_0.5": 0.0032713625114411116,
+        "ridge_amf_1.0": 0.005260178353637457
+      },
+      "last_mse": 0.04101165011525154,
+      "constant_velocity_mse": 0.0031263299752026796,
+      "ridge_mse": 0.0028380381409078836,
+      "cv_amf_mse": 0.005349793005734682,
+      "ridge_amf_0.25_mse": 0.0022843610495328903,
+      "ridge_amf_0.5_mse": 0.0024850531481206417,
+      "ridge_amf_1.0_mse": 0.005149540491402149,
+      "mse_skill_vs_last": 0.944299704032553,
+      "mse_gain_vs_ridge": 0.19509149063016926
+    },
+    "h15": {
+      "samples": 426492,
+      "never12a_physics_mse": 0.02484882064163685,
+      "never12a_physics_mae": 0.05919529125094414,
+      "selected_candidate": "ridge_amf_0.5",
+      "validation_losses": {
+        "ridge": 0.041082799434661865,
+        "constant_velocity": 0.04897360876202583,
+        "cv_amf": 0.047648847103118896,
+        "ridge_amf_0.25": 0.034661635756492615,
+        "ridge_amf_0.5": 0.03372817113995552,
+        "ridge_amf_1.0": 0.0483243390917778
+      },
+      "last_mse": 0.33221951127052307,
+      "constant_velocity_mse": 0.03916299343109131,
+      "ridge_mse": 0.030110208317637444,
+      "cv_amf_mse": 0.04508056491613388,
+      "ridge_amf_0.25_mse": 0.024570848792791367,
+      "ridge_amf_0.5_mse": 0.02484882064163685,
+      "ridge_amf_1.0_mse": 0.042856741696596146,
+      "mse_skill_vs_last": 0.9252036084617478,
+      "mse_gain_vs_ridge": 0.17473767104157395
+    },
+    "h30": {
+      "samples": 379104,
+      "never12a_physics_mse": 0.09767839312553406,
+      "never12a_physics_mae": 0.08559821546077728,
+      "selected_candidate": "ridge_amf_1.0",
+      "validation_losses": {
+        "ridge": 0.18408985435962677,
+        "constant_velocity": 0.2837572395801544,
+        "cv_amf": 0.23908600211143494,
+        "ridge_amf_0.25": 0.1627715677022934,
+        "ridge_amf_0.5": 0.14990076422691345,
+        "ridge_amf_1.0": 0.14950166642665863
+      },
+      "last_mse": 1.1411350965499878,
+      "constant_velocity_mse": 0.23824602365493774,
+      "ridge_mse": 0.1355949342250824,
+      "cv_amf_mse": 0.19680145382881165,
+      "ridge_amf_0.25_mse": 0.11671546846628189,
+      "ridge_amf_0.5_mse": 0.10410288721323013,
+      "ridge_amf_1.0_mse": 0.09767839312553406,
+      "mse_skill_vs_last": 0.9144024284058507,
+      "mse_gain_vs_ridge": 0.2796309560990555
+    }
+  },
+  "elapsed_seconds": 463.16885018348694
+}

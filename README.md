@@ -85,6 +85,11 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   scene. On `billiards` physics shard `00000`, the same validation-selected
   world probe reaches h1/h5/h15/h30 MSE
   `0.000003/0.000347/0.006750/0.051179`; h30 beats Ridge by `0.169266`.
+- `results/FASE12B_BOWLING_WORLD_PROBE.md`: first real PhysicalAI 12B
+  impact/collision probe. On `bowling` physics shard `00000`, the hybrid
+  AMF/Ridge world model reaches h1/h5/h15/h30 MSE
+  `0.000063/0.002284/0.024849/0.097678`, beating Ridge at every horizon with
+  h30 gain-vs-Ridge `0.279631`.
 
 ## What Fase 6 measures
 

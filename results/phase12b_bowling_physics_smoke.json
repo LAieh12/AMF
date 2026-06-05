@@ -1,0 +1,381 @@
+{
+  "repo_id": "nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes",
+  "repo_file": "physics/bowling/physics-bowling-00000.tar",
+  "inspection": {
+    "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\bowling\\physics-bowling-00000.tar",
+    "tar_size_bytes": 194949120,
+    "listed_members": 28,
+    "suffix_counts_first_members": {
+      ".npz": 23,
+      ".json": 5
+    },
+    "members": [
+      {
+        "name": "bowling_e787b7fd_0/Bowler_com.npz",
+        "size": 5556,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -9.14690113067627,
+              "max": 1.0461963415145874
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -9.14690113067627,
+              "max": -0.9153060913085938
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.0,
+              "max": 1.0461963415145874
+            }
+          }
+        }
+      },
+      {
+        "name": "bowling_e787b7fd_0/Bowler_rot.npz",
+        "size": 6627,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                4
+              ],
+              "dtype": "float32",
+              "min": -0.8763408660888672,
+              "max": 0.9440765976905823
+            }
+          }
+        }
+      },
+      {
+        "name": "bowling_e787b7fd_0/Bowler_spin.npz",
+        "size": 6231,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -3320.45556640625,
+              "max": 1020.291748046875
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -3320.45556640625,
+              "max": -344.8894348144531
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 331.6059875488281,
+              "max": 1020.291748046875
+            }
+          }
+        }
+      },
+      {
+        "name": "bowling_e787b7fd_0/Bowler_static.json",
+        "size": 5422
+      },
+      {
+        "name": "bowling_e787b7fd_0/Bowler_velocity.npz",
+        "size": 11514,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "velocities",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "velocities": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -9.625945091247559,
+              "max": 1.814766764640808
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -9.625945091247559,
+              "max": 1.814766764640808
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -9.625945091247559,
+              "max": -0.6915184259414673
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.42898914217948914,
+              "max": 1.814766764640808
+            }
+          }
+        }
+      },
+      {
+        "name": "bowling_e787b7fd_0/Overhead_com.npz",
+        "size": 5090,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                11,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                11,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -5.076499938964844,
+              "max": 3.752500057220459
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -5.076499938964844,
+              "max": -1.025001049041748
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.0,
+              "max": 3.0637311935424805
+            }
+          }
+        }
+      },
+      {
+        "name": "bowling_e787b7fd_0/Overhead_rot.npz",
+        "size": 6917
+      },
+      {
+        "name": "bowling_e787b7fd_0/Overhead_spin.npz",
+        "size": 6253
+      },
+      {
+        "name": "bowling_e787b7fd_0/Overhead_static.json",
+        "size": 5423
+      },
+      {
+        "name": "bowling_e787b7fd_0/Overhead_velocity.npz",
+        "size": 11569
+      },
+      {
+        "name": "bowling_e787b7fd_0/Pins_com.npz",
+        "size": 5532
+      },
+      {
+        "name": "bowling_e787b7fd_0/Pins_rot.npz",
+        "size": 6671
+      },
+      {
+        "name": "bowling_e787b7fd_0/Pins_spin.npz",
+        "size": 6211
+      },
+      {
+        "name": "bowling_e787b7fd_0/Pins_static.json",
+        "size": 5420
+      },
+      {
+        "name": "bowling_e787b7fd_0/Pins_velocity.npz",
+        "size": 11553
+      },
+      {
+        "name": "bowling_e787b7fd_0/Side_com.npz",
+        "size": 5551
+      },
+      {
+        "name": "bowling_e787b7fd_0/Side_rot.npz",
+        "size": 6586
+      },
+      {
+        "name": "bowling_e787b7fd_0/Side_spin.npz",
+        "size": 6197
+      },
+      {
+        "name": "bowling_e787b7fd_0/Side_static.json",
+        "size": 5420
+      },
+      {
+        "name": "bowling_e787b7fd_0/Side_velocity.npz",
+        "size": 11550
+      },
+      {
+        "name": "bowling_e787b7fd_1/Bowler_com.npz",
+        "size": 8437
+      },
+      {
+        "name": "bowling_e787b7fd_1/Bowler_rot.npz",
+        "size": 10537
+      },
+      {
+        "name": "bowling_e787b7fd_1/Bowler_spin.npz",
+        "size": 9948
+      },
+      {
+        "name": "bowling_e787b7fd_1/Bowler_static.json",
+        "size": 12054
+      },
+      {
+        "name": "bowling_e787b7fd_1/Bowler_velocity.npz",
+        "size": 18222
+      },
+      {
+        "name": "bowling_e787b7fd_1/Overhead_com.npz",
+        "size": 7936
+      },
+      {
+        "name": "bowling_e787b7fd_1/Overhead_rot.npz",
+        "size": 11294
+      },
+      {
+        "name": "bowling_e787b7fd_1/Overhead_spin.npz",
+        "size": 10009
+      }
+    ]
+  },
+  "elapsed_seconds": 7.607377529144287
+}

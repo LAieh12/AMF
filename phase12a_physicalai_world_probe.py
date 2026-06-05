@@ -381,10 +381,12 @@ def run_probe(
 
 
 def render_report(result: dict[str, Any]) -> str:
+    tar_path = str(result["tar_path"])
+    phase = "12B" if any(scene in tar_path for scene in ("bowling", "dominoes", "rolling_ramp", "obstruction")) else "12A"
     lines = [
-        "# Fase 12A - PhysicalAI world probe",
+        f"# Fase {phase} - PhysicalAI world probe",
         "",
-        f"Tar: `{result['tar_path']}`",
+        f"Tar: `{tar_path}`",
         f"Tracks: {result['track_count']}",
         f"Sequences: {result['sequence_count']} ({result['train_sequences']} train / {result['test_sequences']} test)",
         f"Fit/validation/test: {result['fit_sequences']} / {result['validation_sequences']} / {result['test_sequences']} (seed {result['split_seed']})",
