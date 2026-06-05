@@ -29,14 +29,27 @@ Uso validado:
 | h15 | base 0.75 + orientation 0.25 | 0.065687 | 0.072202 | 0.090236 | 0.699606 |
 | h30 | base 0.50 + orientation 0.50 | 0.321837 | 0.398862 | 0.193113 | 0.593050 |
 
+## Energia
+
+Se agrego `phase12c_energy_world_probe.py`, con desplazamiento desde ancla inicial, radio, velocidad radial/tangencial, energia cinetica/potencial aproximada y energia de spin.
+
+Comparacion con el ensemble anterior:
+
+| horizonte | ensemble MSE | energy MSE | delta vs ensemble |
+|---|---:|---:|---:|
+| h1 | 0.000045 | 0.000049 | -0.000004 |
+| h5 | 0.003237 | 0.003164 | 0.000073 |
+| h15 | 0.065687 | 0.064402 | 0.001285 |
+| h30 | 0.321837 | 0.307913 | 0.013924 |
+
 ## Lectura
 
 `wrecking_ball` introduce una dinamica 12C mas dificil: pendulo, impacto y movimiento secundario fuerte. El error absoluto sube mucho frente a 12A/12B, pero el AMF ensemble sigue superando al mejor Ridge disponible en todos los horizontes.
 
-La senal de orientacion ya no es solo diagnostica: el ensemble la usa en todos los horizontes. El nuevo cuello es largo plazo caotico:
+La senal de orientacion ya no es solo diagnostica: el ensemble la usa en todos los horizontes. La energia mejora el largo plazo en MSE absoluto. El nuevo cuello es largo plazo caotico:
 
 ```text
-h30: 0.321837 AMF ensemble vs 0.398862 Ridge
+h30: 0.307913 AMF energia vs 0.361978 Ridge
 ```
 
 La siguiente mejora debe modelar energia/constraint pendular o memoria temporal mas larga, porque la extrapolacion local empieza a sufrir en h15/h30.

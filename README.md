@@ -120,6 +120,10 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   validation-selected encoder ensemble reaches h1/h5/h15/h30 MSE
   `0.000045/0.003237/0.065687/0.321837`, beating the best Ridge at every
   horizon with h30 gain `0.193113`.
+- `results/FASE12C_WRECKING_BALL_ENERGY_WORLD_PROBE.md`: energy/constraint
+  probe for `wrecking_ball`. The energy encoder improves h5/h15/h30 MSE over
+  the ensemble to `0.003164/0.064402/0.307913`; see
+  `results/FASE12C_ENERGY_DIAGNOSTIC.md`.
 
 ## What Fase 6 measures
 
