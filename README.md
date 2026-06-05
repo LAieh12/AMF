@@ -90,6 +90,16 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   AMF/Ridge world model reaches h1/h5/h15/h30 MSE
   `0.000063/0.002284/0.024849/0.097678`, beating Ridge at every horizon with
   h30 gain-vs-Ridge `0.279631`.
+- `results/FASE12B_DOMINOES_WORLD_PROBE.md`: real PhysicalAI 12B causal-chain
+  probe. On `dominoes` physics shard `00000`, AMF/Ridge reaches h1/h5/h15/h30
+  MSE `0.000000/0.000011/0.000342/0.004851`; h15/h30 beat Ridge by
+  `0.124300/0.141610`.
+- `results/FASE12B_BOWLING_CONTACT_WORLD_PROBE.md`: contact-context diagnostic
+  with nearest-neighbor, relative velocity, closing speed, and local density
+  features. At matched `stride=30`, it improves `bowling` h30 AMF MSE
+  `0.096619 -> 0.092665`, while hurting shorter horizons; this identifies
+  mask/object identity as the next encoder bottleneck. See
+  `results/FASE12B_CONTACT_DIAGNOSTIC.md` for the matched table.
 
 ## What Fase 6 measures
 

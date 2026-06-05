@@ -1,0 +1,381 @@
+{
+  "repo_id": "nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes",
+  "repo_file": "physics/dominoes/physics-dominoes-00000.tar",
+  "inspection": {
+    "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00000.tar",
+    "tar_size_bytes": 449157120,
+    "listed_members": 28,
+    "suffix_counts_first_members": {
+      ".npz": 23,
+      ".json": 5
+    },
+    "members": [
+      {
+        "name": "dominoes_21b8d802_0/EndGround_com.npz",
+        "size": 13006,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                32,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 2.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                32,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -0.6982359290122986,
+              "max": 0.2202133685350418
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -0.6982359290122986,
+              "max": -0.02520778588950634
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.0,
+              "max": 0.2202133685350418
+            }
+          }
+        }
+      },
+      {
+        "name": "dominoes_21b8d802_0/EndGround_rot.npz",
+        "size": 17123,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                32,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 2.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                32,
+                150,
+                4
+              ],
+              "dtype": "float32",
+              "min": -0.7432217597961426,
+              "max": 0.7329170107841492
+            }
+          }
+        }
+      },
+      {
+        "name": "dominoes_21b8d802_0/EndGround_spin.npz",
+        "size": 17422,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                32,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 2.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                32,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -423.8628234863281,
+              "max": 1047.1810302734375
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -423.8628234863281,
+              "max": -200.04129028320312
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 359.7142333984375,
+              "max": 1047.1810302734375
+            }
+          }
+        }
+      },
+      {
+        "name": "dominoes_21b8d802_0/EndGround_static.json",
+        "size": 22016
+      },
+      {
+        "name": "dominoes_21b8d802_0/EndGround_velocity.npz",
+        "size": 33891,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "velocities",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                32,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 2.0,
+              "max": 255.0
+            },
+            "velocities": {
+              "shape": [
+                32,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -0.5468375086784363,
+              "max": 0.514182448387146
+            },
+            "data": {
+              "shape": [
+                32,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -0.5468375086784363,
+              "max": 0.514182448387146
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -0.5468375086784363,
+              "max": -0.04503101110458374
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.10560987889766693,
+              "max": 0.514182448387146
+            }
+          }
+        }
+      },
+      {
+        "name": "dominoes_21b8d802_0/StartGround_com.npz",
+        "size": 13217,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                32,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 2.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                32,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -0.45978251099586487,
+              "max": 0.319227010011673
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -0.45978251099586487,
+              "max": -0.02000436559319496
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.0,
+              "max": 0.319227010011673
+            }
+          }
+        }
+      },
+      {
+        "name": "dominoes_21b8d802_0/StartGround_rot.npz",
+        "size": 16994
+      },
+      {
+        "name": "dominoes_21b8d802_0/StartGround_spin.npz",
+        "size": 17452
+      },
+      {
+        "name": "dominoes_21b8d802_0/StartGround_static.json",
+        "size": 22018
+      },
+      {
+        "name": "dominoes_21b8d802_0/StartGround_velocity.npz",
+        "size": 33995
+      },
+      {
+        "name": "dominoes_21b8d802_0/ThreeQuarter_com.npz",
+        "size": 12449
+      },
+      {
+        "name": "dominoes_21b8d802_0/ThreeQuarter_rot.npz",
+        "size": 17591
+      },
+      {
+        "name": "dominoes_21b8d802_0/ThreeQuarter_spin.npz",
+        "size": 17404
+      },
+      {
+        "name": "dominoes_21b8d802_0/ThreeQuarter_static.json",
+        "size": 22019
+      },
+      {
+        "name": "dominoes_21b8d802_0/ThreeQuarter_velocity.npz",
+        "size": 33861
+      },
+      {
+        "name": "dominoes_21b8d802_0/TopDown_com.npz",
+        "size": 11955
+      },
+      {
+        "name": "dominoes_21b8d802_0/TopDown_rot.npz",
+        "size": 18261
+      },
+      {
+        "name": "dominoes_21b8d802_0/TopDown_spin.npz",
+        "size": 17554
+      },
+      {
+        "name": "dominoes_21b8d802_0/TopDown_static.json",
+        "size": 22014
+      },
+      {
+        "name": "dominoes_21b8d802_0/TopDown_velocity.npz",
+        "size": 32893
+      },
+      {
+        "name": "dominoes_21b8d802_1/EndGround_com.npz",
+        "size": 16293
+      },
+      {
+        "name": "dominoes_21b8d802_1/EndGround_rot.npz",
+        "size": 21210
+      },
+      {
+        "name": "dominoes_21b8d802_1/EndGround_spin.npz",
+        "size": 21164
+      },
+      {
+        "name": "dominoes_21b8d802_1/EndGround_static.json",
+        "size": 25620
+      },
+      {
+        "name": "dominoes_21b8d802_1/EndGround_velocity.npz",
+        "size": 41283
+      },
+      {
+        "name": "dominoes_21b8d802_1/StartGround_com.npz",
+        "size": 16199
+      },
+      {
+        "name": "dominoes_21b8d802_1/StartGround_rot.npz",
+        "size": 21245
+      },
+      {
+        "name": "dominoes_21b8d802_1/StartGround_spin.npz",
+        "size": 21183
+      }
+    ]
+  },
+  "elapsed_seconds": 14.265726566314697
+}
