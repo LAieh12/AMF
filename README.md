@@ -124,6 +124,14 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   probe for `wrecking_ball`. The energy encoder improves h5/h15/h30 MSE over
   the ensemble to `0.003164/0.064402/0.307913`; see
   `results/FASE12C_ENERGY_DIAGNOSTIC.md`.
+- `results/FASE12C_WRECKING_BALL_TEMPORAL_ENERGY_WORLD_PROBE.md`: temporal
+  energy probe for `wrecking_ball`, adding acceleration, jerk, and recent
+  energy trend. It improves h1/h5/h15/h30 to
+  `0.000029/0.002655/0.060144/0.306422`.
+- `results/FASE12C_LTM_DIAGNOSTIC.md`: first AMF-LTM four-level diagnostic
+  (`H_fast`, `H_event`, `H_regime`, `H_workspace`). It confirms the structure
+  runs on real PhysicalAI data, but fixed feature gates still underperform
+  temporal-energy at long horizons.
 
 ## What Fase 6 measures
 

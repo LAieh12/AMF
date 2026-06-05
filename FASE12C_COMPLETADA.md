@@ -42,6 +42,21 @@ Comparacion con el ensemble anterior:
 | h15 | 0.065687 | 0.064402 | 0.001285 |
 | h30 | 0.321837 | 0.307913 | 0.013924 |
 
+## Temporal energy y AMF-LTM
+
+Se agregaron:
+
+- `phase12c_temporal_energy_world_probe.py`: historia corta, aceleracion, jerk y tendencia de energia.
+- `phase12c_ltm_world_probe.py`: AMF-LTM con `H_fast`, `H_event`, `H_regime`, `H_workspace`.
+
+Comparacion:
+
+| modelo | h1 MSE | h5 MSE | h15 MSE | h30 MSE |
+|---|---:|---:|---:|---:|
+| energy | 0.000049 | 0.003164 | 0.064402 | 0.307913 |
+| temporal-energy | 0.000029 | 0.002655 | 0.060144 | 0.306422 |
+| AMF-LTM diagnostic | 0.000034 | 0.003241 | 0.066412 | 0.358970 |
+
 ## Lectura
 
 `wrecking_ball` introduce una dinamica 12C mas dificil: pendulo, impacto y movimiento secundario fuerte. El error absoluto sube mucho frente a 12A/12B, pero el AMF ensemble sigue superando al mejor Ridge disponible en todos los horizontes.
@@ -49,7 +64,7 @@ Comparacion con el ensemble anterior:
 La senal de orientacion ya no es solo diagnostica: el ensemble la usa en todos los horizontes. La energia mejora el largo plazo en MSE absoluto. El nuevo cuello es largo plazo caotico:
 
 ```text
-h30: 0.307913 AMF energia vs 0.361978 Ridge
+h30: 0.306422 AMF temporal-energy vs 0.340345 Ridge
 ```
 
-La siguiente mejora debe modelar energia/constraint pendular o memoria temporal mas larga, porque la extrapolacion local empieza a sufrir en h15/h30.
+La siguiente mejora debe hacer que AMF-LTM recupere/escriba memorias de evento y regimen de forma selectiva. La concatenacion densa de los cuatro niveles ya no basta.
