@@ -1,0 +1,231 @@
+{
+  "probe": "phase12b_encoder_ensemble_probe",
+  "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00000.tar",
+  "track_count": 63712,
+  "sequence_count": 1000,
+  "fit_sequences": 600,
+  "validation_sequences": 150,
+  "train_sequences": 750,
+  "test_sequences": 250,
+  "horizons": [
+    1,
+    5,
+    15,
+    30
+  ],
+  "encoders": [
+    "base",
+    "identity",
+    "orientation"
+  ],
+  "stride": 10,
+  "max_cells": 20000,
+  "radius": 0.75,
+  "top_k": 32,
+  "tie_tolerance": 0.1,
+  "split_seed": 123,
+  "ensemble_step": 0.25,
+  "test_metrics": {
+    "h1": {
+      "samples": 237720,
+      "selected_weights": {
+        "base": 0.5,
+        "identity": 0.0,
+        "orientation": 0.5
+      },
+      "never12b_ensemble_mse": 4.4985466956859455e-05,
+      "never12b_ensemble_mae": 0.0018501522717997432,
+      "best_encoder_ridge_mse": 7.202594861155376e-05,
+      "last_mse": 0.0010688015026971698,
+      "mse_gain_vs_best_ridge": 0.3754269423166849,
+      "mse_skill_vs_last": 0.957910363296331,
+      "validation_records": {
+        "base": {
+          "selected_candidate": "cv_amf",
+          "validation_losses": {
+            "ridge": 6.869536446174607e-05,
+            "constant_velocity": 8.88910362846218e-05,
+            "cv_amf": 4.532295497483574e-05,
+            "ridge_amf_0.25": 5.471899567055516e-05,
+            "ridge_amf_0.5": 4.734153480967507e-05,
+            "ridge_amf_1.0": 5.238331141299568e-05
+          }
+        },
+        "identity": {
+          "selected_candidate": "ridge_amf_0.5",
+          "validation_losses": {
+            "ridge": 6.858676351839676e-05,
+            "constant_velocity": 8.88910362846218e-05,
+            "cv_amf": 5.4891999752726406e-05,
+            "ridge_amf_0.25": 5.6335953559027985e-05,
+            "ridge_amf_0.5": 5.1080693083349615e-05,
+            "ridge_amf_1.0": 6.155678420327604e-05
+          }
+        },
+        "orientation": {
+          "selected_candidate": "ridge_amf_0.5",
+          "validation_losses": {
+            "ridge": 6.846812175353989e-05,
+            "constant_velocity": 8.88910362846218e-05,
+            "cv_amf": 5.30861689185258e-05,
+            "ridge_amf_0.25": 5.611437882180326e-05,
+            "ridge_amf_0.5": 5.048409730079584e-05,
+            "ridge_amf_1.0": 5.939391485298984e-05
+          }
+        }
+      },
+      "validation_ensemble_mse": 4.188136517768726e-05
+    },
+    "h5": {
+      "samples": 237720,
+      "selected_weights": {
+        "base": 0.75,
+        "identity": 0.0,
+        "orientation": 0.25
+      },
+      "never12b_ensemble_mse": 0.0032368735410273075,
+      "never12b_ensemble_mae": 0.023877792060375214,
+      "best_encoder_ridge_mse": 0.0035768512170761824,
+      "last_mse": 0.0256927739828825,
+      "mse_gain_vs_best_ridge": 0.09504943186504192,
+      "mse_skill_vs_last": 0.8740161905762361,
+      "validation_records": {
+        "base": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.003505941480398178,
+            "constant_velocity": 0.004445521626621485,
+            "cv_amf": 0.003834283445030451,
+            "ridge_amf_0.25": 0.0031712877098470926,
+            "ridge_amf_0.5": 0.003294173860922456,
+            "ridge_amf_1.0": 0.004912565462291241
+          }
+        },
+        "identity": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.003498347010463476,
+            "constant_velocity": 0.004445521626621485,
+            "cv_amf": 0.004102490842342377,
+            "ridge_amf_0.25": 0.0032219290733337402,
+            "ridge_amf_0.5": 0.0034638806246221066,
+            "ridge_amf_1.0": 0.005502893589437008
+          }
+        },
+        "orientation": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.0034939423203468323,
+            "constant_velocity": 0.004445521626621485,
+            "cv_amf": 0.0039846147410571575,
+            "ridge_amf_0.25": 0.003207254456356168,
+            "ridge_amf_0.5": 0.003417778993025422,
+            "ridge_amf_1.0": 0.005330466665327549
+          }
+        }
+      },
+      "validation_ensemble_mse": 0.003159906016662717
+    },
+    "h15": {
+      "samples": 221872,
+      "selected_weights": {
+        "base": 0.75,
+        "identity": 0.0,
+        "orientation": 0.25
+      },
+      "never12b_ensemble_mse": 0.06568676978349686,
+      "never12b_ensemble_mae": 0.12887489795684814,
+      "best_encoder_ridge_mse": 0.07220195978879929,
+      "last_mse": 0.21866896748542786,
+      "mse_gain_vs_best_ridge": 0.09023563936990438,
+      "mse_skill_vs_last": 0.6996063477188448,
+      "validation_records": {
+        "base": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.0714731514453888,
+            "constant_velocity": 0.10326379537582397,
+            "cv_amf": 0.13295429944992065,
+            "ridge_amf_0.25": 0.06495050340890884,
+            "ridge_amf_0.5": 0.07415343821048737,
+            "ridge_amf_1.0": 0.13973607122898102
+          }
+        },
+        "identity": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.07090906798839569,
+            "constant_velocity": 0.10326379537582397,
+            "cv_amf": 0.14983823895454407,
+            "ridge_amf_0.25": 0.06609248369932175,
+            "ridge_amf_0.5": 0.07978159934282303,
+            "ridge_amf_1.0": 0.16267691552639008
+          }
+        },
+        "orientation": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.07072830945253372,
+            "constant_velocity": 0.10326379537582397,
+            "cv_amf": 0.1484907567501068,
+            "ridge_amf_0.25": 0.06643442064523697,
+            "ridge_amf_0.5": 0.07971976697444916,
+            "ridge_amf_1.0": 0.15902815759181976
+          }
+        }
+      },
+      "validation_ensemble_mse": 0.06441949307918549
+    },
+    "h30": {
+      "samples": 190176,
+      "selected_weights": {
+        "base": 0.5,
+        "identity": 0.0,
+        "orientation": 0.5
+      },
+      "never12b_ensemble_mse": 0.3218366801738739,
+      "never12b_ensemble_mae": 0.3330051302909851,
+      "best_encoder_ridge_mse": 0.3988620936870575,
+      "last_mse": 0.7908505201339722,
+      "mse_gain_vs_best_ridge": 0.19311289473804152,
+      "mse_skill_vs_last": 0.5930499228610814,
+      "validation_records": {
+        "base": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.40224528312683105,
+            "constant_velocity": 0.7751364707946777,
+            "cv_amf": 0.5975942015647888,
+            "ridge_amf_0.25": 0.3256993591785431,
+            "ridge_amf_0.5": 0.35327526926994324,
+            "ridge_amf_1.0": 0.7207924723625183
+          }
+        },
+        "identity": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.3929605185985565,
+            "constant_velocity": 0.7751364707946777,
+            "cv_amf": 0.6397961974143982,
+            "ridge_amf_0.25": 0.3248208165168762,
+            "ridge_amf_0.5": 0.3735804259777069,
+            "ridge_amf_1.0": 0.8217976093292236
+          }
+        },
+        "orientation": {
+          "selected_candidate": "ridge_amf_0.25",
+          "validation_losses": {
+            "ridge": 0.39121976494789124,
+            "constant_velocity": 0.7751364707946777,
+            "cv_amf": 0.6707881093025208,
+            "ridge_amf_0.25": 0.32639703154563904,
+            "ridge_amf_0.5": 0.3665488362312317,
+            "ridge_amf_1.0": 0.7617762684822083
+          }
+        }
+      },
+      "validation_ensemble_mse": 0.31606975197792053
+    }
+  },
+  "elapsed_seconds": 729.1971108913422
+}

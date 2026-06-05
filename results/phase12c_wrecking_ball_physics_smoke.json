@@ -1,0 +1,381 @@
+{
+  "repo_id": "nvidia/PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes",
+  "repo_file": "physics/wrecking_ball/physics-wrecking_ball-00000.tar",
+  "inspection": {
+    "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00000.tar",
+    "tar_size_bytes": 350085120,
+    "listed_members": 28,
+    "suffix_counts_first_members": {
+      ".npz": 23,
+      ".json": 5
+    },
+    "members": [
+      {
+        "name": "wrecking_ball_cad96f3f_0/Corner_com.npz",
+        "size": 18103,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                22,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                22,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -15.869248390197754,
+              "max": 5.195318222045898
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -15.769497871398926,
+              "max": -2.381088972091675
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.0,
+              "max": 4.191408157348633
+            }
+          }
+        }
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Corner_rot.npz",
+        "size": 18977,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                22,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                22,
+                150,
+                4
+              ],
+              "dtype": "float32",
+              "min": -0.9717042446136475,
+              "max": 0.9946826100349426
+            }
+          }
+        }
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Corner_spin.npz",
+        "size": 24005,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                22,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                22,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -960.0807495117188,
+              "max": 1345.6773681640625
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -960.0807495117188,
+              "max": -503.1648254394531
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 531.3043212890625,
+              "max": 1345.6773681640625
+            }
+          }
+        }
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Corner_static.json",
+        "size": 13908
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Corner_velocity.npz",
+        "size": 46058,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "velocities",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                22,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "velocities": {
+              "shape": [
+                22,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -9.946737289428711,
+              "max": 6.079237461090088
+            },
+            "data": {
+              "shape": [
+                22,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -9.946737289428711,
+              "max": 6.079237461090088
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -9.946737289428711,
+              "max": -2.851130962371826
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 2.5634193420410156,
+              "max": 6.079237461090088
+            }
+          }
+        }
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Front_com.npz",
+        "size": 17884,
+        "npz": {
+          "keys": [
+            "frame_count",
+            "segmentation_colors",
+            "data",
+            "global_min",
+            "global_max"
+          ],
+          "arrays": {
+            "frame_count": {
+              "shape": [],
+              "dtype": "int64",
+              "min": 150.0,
+              "max": 150.0
+            },
+            "segmentation_colors": {
+              "shape": [
+                22,
+                4
+              ],
+              "dtype": "uint8",
+              "min": 3.0,
+              "max": 255.0
+            },
+            "data": {
+              "shape": [
+                22,
+                150,
+                3
+              ],
+              "dtype": "float32",
+              "min": -15.702860832214355,
+              "max": 5.268680095672607
+            },
+            "global_min": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": -15.702860832214355,
+              "max": -2.107199192047119
+            },
+            "global_max": {
+              "shape": [
+                3
+              ],
+              "dtype": "float32",
+              "min": 0.0,
+              "max": 4.753413200378418
+            }
+          }
+        }
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Front_rot.npz",
+        "size": 19726
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Front_spin.npz",
+        "size": 24448
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Front_static.json",
+        "size": 13907
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Front_velocity.npz",
+        "size": 46113
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Side_com.npz",
+        "size": 18710
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Side_rot.npz",
+        "size": 18927
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Side_spin.npz",
+        "size": 24439
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Side_static.json",
+        "size": 13906
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/Side_velocity.npz",
+        "size": 46036
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/TopDown_com.npz",
+        "size": 18676
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/TopDown_rot.npz",
+        "size": 19992
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/TopDown_spin.npz",
+        "size": 24459
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/TopDown_static.json",
+        "size": 13908
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_0/TopDown_velocity.npz",
+        "size": 44957
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_1/Corner_com.npz",
+        "size": 11175
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_1/Corner_rot.npz",
+        "size": 10738
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_1/Corner_spin.npz",
+        "size": 11012
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_1/Corner_static.json",
+        "size": 7121
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_1/Corner_velocity.npz",
+        "size": 21115
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_1/Front_com.npz",
+        "size": 10948
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_1/Front_rot.npz",
+        "size": 11016
+      },
+      {
+        "name": "wrecking_ball_cad96f3f_1/Front_spin.npz",
+        "size": 11402
+      }
+    ]
+  },
+  "elapsed_seconds": 13.243437767028809
+}

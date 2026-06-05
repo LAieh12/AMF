@@ -115,6 +115,11 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   convex ensemble over base, identity, and orientation encoders. On `dominoes`,
   it improves h15/h30 MSE to `0.000330/0.004697`, beating the best individual
   encoder and best Ridge by h30 gain `0.159212`.
+- `results/FASE12C_WRECKING_BALL_ENCODER_ENSEMBLE_PROBE.md`: first real
+  PhysicalAI 12C probe. On `wrecking_ball` physics shard `00000`, the
+  validation-selected encoder ensemble reaches h1/h5/h15/h30 MSE
+  `0.000045/0.003237/0.065687/0.321837`, beating the best Ridge at every
+  horizon with h30 gain `0.193113`.
 
 ## What Fase 6 measures
 

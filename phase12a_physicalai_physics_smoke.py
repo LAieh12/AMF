@@ -59,7 +59,12 @@ def inspect_tar(path: Path, max_members: int, max_npz: int, max_arrays: int) -> 
 
 def render_report(result: dict[str, Any]) -> str:
     repo_file = str(result["repo_file"])
-    phase = "12B" if any(scene in repo_file for scene in ("bowling", "dominoes", "rolling_ramp", "obstruction")) else "12A"
+    if any(scene in repo_file for scene in ("ball_mixer", "towers", "wrecking_ball")):
+        phase = "12C"
+    elif any(scene in repo_file for scene in ("bowling", "dominoes", "rolling_ramp", "obstruction")):
+        phase = "12B"
+    else:
+        phase = "12A"
     lines: list[str] = []
     lines.append(f"# Fase {phase} - PhysicalAI physics smoke")
     lines.append("")

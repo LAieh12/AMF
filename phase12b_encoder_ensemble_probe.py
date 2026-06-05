@@ -159,10 +159,17 @@ def run_ensemble_probe(
 
 
 def render_report(result: dict[str, Any]) -> str:
+    tar_path = str(result["tar_path"])
+    if any(scene in tar_path for scene in ("ball_mixer", "towers", "wrecking_ball")):
+        phase = "12C"
+    elif any(scene in tar_path for scene in ("bowling", "dominoes", "rolling_ramp", "obstruction")):
+        phase = "12B"
+    else:
+        phase = "12A"
     lines = [
-        "# Fase 12B - Encoder ensemble world probe",
+        f"# Fase {phase} - Encoder ensemble world probe",
         "",
-        f"Tar: `{result['tar_path']}`",
+        f"Tar: `{tar_path}`",
         f"Tracks: {result['track_count']}",
         f"Sequences: {result['sequence_count']} ({result['train_sequences']} train / {result['test_sequences']} test)",
         f"Fit/validation/test: {result['fit_sequences']} / {result['validation_sequences']} / {result['test_sequences']} (seed {result['split_seed']})",
