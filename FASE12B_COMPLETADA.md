@@ -53,13 +53,29 @@ h30 base     stride30: 0.096619 AMF hibrido vs 0.213070 Ridge
 
 Lectura: el contexto nearest-neighbor ayuda en largo plazo (`h30`) pero mete ruido en h1/h5/h15. Esto apunta a que el siguiente encoder necesita identidad de objeto y mascara/segmentacion real, no solo proximidad geometrica.
 
+## Identidad de slot
+
+Se agrego `phase12b_identity_world_probe.py`, usando `segmentation_colors`, codigo estable de objeto y slot index.
+
+Comparacion en `dominoes`, mismo split y parametros del run principal:
+
+```text
+h15 base:      0.000342
+h15 identidad: 0.000339
+
+h30 base:      0.004851
+h30 identidad: 0.004809
+```
+
+Lectura: la identidad de slot mejora poco pero consistentemente h15/h30. Es la primera senal directa de mascara/identidad sin descargar RGB ni segmentacion pesada.
+
 ## Lectura
 
 `bowling` introduce impacto dirigido y dispersion de pines. `dominoes` introduce cadena causal de contactos. En ambas escenas, el AMF hibrido supera a Ridge en largo plazo:
 
 ```text
 bowling  h30: 0.097678 AMF hibrido vs 0.135595 Ridge
-dominoes h30: 0.004851 AMF hibrido vs 0.005652 Ridge
+dominoes h30: 0.004809 AMF hibrido con identidad vs 0.005605 Ridge
 ```
 
 Esto confirma que la memoria local residual no solo ayuda en caida limpia o billar simple; tambien corrige dinamica de impacto estructurado y cadenas de contacto. El siguiente cuello ya no es un baseline lineal, sino representar contactos explicitos, identidad de objeto y mascara/segmentacion para conectar el estado fisico con decoder visual.

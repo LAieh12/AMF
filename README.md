@@ -100,6 +100,11 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   `0.096619 -> 0.092665`, while hurting shorter horizons; this identifies
   mask/object identity as the next encoder bottleneck. See
   `results/FASE12B_CONTACT_DIAGNOSTIC.md` for the matched table.
+- `results/FASE12B_DOMINOES_IDENTITY_WORLD_PROBE.md`: slot-identity probe
+  using `segmentation_colors`, object code, and slot index from real physics
+  NPZ metadata. On `dominoes`, it improves h15/h30 AMF MSE
+  `0.000342 -> 0.000339` and `0.004851 -> 0.004809`; see
+  `results/FASE12B_IDENTITY_DIAGNOSTIC.md`.
 
 ## What Fase 6 measures
 

@@ -27,6 +27,7 @@ class PhysicsTrack:
     com: np.ndarray
     velocity: np.ndarray
     spin: np.ndarray | None
+    segmentation_color: np.ndarray | None = None
 
 
 def _read_npz(tar: tarfile.TarFile, member: tarfile.TarInfo) -> dict[str, np.ndarray]:
@@ -53,6 +54,8 @@ def load_tracks(tar_path: Path) -> list[PhysicsTrack]:
             data = _read_npz(tar, member)
             if "data" in data:
                 grouped[(sequence, object_name)][field] = np.asarray(data["data"], dtype=np.float32)
+            if "segmentation_colors" in data and "segmentation_colors" not in grouped[(sequence, object_name)]:
+                grouped[(sequence, object_name)]["segmentation_colors"] = np.asarray(data["segmentation_colors"], dtype=np.float32)
 
     tracks: list[PhysicsTrack] = []
     for (sequence, object_name), fields in grouped.items():
@@ -64,6 +67,9 @@ def load_tracks(tar_path: Path) -> list[PhysicsTrack]:
         slot_count = min(com.shape[0], velocity.shape[0])
         if spin is not None:
             slot_count = min(slot_count, spin.shape[0])
+        colors = fields.get("segmentation_colors")
+        if colors is not None:
+            slot_count = min(slot_count, colors.shape[0])
         for slot_index in range(slot_count):
             tracks.append(
                 PhysicsTrack(
@@ -73,6 +79,7 @@ def load_tracks(tar_path: Path) -> list[PhysicsTrack]:
                     com=com[slot_index],
                     velocity=velocity[slot_index],
                     spin=spin[slot_index] if spin is not None else None,
+                    segmentation_color=colors[slot_index] if colors is not None else None,
                 )
             )
     return tracks
