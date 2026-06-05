@@ -132,6 +132,12 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   (`H_fast`, `H_event`, `H_regime`, `H_workspace`). It confirms the structure
   runs on real PhysicalAI data, but fixed feature gates still underperform
   temporal-energy at long horizons.
+- `results/FASE12D_LTM_ROUTER_PROBE.md`: AMF-LTM episodic router/retriever
+  over the frozen temporal-energy champion. On matched `wrecking_ball`
+  `stride=30`, the LTM residual improves h1/h5/h15/h30/h60 MSE to
+  `0.000024/0.002925/0.066685/0.347153/0.967422`, beating temporal-energy by
+  `17.53%/9.99%/9.19%/11.65%/9.45%`; oracle selector is reported only as an
+  invalid diagnostic ceiling.
 
 ## What Fase 6 measures
 
@@ -197,6 +203,8 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
 - `NEVER/src/engine/amf_world_model.cuh`: CUDA-facing AMF latent runtime.
 - `NEVER/src/engine/amf_vector_decoder.cuh`: latent-to-frame vector decoder.
 - `NEVER/src/engine/action_orchestrator.hpp`: prompt-to-action fallback.
+- `phase12d_ltm_router_probe.py`: AMF-LTM episodic router/retriever over the
+  frozen temporal-energy PhysicalAI world-model baseline.
 
 ## Fase 7
 
