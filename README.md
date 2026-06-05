@@ -111,6 +111,10 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
 - `results/FASE12B_DOMINOES_ENCODER_SELECTOR_PROBE.md`: validation-selected
   encoder probe across base, identity, and orientation. It selects orientation
   for h15/h30 on validation; see `results/FASE12B_ENCODER_DIAGNOSTIC.md`.
+- `results/FASE12B_DOMINOES_ENCODER_ENSEMBLE_PROBE.md`: validation-selected
+  convex ensemble over base, identity, and orientation encoders. On `dominoes`,
+  it improves h15/h30 MSE to `0.000330/0.004697`, beating the best individual
+  encoder and best Ridge by h30 gain `0.159212`.
 
 ## What Fase 6 measures
 

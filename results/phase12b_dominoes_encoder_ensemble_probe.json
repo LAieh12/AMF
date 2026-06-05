@@ -1,0 +1,231 @@
+{
+  "probe": "phase12b_encoder_ensemble_probe",
+  "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00000.tar",
+  "track_count": 138720,
+  "sequence_count": 1000,
+  "fit_sequences": 600,
+  "validation_sequences": 150,
+  "train_sequences": 750,
+  "test_sequences": 250,
+  "horizons": [
+    1,
+    5,
+    15,
+    30
+  ],
+  "encoders": [
+    "base",
+    "identity",
+    "orientation"
+  ],
+  "stride": 10,
+  "max_cells": 20000,
+  "radius": 0.75,
+  "top_k": 32,
+  "tie_tolerance": 0.1,
+  "split_seed": 123,
+  "ensemble_step": 0.25,
+  "test_metrics": {
+    "h1": {
+      "samples": 537780,
+      "selected_weights": {
+        "base": 0.0,
+        "identity": 0.25,
+        "orientation": 0.75
+      },
+      "never12b_ensemble_mse": 9.447462190337319e-08,
+      "never12b_ensemble_mae": 8.685608190717176e-05,
+      "best_encoder_ridge_mse": 9.446257820400206e-08,
+      "last_mse": 0.000125421371194534,
+      "mse_gain_vs_best_ridge": -0.00012749704274558375,
+      "mse_skill_vs_last": 0.999246742233771,
+      "validation_records": {
+        "base": {
+          "selected_candidate": "ridge",
+          "validation_losses": {
+            "ridge": 9.421739832760068e-08,
+            "constant_velocity": 1.1647613717968852e-07,
+            "cv_amf": 4.259301249476266e-07,
+            "ridge_amf_0.25": 1.0922001791868752e-07,
+            "ridge_amf_0.5": 1.6765872601354204e-07,
+            "ridge_amf_1.0": 4.148442087625881e-07
+          }
+        },
+        "identity": {
+          "selected_candidate": "ridge",
+          "validation_losses": {
+            "ridge": 9.41226758754965e-08,
+            "constant_velocity": 1.1647613717968852e-07,
+            "cv_amf": 4.0666728295946086e-07,
+            "ridge_amf_0.25": 1.07786348735317e-07,
+            "ridge_amf_0.5": 1.615141513866547e-07,
+            "ridge_amf_1.0": 3.891622384344373e-07
+          }
+        },
+        "orientation": {
+          "selected_candidate": "ridge",
+          "validation_losses": {
+            "ridge": 9.403328959933788e-08,
+            "constant_velocity": 1.1647613717968852e-07,
+            "cv_amf": 4.485647480123589e-07,
+            "ridge_amf_0.25": 1.1181899139955931e-07,
+            "ridge_amf_0.5": 1.75024922555167e-07,
+            "ridge_amf_1.0": 4.376974800379685e-07
+          }
+        }
+      },
+      "validation_ensemble_mse": 9.402565837035581e-08
+    },
+    "h5": {
+      "samples": 537780,
+      "selected_weights": {
+        "base": 0.0,
+        "identity": 0.25,
+        "orientation": 0.75
+      },
+      "never12b_ensemble_mse": 1.087542204913916e-05,
+      "never12b_ensemble_mae": 0.0009288064320571721,
+      "best_encoder_ridge_mse": 1.087172859115526e-05,
+      "last_mse": 0.003394871484488249,
+      "mse_gain_vs_best_ridge": -0.0003397305178225926,
+      "mse_skill_vs_last": 0.9967965143603136,
+      "validation_records": {
+        "base": {
+          "selected_candidate": "ridge",
+          "validation_losses": {
+            "ridge": 1.1445244126662146e-05,
+            "constant_velocity": 2.3756849259370938e-05,
+            "cv_amf": 3.745593494386412e-05,
+            "ridge_amf_0.25": 1.1556172466953285e-05,
+            "ridge_amf_0.5": 1.3943016710982192e-05,
+            "ridge_amf_1.0": 2.5544444724800996e-05
+          }
+        },
+        "identity": {
+          "selected_candidate": "ridge",
+          "validation_losses": {
+            "ridge": 1.1378760973457247e-05,
+            "constant_velocity": 2.3756849259370938e-05,
+            "cv_amf": 4.029077899758704e-05,
+            "ridge_amf_0.25": 1.1771367098845076e-05,
+            "ridge_amf_0.5": 1.4877456123940647e-05,
+            "ridge_amf_1.0": 2.923008651123382e-05
+          }
+        },
+        "orientation": {
+          "selected_candidate": "ridge",
+          "validation_losses": {
+            "ridge": 1.1352347428328358e-05,
+            "constant_velocity": 2.3756849259370938e-05,
+            "cv_amf": 3.936680150218308e-05,
+            "ridge_amf_0.25": 1.1988362530246377e-05,
+            "ridge_amf_0.5": 1.494373100285884e-05,
+            "ridge_amf_1.0": 2.7812533517135307e-05
+          }
+        }
+      },
+      "validation_ensemble_mse": 1.1349869055266026e-05
+    },
+    "h15": {
+      "samples": 501928,
+      "selected_weights": {
+        "base": 0.0,
+        "identity": 0.25,
+        "orientation": 0.75
+      },
+      "never12b_ensemble_mse": 0.0003296078648418188,
+      "never12b_ensemble_mae": 0.0041112350299954414,
+      "best_encoder_ridge_mse": 0.0003853867237921804,
+      "last_mse": 0.026507023721933365,
+      "mse_gain_vs_best_ridge": 0.14473477031461085,
+      "mse_skill_vs_last": 0.9875652631431011,
+      "validation_records": {
+        "base": {
+          "selected_candidate": "ridge_amf_0.5",
+          "validation_losses": {
+            "ridge": 0.00042081665014848113,
+            "constant_velocity": 0.0012582659255713224,
+            "cv_amf": 0.0012847790494561195,
+            "ridge_amf_0.25": 0.00039291265420615673,
+            "ridge_amf_0.5": 0.000383123813662678,
+            "ridge_amf_1.0": 0.000417891627876088
+          }
+        },
+        "identity": {
+          "selected_candidate": "ridge_amf_0.5",
+          "validation_losses": {
+            "ridge": 0.0004160547978244722,
+            "constant_velocity": 0.0012582659255713224,
+            "cv_amf": 0.001284796861000359,
+            "ridge_amf_0.25": 0.00038843933725729585,
+            "ridge_amf_0.5": 0.00037852925015613437,
+            "ridge_amf_1.0": 0.0004118253127671778
+          }
+        },
+        "orientation": {
+          "selected_candidate": "ridge_amf_1.0",
+          "validation_losses": {
+            "ridge": 0.0004146561259403825,
+            "constant_velocity": 0.0012582659255713224,
+            "cv_amf": 0.0012374600628390908,
+            "ridge_amf_0.25": 0.0003937662986572832,
+            "ridge_amf_0.5": 0.00037876926944591105,
+            "ridge_amf_1.0": 0.0003664538380689919
+          }
+        }
+      },
+      "validation_ensemble_mse": 0.00036237569293007255
+    },
+    "h30": {
+      "samples": 430224,
+      "selected_weights": {
+        "base": 0.0,
+        "identity": 0.5,
+        "orientation": 0.5
+      },
+      "never12b_ensemble_mse": 0.0046965451911091805,
+      "never12b_ensemble_mae": 0.012474272400140762,
+      "best_encoder_ridge_mse": 0.005585883278399706,
+      "last_mse": 0.06894493103027344,
+      "mse_gain_vs_best_ridge": 0.15921172050435523,
+      "mse_skill_vs_last": 0.9318797608333679,
+      "validation_records": {
+        "base": {
+          "selected_candidate": "ridge_amf_0.5",
+          "validation_losses": {
+            "ridge": 0.006126938387751579,
+            "constant_velocity": 0.015799514949321747,
+            "cv_amf": 0.015665633603930473,
+            "ridge_amf_0.25": 0.005663169082254171,
+            "ridge_amf_0.5": 0.005403110757470131,
+            "ridge_amf_1.0": 0.0054941242560744286
+          }
+        },
+        "identity": {
+          "selected_candidate": "ridge_amf_0.5",
+          "validation_losses": {
+            "ridge": 0.00606406107544899,
+            "constant_velocity": 0.015799514949321747,
+            "cv_amf": 0.01567617803812027,
+            "ridge_amf_0.25": 0.00560268247500062,
+            "ridge_amf_0.5": 0.005342093296349049,
+            "ridge_amf_1.0": 0.005423286929726601
+          }
+        },
+        "orientation": {
+          "selected_candidate": "ridge_amf_1.0",
+          "validation_losses": {
+            "ridge": 0.006038706284016371,
+            "constant_velocity": 0.015799514949321747,
+            "cv_amf": 0.015575401484966278,
+            "ridge_amf_0.25": 0.005734357051551342,
+            "ridge_amf_0.5": 0.0055121467448771,
+            "ridge_amf_1.0": 0.0053141419775784016
+          }
+        }
+      },
+      "validation_ensemble_mse": 0.00522204814478755
+    }
+  },
+  "elapsed_seconds": 1472.0062699317932
+}

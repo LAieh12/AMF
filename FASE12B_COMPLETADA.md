@@ -75,6 +75,7 @@ Se agregaron:
 
 - `phase12b_orientation_world_probe.py`: usa `rot` quaternion y delta rotacional reciente.
 - `phase12b_encoder_selector_probe.py`: elige en validacion entre base, identidad y orientacion.
+- `phase12b_encoder_ensemble_probe.py`: elige pesos convexos entre encoders solo en validacion.
 
 Comparacion en `dominoes`:
 
@@ -84,8 +85,9 @@ Comparacion en `dominoes`:
 | identity | 0.000339 | 0.004809 |
 | orientation | 0.000335 | 0.004839 |
 | validation selector | 0.000335 | 0.004839 |
+| validation ensemble | 0.000330 | 0.004697 |
 
-Lectura: orientacion mejora h15 y es elegida por validacion; identidad sigue marginalmente mejor en h30 de test. El siguiente paso natural es un ensemble/selector con incertidumbre entre identidad y orientacion, especialmente para h30.
+Lectura: orientacion mejora h15, identidad aporta h30, y el ensemble validado combina ambas senales sin mirar test. Es el nuevo mejor resultado de `dominoes`.
 
 ## Lectura
 
@@ -93,7 +95,7 @@ Lectura: orientacion mejora h15 y es elegida por validacion; identidad sigue mar
 
 ```text
 bowling  h30: 0.097678 AMF hibrido vs 0.135595 Ridge
-dominoes h30: 0.004809 AMF hibrido con identidad vs 0.005605 Ridge
+dominoes h30: 0.004697 AMF ensemble validado vs 0.005586 Ridge
 ```
 
 Esto confirma que la memoria local residual no solo ayuda en caida limpia o billar simple; tambien corrige dinamica de impacto estructurado y cadenas de contacto. El siguiente cuello ya no es un baseline lineal, sino representar contactos explicitos, identidad de objeto y mascara/segmentacion para conectar el estado fisico con decoder visual.

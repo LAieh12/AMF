@@ -10,8 +10,9 @@ Comparacion con split fijo, `stride=10`, `max_cells=20000`, `radius=0.75`, `top_
 | identity | 0.000339 | 0.004809 | 0.125099 | 0.142018 |
 | orientation | 0.000335 | 0.004839 | 0.129610 | 0.133776 |
 | validation selector | 0.000335 | 0.004839 | 0.129610 | 0.133776 |
+| validation ensemble | 0.000330 | 0.004697 | 0.144735 | 0.159212 |
 
 ## Lectura
 
 La orientacion (`rot` + delta de quaternion) es la mejor senal validada para h15 y fue seleccionada tambien en h30 por validacion.
-En test, identidad de slot queda marginalmente mejor en h30 (`0.004809` vs `0.004839`), lo que sugiere un selector futuro con incertidumbre/ensemble entre identidad y orientacion.
+El ensemble validado entre identidad y orientacion resuelve el desacuerdo: mejora h15 y h30 frente a todos los encoders individuales sin elegir pesos mirando test.
