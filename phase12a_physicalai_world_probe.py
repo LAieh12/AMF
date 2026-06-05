@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import io
 import json
-import math
 import tarfile
 import time
 from collections import defaultdict
@@ -12,10 +11,12 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+from sklearn.neighbors import NearestNeighbors
 
 
 HORIZONS = (1, 5, 15, 30)
 FPS = 30.0
+FEATURE_DIM = 18
 
 
 @dataclass(frozen=True)
@@ -78,13 +79,28 @@ def load_tracks(tar_path: Path) -> list[PhysicsTrack]:
 
 
 def _feature(track: PhysicsTrack, frame: int, horizon: int) -> np.ndarray:
+    dt = horizon / FPS
+    com = track.com[frame]
+    velocity = track.velocity[frame]
     spin = track.spin[frame] if track.spin is not None else np.zeros(3, dtype=np.float32)
+    cv = com + velocity * dt
     return np.concatenate(
         [
-            track.com[frame],
-            track.velocity[frame] / 10.0,
+            com,
+            velocity / 10.0,
             spin / 1000.0,
-            np.array([horizon / 30.0, 1.0], dtype=np.float32),
+            cv,
+            np.array(
+                [
+                    dt,
+                    dt * dt,
+                    horizon / 30.0,
+                    np.linalg.norm(velocity) / 10.0,
+                    com[1] / 10.0,
+                    np.linalg.norm(com[[0, 2]]) / 10.0,
+                ],
+                dtype=np.float32,
+            ),
         ]
     ).astype(np.float32)
 
@@ -108,7 +124,7 @@ def make_samples(
     for horizon, rows in by_h.items():
         if not rows:
             out[horizon] = (
-                np.zeros((0, 11), dtype=np.float32),
+                np.zeros((0, FEATURE_DIM), dtype=np.float32),
                 np.zeros((0, 3), dtype=np.float32),
                 np.zeros((0, 3), dtype=np.float32),
                 np.zeros((0, 3), dtype=np.float32),
@@ -138,28 +154,113 @@ class ResidualMemory:
         self.top_k = top_k
         self.x: np.ndarray | None = None
         self.y: np.ndarray | None = None
+        self.center: np.ndarray | None = None
+        self.scale: np.ndarray | None = None
+        self.nn: NearestNeighbors | None = None
+
+    def _normalize(self, x: np.ndarray) -> np.ndarray:
+        if self.center is None or self.scale is None:
+            raise RuntimeError("ResidualMemory must be fitted before predict")
+        return ((x - self.center) / self.scale).astype(np.float32)
 
     def fit(self, x: np.ndarray, residual: np.ndarray, max_cells: int) -> None:
-        if len(x) <= max_cells:
-            self.x = x.astype(np.float32)
-            self.y = residual.astype(np.float32)
+        if len(x) == 0:
+            self.x = np.zeros((0, FEATURE_DIM), dtype=np.float32)
+            self.y = np.zeros((0, 3), dtype=np.float32)
             return
-        step = max(1, int(math.ceil(len(x) / max_cells)))
-        self.x = x[::step].astype(np.float32)
-        self.y = residual[::step].astype(np.float32)
+
+        self.center = np.median(x, axis=0).astype(np.float32)
+        scale = np.percentile(np.abs(x - self.center), 75, axis=0).astype(np.float32)
+        self.scale = np.maximum(scale, 1e-4)
+
+        if len(x) > max_cells:
+            uniform_count = max_cells // 2
+            hard_count = max_cells - uniform_count
+            uniform_idx = np.linspace(0, len(x) - 1, uniform_count, dtype=np.int64)
+            hard_score = np.linalg.norm(residual, axis=1)
+            hard_idx = np.argpartition(hard_score, -hard_count)[-hard_count:]
+            idx = np.unique(np.concatenate([uniform_idx, hard_idx]))
+            if len(idx) > max_cells:
+                idx = idx[:max_cells]
+            x_fit = x[idx]
+            y_fit = residual[idx]
+        else:
+            x_fit = x
+            y_fit = residual
+
+        self.x = self._normalize(x_fit)
+        self.y = y_fit.astype(np.float32)
+        k = min(self.top_k, len(self.x))
+        self.nn = NearestNeighbors(n_neighbors=k, algorithm="auto", metric="euclidean")
+        self.nn.fit(self.x)
 
     def predict(self, x: np.ndarray) -> np.ndarray:
-        if self.x is None or self.y is None or len(self.x) == 0:
+        if self.x is None or self.y is None or len(self.x) == 0 or self.nn is None:
             return np.zeros((len(x), 3), dtype=np.float32)
-        preds = []
-        for row in x:
-            dists = np.linalg.norm(self.x - row[None, :], axis=1)
-            k = min(self.top_k, len(dists))
-            idx = np.argpartition(dists, k - 1)[:k]
-            weights = np.exp(-dists[idx] / max(self.radius, 1e-6))
-            denom = float(weights.sum())
-            preds.append((self.y[idx] * weights[:, None]).sum(axis=0) / max(denom, 1e-9))
-        return np.asarray(preds, dtype=np.float32)
+        x_norm = self._normalize(x)
+        dists, idx = self.nn.kneighbors(x_norm, return_distance=True)
+        weights = np.exp(-dists / max(self.radius, 1e-6)).astype(np.float32)
+        denom = np.maximum(weights.sum(axis=1, keepdims=True), 1e-9)
+        return ((self.y[idx] * weights[:, :, None]).sum(axis=1) / denom).astype(np.float32)
+
+
+def split_train_validation(sequences: list[str], train_fraction: float) -> tuple[set[str], set[str], set[str]]:
+    split = max(1, min(len(sequences) - 1, int(len(sequences) * train_fraction)))
+    train_all = sequences[:split]
+    test_sequences = set(sequences[split:])
+    val_count = max(1, min(len(train_all) - 1, int(len(train_all) * 0.2)))
+    fit_sequences = set(train_all[:-val_count])
+    val_sequences = set(train_all[-val_count:])
+    return fit_sequences, val_sequences, set(train_all), test_sequences
+
+
+def fit_model_family(
+    x: np.ndarray,
+    target: np.ndarray,
+    cv: np.ndarray,
+    max_cells: int,
+    ridge: float,
+    radius: float,
+    top_k: int,
+) -> dict[str, Any]:
+    ridge_weights = fit_ridge(x, target, ridge=ridge)
+    ridge_pred = x @ ridge_weights
+
+    cv_memory = ResidualMemory(radius=radius, top_k=top_k)
+    cv_memory.fit(x, target - cv, max_cells=max_cells)
+
+    ridge_memory = ResidualMemory(radius=radius, top_k=top_k)
+    ridge_memory.fit(x, target - ridge_pred, max_cells=max_cells)
+    return {
+        "ridge": ridge_weights,
+        "cv_memory": cv_memory,
+        "ridge_memory": ridge_memory,
+    }
+
+
+def predict_family(model: dict[str, Any], x: np.ndarray, cv: np.ndarray, candidate: str) -> np.ndarray:
+    ridge_pred = x @ model["ridge"]
+    if candidate == "ridge":
+        return ridge_pred
+    if candidate == "constant_velocity":
+        return cv
+    if candidate == "cv_amf":
+        return cv + model["cv_memory"].predict(x)
+    if candidate.startswith("ridge_amf_"):
+        alpha = float(candidate.rsplit("_", 1)[-1])
+        return ridge_pred + alpha * model["ridge_memory"].predict(x)
+    raise KeyError(candidate)
+
+
+def select_candidate(
+    model: dict[str, Any],
+    x: np.ndarray,
+    target: np.ndarray,
+    cv: np.ndarray,
+    candidates: tuple[str, ...],
+) -> tuple[str, dict[str, float]]:
+    losses = {name: mse(predict_family(model, x, cv, name), target) for name in candidates}
+    return min(losses.items(), key=lambda item: item[1])[0], losses
 
 
 def mse(pred: np.ndarray, target: np.ndarray) -> float:
@@ -170,61 +271,70 @@ def mae(pred: np.ndarray, target: np.ndarray) -> float:
     return float(np.mean(np.abs(pred - target)))
 
 
-def evaluate(samples: dict[int, tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]], models: dict[int, dict[str, Any]]) -> dict[str, dict[str, float]]:
+def evaluate(
+    samples: dict[int, tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]],
+    models: dict[int, dict[str, Any]],
+) -> dict[str, dict[str, float]]:
     results: dict[str, dict[str, float]] = {}
     for horizon, (x, target, last, cv) in samples.items():
         if len(x) == 0:
             continue
         model = models[horizon]
-        ridge_pred = x @ model["ridge"]
-        amf_pred = cv + model["memory"].predict(x)
-        hybrid = 0.5 * ridge_pred + 0.5 * amf_pred
+        selected = model["selected_candidate"]
+        pred = predict_family(model, x, cv, selected)
+        ridge_pred = predict_family(model, x, cv, "ridge")
+        cv_amf_pred = predict_family(model, x, cv, "cv_amf")
+        ridge_amf_pred = predict_family(model, x, cv, "ridge_amf_1.0")
         candidate_losses = {
             "last": mse(last, target),
             "constant_velocity": mse(cv, target),
             "ridge": mse(ridge_pred, target),
-            "amf_residual": mse(amf_pred, target),
-            "ridge_amf_mean": mse(hybrid, target),
+            "cv_amf": mse(cv_amf_pred, target),
+            "ridge_amf_0.25": mse(predict_family(model, x, cv, "ridge_amf_0.25"), target),
+            "ridge_amf_0.5": mse(predict_family(model, x, cv, "ridge_amf_0.5"), target),
+            "ridge_amf_1.0": mse(ridge_amf_pred, target),
         }
-        best_name = min(candidate_losses.items(), key=lambda item: item[1])[0]
-        best_pred = {
-            "last": last,
-            "constant_velocity": cv,
-            "ridge": ridge_pred,
-            "amf_residual": amf_pred,
-            "ridge_amf_mean": hybrid,
-        }[best_name]
         results[f"h{horizon}"] = {
             "samples": int(len(x)),
-            "never12a_physics_mse": candidate_losses[best_name],
-            "never12a_physics_mae": mae(best_pred, target),
-            "best_candidate": best_name,
+            "never12a_physics_mse": candidate_losses[selected],
+            "never12a_physics_mae": mae(pred, target),
+            "selected_candidate": selected,
+            "validation_losses": model["validation_losses"],
             "last_mse": candidate_losses["last"],
             "constant_velocity_mse": candidate_losses["constant_velocity"],
             "ridge_mse": candidate_losses["ridge"],
-            "amf_residual_mse": candidate_losses["amf_residual"],
-            "ridge_amf_mean_mse": candidate_losses["ridge_amf_mean"],
-            "mse_skill_vs_last": (candidate_losses["last"] - candidate_losses[best_name]) / max(candidate_losses["last"], 1e-9),
+            "cv_amf_mse": candidate_losses["cv_amf"],
+            "ridge_amf_0.25_mse": candidate_losses["ridge_amf_0.25"],
+            "ridge_amf_0.5_mse": candidate_losses["ridge_amf_0.5"],
+            "ridge_amf_1.0_mse": candidate_losses["ridge_amf_1.0"],
+            "mse_skill_vs_last": (candidate_losses["last"] - candidate_losses[selected]) / max(candidate_losses["last"], 1e-9),
+            "mse_gain_vs_ridge": (candidate_losses["ridge"] - candidate_losses[selected]) / max(candidate_losses["ridge"], 1e-9),
         }
     return results
 
 
-def run_probe(tar_path: Path, train_fraction: float, stride: int, max_cells: int, ridge: float) -> dict[str, Any]:
+def run_probe(tar_path: Path, train_fraction: float, stride: int, max_cells: int, ridge: float, radius: float, top_k: int) -> dict[str, Any]:
     started = time.time()
     tracks = load_tracks(tar_path)
     sequences = sorted({track.sequence for track in tracks})
-    split = max(1, min(len(sequences) - 1, int(len(sequences) * train_fraction)))
-    train_sequences = set(sequences[:split])
-    test_sequences = set(sequences[split:])
+    fit_sequences, val_sequences, train_sequences, test_sequences = split_train_validation(sequences, train_fraction)
+    fit_samples = make_samples(tracks, fit_sequences, HORIZONS, stride)
+    val_samples = make_samples(tracks, val_sequences, HORIZONS, stride)
     train_samples = make_samples(tracks, train_sequences, HORIZONS, stride)
     test_samples = make_samples(tracks, test_sequences, HORIZONS, stride)
 
     models: dict[int, dict[str, Any]] = {}
-    for horizon, (x, target, _last, cv) in train_samples.items():
-        residual = target - cv
-        memory = ResidualMemory(radius=0.25, top_k=16)
-        memory.fit(x, residual, max_cells=max_cells)
-        models[horizon] = {"ridge": fit_ridge(x, target, ridge=ridge), "memory": memory}
+    candidates = ("ridge", "constant_velocity", "cv_amf", "ridge_amf_0.25", "ridge_amf_0.5", "ridge_amf_1.0")
+    for horizon, (x_fit, target_fit, _last_fit, cv_fit) in fit_samples.items():
+        val_x, val_target, _val_last, val_cv = val_samples[horizon]
+        selector_model = fit_model_family(x_fit, target_fit, cv_fit, max_cells=max_cells, ridge=ridge, radius=radius, top_k=top_k)
+        selected_candidate, val_losses = select_candidate(selector_model, val_x, val_target, val_cv, candidates)
+
+        x_train, target_train, _last_train, cv_train = train_samples[horizon]
+        model = fit_model_family(x_train, target_train, cv_train, max_cells=max_cells, ridge=ridge, radius=radius, top_k=top_k)
+        model["selected_candidate"] = selected_candidate
+        model["validation_losses"] = val_losses
+        models[horizon] = model
 
     metrics = evaluate(test_samples, models)
     return {
@@ -232,11 +342,15 @@ def run_probe(tar_path: Path, train_fraction: float, stride: int, max_cells: int
         "tar_path": str(tar_path),
         "track_count": len(tracks),
         "sequence_count": len(sequences),
+        "fit_sequences": len(fit_sequences),
+        "validation_sequences": len(val_sequences),
         "train_sequences": len(train_sequences),
         "test_sequences": len(test_sequences),
         "horizons": list(HORIZONS),
         "stride": stride,
         "max_cells": max_cells,
+        "radius": radius,
+        "top_k": top_k,
         "test_metrics": metrics,
         "elapsed_seconds": time.time() - started,
     }
@@ -252,21 +366,27 @@ def render_report(result: dict[str, Any]) -> str:
         "",
         "## Metrics",
         "",
-        "| horizon | candidate | MSE | MAE | last MSE | skill vs last |",
-        "|---|---|---:|---:|---:|---:|",
+        "| horizon | selected | MSE | MAE | last MSE | Ridge MSE | gain vs Ridge | skill vs last |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for horizon, metrics in result["test_metrics"].items():
         lines.append(
-            f"| {horizon} | {metrics['best_candidate']} | {metrics['never12a_physics_mse']:.6f} | "
-            f"{metrics['never12a_physics_mae']:.6f} | {metrics['last_mse']:.6f} | {metrics['mse_skill_vs_last']:.6f} |"
+            f"| {horizon} | {metrics['selected_candidate']} | {metrics['never12a_physics_mse']:.6f} | "
+            f"{metrics['never12a_physics_mae']:.6f} | {metrics['last_mse']:.6f} | {metrics['ridge_mse']:.6f} | "
+            f"{metrics['mse_gain_vs_ridge']:.6f} | {metrics['mse_skill_vs_last']:.6f} |"
         )
     lines.extend(
         [
             "",
+            "## Selector",
+            "",
+            "El candidato activo se elige en validacion y luego se reentrena sobre todo el bloque train antes del test.",
+            "Esto evita elegir el mejor metodo mirando el test y hace mas justa la comparacion contra Ridge.",
+            "",
             "## Lectura",
             "",
             "Este probe usa ground truth fisico real (`com` y `velocity`) del dataset NVIDIA PhysicalAI.",
-            "La primera meta de 12A no es renderizar RGB: es que Never prediga estados fisicos multi-slot con memoria AMF y baselines claros.",
+            "La arquitectura activa combina encoder fisico enriquecido, Ridge global y memorias AMF locales normalizadas para corregir residuales.",
         ]
     )
     return "\n".join(lines) + "\n"
@@ -279,11 +399,13 @@ def main() -> None:
     parser.add_argument("--stride", type=int, default=5)
     parser.add_argument("--max-cells", type=int, default=12000)
     parser.add_argument("--ridge", type=float, default=1e-3)
+    parser.add_argument("--radius", type=float, default=0.75)
+    parser.add_argument("--top-k", type=int, default=32)
     parser.add_argument("--out-json", default="results/phase12a_physicalai_world_probe.json")
     parser.add_argument("--out-report", default="results/FASE12A_PHYSICALAI_WORLD_PROBE.md")
     args = parser.parse_args()
 
-    result = run_probe(Path(args.tar_path), args.train_fraction, args.stride, args.max_cells, args.ridge)
+    result = run_probe(Path(args.tar_path), args.train_fraction, args.stride, args.max_cells, args.ridge, args.radius, args.top_k)
     out_json = Path(args.out_json)
     out_json.parent.mkdir(parents=True, exist_ok=True)
     out_json.write_text(json.dumps(result, indent=2), encoding="utf-8")

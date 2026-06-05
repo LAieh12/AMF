@@ -76,10 +76,11 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
 - `results/FASE12A_PHYSICALAI_PHYSICS_SMOKE.md`: real `objects_falling`
   physics-shard inspection, confirming usable `com`, `velocity`, `spin`, and
   `rot` arrays without downloading RGB/depth shards.
-- `results/FASE12A_PHYSICALAI_WORLD_PROBE.md`: first PhysicalAI physics world
-  probe. On `objects_falling` physics shard `00007`, AMF residual reaches
-  h1/h5/h15 MSE `0.000109/0.003526/0.069023`; h30 exposes the next long-horizon
-  bottleneck where Ridge is better at `0.314095`.
+- `results/FASE12A_PHYSICALAI_WORLD_PROBE.md`: PhysicalAI physics world
+  probe. On `objects_falling` physics shard `00007`, the validation-selected
+  hybrid AMF/Ridge world model reaches h1/h5/h15/h30 MSE
+  `0.000118/0.005272/0.037346/0.184980`, beating Ridge at every horizon with
+  h30 gain-vs-Ridge `0.351889`.
 
 ## What Fase 6 measures
 

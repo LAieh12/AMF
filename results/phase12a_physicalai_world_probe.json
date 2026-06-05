@@ -3,6 +3,8 @@
   "tar_path": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00007.tar",
   "track_count": 19036,
   "sequence_count": 142,
+  "fit_sequences": 85,
+  "validation_sequences": 21,
   "train_sequences": 106,
   "test_sequences": 36,
   "horizons": [
@@ -13,55 +15,101 @@
   ],
   "stride": 5,
   "max_cells": 12000,
+  "radius": 0.75,
+  "top_k": 32,
   "test_metrics": {
     "h1": {
       "samples": 134280,
-      "never12a_physics_mse": 0.00010927775292657316,
-      "never12a_physics_mae": 0.002280313754454255,
-      "best_candidate": "amf_residual",
+      "never12a_physics_mse": 0.00011800977517850697,
+      "never12a_physics_mae": 0.002896517515182495,
+      "selected_candidate": "ridge_amf_0.25",
+      "validation_losses": {
+        "ridge": 0.00014330273552332073,
+        "constant_velocity": 0.00014650209050159901,
+        "cv_amf": 0.0002561784058343619,
+        "ridge_amf_0.25": 0.0001421941415173933,
+        "ridge_amf_0.5": 0.00016171835886780173,
+        "ridge_amf_1.0": 0.00026266524218954146
+      },
       "last_mse": 0.0019031804986298084,
       "constant_velocity_mse": 0.00012432319635991007,
-      "ridge_mse": 0.00012047078053001314,
-      "amf_residual_mse": 0.00010927775292657316,
-      "ridge_amf_mean_mse": 0.00011173132224939764,
-      "mse_skill_vs_last": 0.9425815086875641
+      "ridge_mse": 0.00011952097702305764,
+      "cv_amf_mse": 0.00027333106845617294,
+      "ridge_amf_0.25_mse": 0.00011800977517850697,
+      "ridge_amf_0.5_mse": 0.0001432659919373691,
+      "ridge_amf_1.0_mse": 0.0002740805794019252,
+      "mse_skill_vs_last": 0.9379933877719596,
+      "mse_gain_vs_ridge": 0.012643821044561345
     },
     "h5": {
       "samples": 129804,
-      "never12a_physics_mse": 0.003526248037815094,
-      "never12a_physics_mae": 0.016348443925380707,
-      "best_candidate": "amf_residual",
+      "never12a_physics_mse": 0.005272372625768185,
+      "never12a_physics_mae": 0.02509360760450363,
+      "selected_candidate": "ridge_amf_0.5",
+      "validation_losses": {
+        "ridge": 0.0066786338575184345,
+        "constant_velocity": 0.00847749225795269,
+        "cv_amf": 0.007379726506769657,
+        "ridge_amf_0.25": 0.005485094618052244,
+        "ridge_amf_0.5": 0.005238448269665241,
+        "ridge_amf_1.0": 0.007585838437080383
+      },
       "last_mse": 0.04536404833197594,
       "constant_velocity_mse": 0.008487138897180557,
-      "ridge_mse": 0.00692561361938715,
-      "amf_residual_mse": 0.003526248037815094,
-      "ridge_amf_mean_mse": 0.004596390761435032,
-      "mse_skill_vs_last": 0.9222677832452283
+      "ridge_mse": 0.006662581581622362,
+      "cv_amf_mse": 0.007971609942615032,
+      "ridge_amf_0.25_mse": 0.005424046888947487,
+      "ridge_amf_0.5_mse": 0.005272372625768185,
+      "ridge_amf_1.0_mse": 0.008229606784880161,
+      "mse_skill_vs_last": 0.8837764084196201,
+      "mse_gain_vs_ridge": 0.20865920196592275
     },
     "h15": {
       "samples": 120852,
-      "never12a_physics_mse": 0.0690234825015068,
-      "never12a_physics_mae": 0.08912788331508636,
-      "best_candidate": "amf_residual",
+      "never12a_physics_mse": 0.03734556585550308,
+      "never12a_physics_mae": 0.06479012221097946,
+      "selected_candidate": "cv_amf",
+      "validation_losses": {
+        "ridge": 0.08507799357175827,
+        "constant_velocity": 0.20100167393684387,
+        "cv_amf": 0.035116009414196014,
+        "ridge_amf_0.25": 0.05570046603679657,
+        "ridge_amf_0.5": 0.03773101419210434,
+        "ridge_amf_1.0": 0.03601634502410889
+      },
       "last_mse": 0.345906525850296,
       "constant_velocity_mse": 0.20863807201385498,
-      "ridge_mse": 0.103250652551651,
-      "amf_residual_mse": 0.0690234825015068,
-      "ridge_amf_mean_mse": 0.07057469338178635,
-      "mse_skill_vs_last": 0.8004562581413127
+      "ridge_mse": 0.09412745386362076,
+      "cv_amf_mse": 0.03734556585550308,
+      "ridge_amf_0.25_mse": 0.0646541640162468,
+      "ridge_amf_0.5_mse": 0.046952445060014725,
+      "ridge_amf_1.0_mse": 0.04686371982097626,
+      "mse_skill_vs_last": 0.8920356713025247,
+      "mse_gain_vs_ridge": 0.6032447036163087
     },
     "h30": {
       "samples": 107424,
-      "never12a_physics_mse": 0.3140953481197357,
-      "never12a_physics_mae": 0.26348555088043213,
-      "best_candidate": "ridge",
+      "never12a_physics_mse": 0.1849803626537323,
+      "never12a_physics_mae": 0.1901392638683319,
+      "selected_candidate": "ridge_amf_0.5",
+      "validation_losses": {
+        "ridge": 0.2237953394651413,
+        "constant_velocity": 1.2055341005325317,
+        "cv_amf": 0.15000733733177185,
+        "ridge_amf_0.25": 0.1588747352361679,
+        "ridge_amf_0.5": 0.12495502084493637,
+        "ridge_amf_1.0": 0.15011827647686005
+      },
       "last_mse": 0.8633855581283569,
       "constant_velocity_mse": 1.260606288909912,
-      "ridge_mse": 0.3140953481197357,
-      "amf_residual_mse": 1.1889300346374512,
-      "ridge_amf_mean_mse": 0.44192031025886536,
-      "mse_skill_vs_last": 0.6362050011577329
+      "ridge_mse": 0.28541451692581177,
+      "cv_amf_mse": 0.15965500473976135,
+      "ridge_amf_0.25_mse": 0.21988186240196228,
+      "ridge_amf_0.5_mse": 0.1849803626537323,
+      "ridge_amf_1.0_mse": 0.20707091689109802,
+      "mse_skill_vs_last": 0.7857499920953834,
+      "mse_gain_vs_ridge": 0.3518887383649987
     }
   },
-  "elapsed_seconds": 181.5748791694641
+  "elapsed_seconds": 117.0619785785675
 }
