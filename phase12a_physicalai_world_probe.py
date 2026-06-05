@@ -28,6 +28,7 @@ class PhysicsTrack:
     velocity: np.ndarray
     spin: np.ndarray | None
     segmentation_color: np.ndarray | None = None
+    rot: np.ndarray | None = None
 
 
 def _read_npz(tar: tarfile.TarFile, member: tarfile.TarInfo) -> dict[str, np.ndarray]:
@@ -49,7 +50,7 @@ def load_tracks(tar_path: Path) -> list[PhysicsTrack]:
             if "_" not in stem:
                 continue
             object_name, field = stem.rsplit("_", 1)
-            if field not in {"com", "velocity", "spin"}:
+            if field not in {"com", "velocity", "spin", "rot"}:
                 continue
             data = _read_npz(tar, member)
             if "data" in data:
@@ -64,9 +65,12 @@ def load_tracks(tar_path: Path) -> list[PhysicsTrack]:
         com = fields["com"]
         velocity = fields["velocity"]
         spin = fields.get("spin")
+        rot = fields.get("rot")
         slot_count = min(com.shape[0], velocity.shape[0])
         if spin is not None:
             slot_count = min(slot_count, spin.shape[0])
+        if rot is not None:
+            slot_count = min(slot_count, rot.shape[0])
         colors = fields.get("segmentation_colors")
         if colors is not None:
             slot_count = min(slot_count, colors.shape[0])
@@ -80,6 +84,7 @@ def load_tracks(tar_path: Path) -> list[PhysicsTrack]:
                     velocity=velocity[slot_index],
                     spin=spin[slot_index] if spin is not None else None,
                     segmentation_color=colors[slot_index] if colors is not None else None,
+                    rot=rot[slot_index] if rot is not None else None,
                 )
             )
     return tracks

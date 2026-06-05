@@ -69,6 +69,24 @@ h30 identidad: 0.004809
 
 Lectura: la identidad de slot mejora poco pero consistentemente h15/h30. Es la primera senal directa de mascara/identidad sin descargar RGB ni segmentacion pesada.
 
+## Orientacion y selector de encoders
+
+Se agregaron:
+
+- `phase12b_orientation_world_probe.py`: usa `rot` quaternion y delta rotacional reciente.
+- `phase12b_encoder_selector_probe.py`: elige en validacion entre base, identidad y orientacion.
+
+Comparacion en `dominoes`:
+
+| encoder | h15 MSE | h30 MSE |
+|---|---:|---:|
+| base | 0.000342 | 0.004851 |
+| identity | 0.000339 | 0.004809 |
+| orientation | 0.000335 | 0.004839 |
+| validation selector | 0.000335 | 0.004839 |
+
+Lectura: orientacion mejora h15 y es elegida por validacion; identidad sigue marginalmente mejor en h30 de test. El siguiente paso natural es un ensemble/selector con incertidumbre entre identidad y orientacion, especialmente para h30.
+
 ## Lectura
 
 `bowling` introduce impacto dirigido y dispersion de pines. `dominoes` introduce cadena causal de contactos. En ambas escenas, el AMF hibrido supera a Ridge en largo plazo:

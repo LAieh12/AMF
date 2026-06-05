@@ -105,6 +105,12 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   NPZ metadata. On `dominoes`, it improves h15/h30 AMF MSE
   `0.000342 -> 0.000339` and `0.004851 -> 0.004809`; see
   `results/FASE12B_IDENTITY_DIAGNOSTIC.md`.
+- `results/FASE12B_DOMINOES_ORIENTATION_WORLD_PROBE.md`: orientation probe
+  using PhysicalAI `rot` quaternions and recent rotation delta. On `dominoes`,
+  it improves h15 MSE to `0.000335`; h30 is `0.004839`.
+- `results/FASE12B_DOMINOES_ENCODER_SELECTOR_PROBE.md`: validation-selected
+  encoder probe across base, identity, and orientation. It selects orientation
+  for h15/h30 on validation; see `results/FASE12B_ENCODER_DIAGNOSTIC.md`.
 
 ## What Fase 6 measures
 
