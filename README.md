@@ -144,6 +144,11 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   ties temporal-energy on all long-horizon checks, but the strict phase gate is
   not passed because it wins/ties only 3/9 long-horizon checks against the best
   previous AMF per scene/horizon.
+- `results/FASE13B_REGIME_EXPERT_SELECTOR.md`: Regime Expert Selector over
+  temporal-energy, energy/constraint, identity/orientation, ensemble 12C,
+  AMF-LTM residual, Ridge safety, and AMF residual base. On the same Tier 1
+  h1/h5/h15/h30/h60/h120 run it passes the long-horizon gate with 8/9
+  wins/ties vs the best previous AMF.
 
 ## What Fase 6 measures
 
@@ -213,6 +218,8 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   frozen temporal-energy PhysicalAI world-model baseline.
 - `run_phase13.py`: formal multi-scene AMF World Model training runner with
   AMF-LTM residual/router ablations and cross-scene diagnostics.
+- `run_phase13b.py`: validation-trained regime expert selector that mixes the
+  strongest AMF world-model experts by physical regime and horizon.
 
 ## Fase 7
 
