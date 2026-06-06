@@ -227,6 +227,10 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   strongest AMF world-model experts by physical regime and horizon.
 - `run_phase14.py`: frozen Phase 14 formal runner using the Phase 13B Regime
   Expert Selector with checkpoint/resume and training logs.
+- `phase14_data_sync.py`: remote data-sync utility for downloading only full
+  PhysicalAI physics NPZ tar shards plus captions, regenerating manifest,
+  splits, and Phase 14 config while rejecting RGB/depth/segmentation/camera
+  assets. See `PHASE14_REMOTE_DATA_SYNC.md`.
 
 ## Fase 7
 
