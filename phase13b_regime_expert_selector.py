@@ -323,6 +323,31 @@ def metrics_for(pred: np.ndarray, target: np.ndarray, last: np.ndarray, ridge: n
     }
 
 
+def normalize_expert_name(name: str | None) -> str | None:
+    aliases = {
+        "amf_ensemble_12c": "ensemble_12c",
+        "energy": "energy_constraint",
+        "amf_residual": "amf_residual_base",
+    }
+    if name is None:
+        return None
+    return aliases.get(name, name)
+
+
+def choose_previous_expert(
+    scene_name: str,
+    horizon_name: str,
+    previous_matrix: dict[str, dict[str, str]],
+    val_experts: dict[str, np.ndarray],
+    target_val: np.ndarray,
+) -> str:
+    previous_name = normalize_expert_name(previous_matrix.get(scene_name, {}).get(horizon_name))
+    if previous_name in val_experts:
+        return previous_name
+    candidates = ("energy_constraint", "temporal_energy", "amf_residual_base", "ensemble_12c")
+    return min(candidates, key=lambda name: mse(val_experts[name], target_val))
+
+
 def load_previous_matrix(path: Path) -> dict[str, dict[str, str]]:
     if not path.exists():
         return {}
@@ -408,23 +433,28 @@ def evaluate_scene_selector(
         beta, beta_threshold = choose_optional_ltm_beta(
             val_selected, ltm.val_delta, ltm.val_confidence, ltm.threshold, target_val
         )
-        final_pred, ltm_mask = final_with_optional_residual(
+        val_final_pred, _ = final_with_optional_residual(
+            val_selected, ltm.val_delta, ltm.val_confidence, beta, beta_threshold
+        )
+        selector_final_pred, selector_ltm_mask = final_with_optional_residual(
             test_selected, ltm.test_delta, ltm.test_confidence, beta, beta_threshold
         )
 
-        previous_name = previous_matrix.get(scene_data.shard.scene, {}).get(hname)
-        if previous_name == "amf_ensemble_12c":
-            previous_name = "ensemble_12c"
-        if previous_name == "energy":
-            previous_name = "energy_constraint"
-        if previous_name == "amf_residual":
-            previous_name = "amf_residual_base"
-        if previous_name not in test_experts:
-            previous_name = min(
-                ("energy_constraint", "temporal_energy", "amf_residual_base", "ensemble_12c"),
-                key=lambda name: mse(test_experts[name], target_test),
-            )
+        previous_name = choose_previous_expert(
+            scene_data.shard.scene,
+            hname,
+            previous_matrix,
+            val_experts,
+            target_val,
+        )
+        previous_val_pred = val_experts[previous_name]
         previous_pred = test_experts[previous_name]
+        selector_val_mse = mse(val_final_pred, target_val)
+        previous_val_mse = mse(previous_val_pred, target_val)
+        validation_guard_used = selector_val_mse > previous_val_mse * (1.0 + 1e-9)
+        final_pred = previous_pred if validation_guard_used else selector_final_pred
+        ltm_mask = np.zeros_like(selector_ltm_mask) if validation_guard_used else selector_ltm_mask
+        final_model_selected = previous_name if validation_guard_used else "regime_expert_selector_13b"
         final_metrics = metrics_for(
             final_pred,
             target_test,
@@ -462,6 +492,7 @@ def evaluate_scene_selector(
         horizon_results[hname] = {
             "samples": int(len(target_test)),
             "previous_best_model": previous_name,
+            "final_model_selected": final_model_selected,
             "final_metrics": final_metrics,
             "selector_only_metrics": selected_metrics,
             "expert_metrics": expert_metrics,
@@ -475,6 +506,12 @@ def evaluate_scene_selector(
                 "validation_group_counts": selector["counts"],
                 "expert_report": expert_report,
                 "context_thresholds": thresholds,
+                "validation_guard": {
+                    "used": bool(validation_guard_used),
+                    "selector_final_mse": float(selector_val_mse),
+                    "previous_best_mse": float(previous_val_mse),
+                    "rule": "Use selector only when validation MSE is no worse than the previous best expert.",
+                },
             },
             "ltm": {
                 "alpha": ltm.alpha,
@@ -497,6 +534,8 @@ def evaluate_scene_selector(
         }
         export_horizons[hname] = {
             "previous_best_model": previous_name,
+            "final_model_selected": final_model_selected,
+            "validation_guard_used": bool(validation_guard_used),
             "selector_weights": selector["weights"],
             "selector_validation_losses": selector["validation_losses"],
             "selector_counts": selector["counts"],
