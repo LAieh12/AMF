@@ -80,14 +80,24 @@ python phase14_data_sync.py --local-dir data/physicalai_physics_captions_full --
 
 ## 5. Run Phase 14
 
+Recommended start on a 128 GB RAM machine:
+
 ```bash
-python run_phase14.py --config configs/phase14_world_model_train.yaml
+python run_phase14.py --config configs/phase14_world_model_train.yaml --workers 8
 ```
 
 Resume after interruption:
 
 ```bash
-python run_phase14.py --config configs/phase14_world_model_train.yaml --resume
+python run_phase14.py --config configs/phase14_world_model_train.yaml --resume --workers 8
+```
+
+`--workers` trains scene shards in parallel. If RAM stays comfortable, try `--workers 12` or `--workers 16`; if the process starts swapping or RAM approaches the machine limit, go back to `--workers 8`.
+
+Each completed shard writes:
+
+```text
+models/phase14/<scene>_<shard>.pkl
 ```
 
 The architecture/protocol remains frozen. This sync only changes data paths, manifest, splits, and config shard lists.

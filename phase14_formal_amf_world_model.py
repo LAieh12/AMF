@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import replace
 from pathlib import Path
 from typing import Any
@@ -149,7 +150,40 @@ def scene_result_to_log_records(scene_result: dict[str, Any], split: str = "test
     return records
 
 
-def run_formal_world_model(config: dict[str, Any], resume: bool = False, stop_after_scenes: int | None = None) -> dict[str, Any]:
+def _run_one_scene(scene_cfg: dict[str, Any], config: dict[str, Any], export_dir_text: str) -> dict[str, Any]:
+    scene_name = scene_cfg["scene"]
+    shard_path = Path(scene_cfg["shard"])
+    scene_data = load_scene_data(
+        SceneShard(scene=scene_name, tar_path=shard_path, tier=int(scene_cfg.get("tier", 1))),
+        train_fraction=float(config["split"]["train_fraction"]),
+        split_seed=int(config["random_seed"]),
+    )
+    scene_data = maybe_limit_tracks(scene_data, config.get("preflight", {}).get("max_tracks_per_scene"))
+    return evaluate_scene_selector(
+        scene_data,
+        horizons=tuple(int(h) for h in config["horizons"]),
+        stride=int(config["training"]["stride"]),
+        memory_window=int(config["model"]["memory_window"]),
+        max_cells=int(config["model"]["max_cells"]),
+        ridge=float(config["model"]["ridge"]),
+        model_radius=float(config["model"]["model_radius"]),
+        model_top_k=int(config["model"]["model_top_k"]),
+        ltm_radius=float(config["model"]["ltm_radius"]),
+        ltm_top_k=int(config["model"]["ltm_top_k"]),
+        tie_tolerance=float(config["model"]["tie_tolerance"]),
+        selector_step=float(config["selector"]["step"]),
+        min_group=int(config["selector"]["min_group"]),
+        previous_matrix={},
+        export_dir=Path(export_dir_text),
+    )
+
+
+def run_formal_world_model(
+    config: dict[str, Any],
+    resume: bool = False,
+    stop_after_scenes: int | None = None,
+    workers: int = 1,
+) -> dict[str, Any]:
     output_paths = config["output_paths"]
     checkpoint_dir = Path(config["checkpoint"]["dir"])
     log_path = Path(output_paths["train_log_jsonl"])
@@ -163,35 +197,21 @@ def run_formal_world_model(config: dict[str, Any], resume: bool = False, stop_af
     scene_results = []
     started = time.time()
 
+    pending_scene_cfgs = []
     for scene_cfg in config["scenes"]:
         scene_name = scene_cfg["scene"]
         shard_path = Path(scene_cfg["shard"])
         shard_id = f"{scene_name}_{shard_path.stem}"
         if shard_id in completed:
             continue
-        scene_data = load_scene_data(
-            SceneShard(scene=scene_name, tar_path=shard_path, tier=int(scene_cfg.get("tier", 1))),
-            train_fraction=float(config["split"]["train_fraction"]),
-            split_seed=int(config["random_seed"]),
-        )
-        scene_data = maybe_limit_tracks(scene_data, config.get("preflight", {}).get("max_tracks_per_scene"))
-        scene_result = evaluate_scene_selector(
-            scene_data,
-            horizons=tuple(int(h) for h in config["horizons"]),
-            stride=int(config["training"]["stride"]),
-            memory_window=int(config["model"]["memory_window"]),
-            max_cells=int(config["model"]["max_cells"]),
-            ridge=float(config["model"]["ridge"]),
-            model_radius=float(config["model"]["model_radius"]),
-            model_top_k=int(config["model"]["model_top_k"]),
-            ltm_radius=float(config["model"]["ltm_radius"]),
-            ltm_top_k=int(config["model"]["ltm_top_k"]),
-            tie_tolerance=float(config["model"]["tie_tolerance"]),
-            selector_step=float(config["selector"]["step"]),
-            min_group=int(config["selector"]["min_group"]),
-            previous_matrix={},
-            export_dir=export_dir,
-        )
+        pending_scene_cfgs.append(scene_cfg)
+        if stop_after_scenes is not None and len(pending_scene_cfgs) >= stop_after_scenes:
+            break
+
+    def record_completed_scene(scene_result: dict[str, Any]) -> None:
+        scene_name = scene_result["scene"]
+        shard_path = Path(scene_result["tar_path"])
+        shard_id = f"{scene_name}_{shard_path.stem}"
         scene_results.append(scene_result)
         completed.append(shard_id)
         for record in scene_result_to_log_records(scene_result):
@@ -208,8 +228,18 @@ def run_formal_world_model(config: dict[str, Any], resume: bool = False, stop_af
         }
         live_path.parent.mkdir(parents=True, exist_ok=True)
         live_path.write_text(json.dumps(live, indent=2), encoding="utf-8")
-        if stop_after_scenes is not None and len(scene_results) >= stop_after_scenes:
-            break
+
+    if workers <= 1:
+        for scene_cfg in pending_scene_cfgs:
+            record_completed_scene(_run_one_scene(scene_cfg, config, str(export_dir)))
+    else:
+        with ProcessPoolExecutor(max_workers=workers) as executor:
+            futures = {
+                executor.submit(_run_one_scene, scene_cfg, config, str(export_dir)): scene_cfg
+                for scene_cfg in pending_scene_cfgs
+            }
+            for future in as_completed(futures):
+                record_completed_scene(future.result())
 
     result = {
         "phase": "14_prepared_or_formal",
@@ -219,6 +249,7 @@ def run_formal_world_model(config: dict[str, Any], resume: bool = False, stop_af
         "scene_results": scene_results,
         "partial_metrics": partial_metrics,
         "model_export_dir": str(export_dir),
+        "workers": workers,
         "model_exports": [
             scene.get("model_export_path")
             for scene in scene_results
