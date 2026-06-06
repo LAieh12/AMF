@@ -1,0 +1,39 @@
+{
+  "phase": "13C",
+  "passed": true,
+  "architecture_freeze": {
+    "name": "AMF World Model Phase 14 frozen architecture",
+    "frozen_after": "phase13b_regime_expert_selector",
+    "components": [
+      "AMF residual/local transition cells",
+      "temporal-energy",
+      "identity/orientation",
+      "energy/constraint",
+      "AMF-LTM residual",
+      "Regime Expert Selector 13B",
+      "ridge safety fallback"
+    ],
+    "forbidden_without_bug": [
+      "new dense H_event/H_workspace feature concatenation",
+      "new physical features",
+      "selector formula changes",
+      "residual formula changes",
+      "test-driven weight calibration"
+    ]
+  },
+  "manifest_path": "results\\phase13c_dataset_manifest.json",
+  "splits_path": "results\\phase13c_splits.json",
+  "config_path": "configs\\phase14_world_model_train.yaml",
+  "command_ready": "python run_phase14.py --config configs/phase14_world_model_train.yaml",
+  "first_pass_completed_shards": [
+    "objects_falling_physics-objects_falling-00000"
+  ],
+  "resume_completed_shards": [
+    "objects_falling_physics-objects_falling-00000",
+    "dominoes_physics-dominoes-00000",
+    "wrecking_ball_physics-wrecking_ball-00000"
+  ],
+  "resume_used": true,
+  "no_architecture_changes_after_preflight": true,
+  "no_test_calibration": true
+}

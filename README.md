@@ -149,6 +149,11 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   AMF-LTM residual, Ridge safety, and AMF residual base. On the same Tier 1
   h1/h5/h15/h30/h60/h120 run it passes the long-horizon gate with 8/9
   wins/ties vs the best previous AMF.
+- `results/FASE13C_PREFLIGHT.md`: AMF World Model readiness/freeze preflight
+  for Phase 14. It prepares the physics manifest, fixed sequence splits,
+  `configs/phase14_world_model_train.yaml`, frozen formal model runner,
+  checkpoint/resume, JSONL logging, and the command
+  `python run_phase14.py --config configs/phase14_world_model_train.yaml`.
 
 ## What Fase 6 measures
 
@@ -220,6 +225,8 @@ available dataset, including `optdigits`, `pendigits`, and `satimage`.
   AMF-LTM residual/router ablations and cross-scene diagnostics.
 - `run_phase13b.py`: validation-trained regime expert selector that mixes the
   strongest AMF world-model experts by physical regime and horizon.
+- `run_phase14.py`: frozen Phase 14 formal runner using the Phase 13B Regime
+  Expert Selector with checkpoint/resume and training logs.
 
 ## Fase 7
 

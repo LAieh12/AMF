@@ -1,0 +1,241 @@
+Comienza **Phase 13C — AMF World Model Training Readiness / Freeze**.
+
+Contexto:
+Hasta ahora las fases 12A-13B fueron investigación de arquitectura. Ya no quiero seguir modificando el modelo en cada shard. El objetivo ahora es preparar el sistema para una **run formal larga** del AMF World Model.
+
+La arquitectura queda congelada como:
+
+* AMF residual/local transition cells
+* temporal-energy
+* identity/orientation
+* energy/constraint
+* AMF-LTM residual
+* Regime Expert Selector 13B
+
+No crear arquitectura nueva salvo bug crítico. No añadir features nuevas salvo que el preflight demuestre una falla técnica obvia. El objetivo es preparar entrenamiento formal, no seguir haciendo probes.
+
+## Objetivo de Phase 13C
+
+Dejar listo el pipeline para Phase 14:
+
+1. dataset completo de física necesario;
+2. manifest reproducible de escenas/shards;
+3. config única de entrenamiento;
+4. validación de splits;
+5. checkpoint/resume;
+6. logging completo;
+7. métricas estables;
+8. preflight corto;
+9. freeze de arquitectura;
+10. preparación para run larga.
+
+## Dataset
+
+No descargar RGB completo todavía. Para el world model, usar primero los datos físicos/metadata:
+
+* physics NPZ
+* rot/orientation
+* velocity
+* center of mass
+* segmentation_colors/slot identity si están en metadata
+* constraints/energy derivada
+* contacto si está disponible
+
+Si el paquete físico completo pesa alrededor de 15 GB, descargarlo completo. No usar solo 1-2 shards si el costo es manejable.
+
+Crear un manifest:
+
+`results/phase13c_dataset_manifest.json`
+
+Debe incluir:
+
+* escena
+* shard
+* número de tracks
+* número de secuencias
+* número de frames/transiciones
+* campos disponibles: com, velocity, rot, segmentation_colors, etc.
+* checksum/tamaño si es fácil
+* si el shard fue usado en train/val/test
+
+## Escenas para Phase 14
+
+Preparar al menos:
+
+Tier 1 obligatorio:
+
+* objects_falling
+* dominoes
+* wrecking_ball
+
+Tier 2 si ya están disponibles:
+
+* billiards
+* rolling_ramp_objects
+* rolling_ramp_obstruct
+* bowling
+
+No usar ball_mixer/towers todavía en la run principal si el pipeline no está estable. Pueden quedar como stress-test posterior.
+
+## Splits
+
+Crear splits fijos y reproducibles:
+
+* train
+* validation
+* test
+
+Separar por secuencia/track, no por frame mezclado, para evitar leakage temporal.
+
+Guardar:
+
+`results/phase13c_splits.json`
+
+Nada de calibrar pesos usando test.
+
+## Config única
+
+Crear:
+
+`configs/phase14_world_model_train.yaml`
+
+Debe contener:
+
+* escenas usadas
+* shards usados
+* horizons: h1, h5, h15, h30, h60, h120
+* max_cells
+* memory limits
+* LTM settings
+* selector settings
+* checkpoint interval
+* random seed
+* output paths
+* train/val/test split paths
+* whether to use RGB: false
+
+## Modelo congelado
+
+Crear una versión estable:
+
+`phase14_formal_amf_world_model.py`
+
+Puede reutilizar código de 13B, pero debe quedar limpio como modelo formal, no como probe.
+
+El modelo debe usar:
+
+* temporal-energy como predictor base fuerte
+* Regime Expert Selector para elegir/mezclar expertos
+* AMF-LTM residual opcional con confidence gate
+* safety fallback si la confianza es baja
+
+No volver a concatenar H_event/H_workspace como features densas.
+
+## Checkpoint/resume
+
+Implementar checkpointing obligatorio:
+
+* células AMF
+* memorias LTM
+* selector weights
+* config usada
+* progreso por escena/shard
+* métricas parciales
+
+Archivos:
+
+* `checkpoints/phase14/latest.ckpt`
+* `checkpoints/phase14/epoch_or_shard_<id>.ckpt`
+
+Debe poder continuar si se interrumpe.
+
+## Logging
+
+Guardar logs en:
+
+* `results/phase14_train_log.jsonl`
+* `results/phase14_metrics_live.json`
+* `results/phase14_latest.json`
+
+Cada entrada debe incluir:
+
+* escena
+* shard
+* split
+* horizonte
+* modelo/experto seleccionado
+* MSE
+* gain vs Ridge
+* gain vs temporal-energy
+* gain vs best previous AMF
+* memoria MB
+* células
+* LTM memories
+* selector confidence
+* residual on/off
+* tiempo
+
+## Preflight corto
+
+Antes de la run larga, correr un preflight pequeño con:
+
+* 1 shard por escena Tier 1
+* pocos samples
+* todos los horizontes
+* train/val/test real
+* checkpoint/resume probado
+
+El preflight pasa si:
+
+* no hay leakage
+* no crashea
+* genera reportes
+* checkpoint/resume funciona
+* métricas salen razonables
+* el selector no usa test
+* memoria no explota
+* h30/h60 se calculan correctamente
+
+Generar:
+
+* `results/FASE13C_PREFLIGHT.md`
+* `results/phase13c_preflight_latest.json`
+* `FASE13C_COMPLETADA.md`
+
+## Regla importante
+
+Después del preflight, si pasa, no modificar arquitectura. Solo permitir:
+
+* fix de bug
+* fix de loader
+* fix de checkpoint
+* fix de logging
+
+Nada de cambiar features, thresholds, selector o fórmula de residual durante la run larga.
+
+## Phase 14 preparado
+
+Al final de 13C, dejar listo el comando:
+
+`python run_phase14.py --config configs/phase14_world_model_train.yaml`
+
+Y crear `run_phase14.py`.
+
+No hace falta ejecutar la run larga en 13C si toma muchas horas. Solo debe quedar lista y validada.
+
+## Criterio de éxito de 13C
+
+13C pasa si:
+
+1. dataset manifest listo;
+2. splits reproducibles listos;
+3. config única creada;
+4. modelo formal congelado;
+5. checkpoint/resume funcionando;
+6. preflight multi-escena pasa;
+7. reportes generados;
+8. comando de Phase 14 listo;
+9. no se usó test para calibrar;
+10. arquitectura no cambió después del preflight.
+
+Commit final a main.

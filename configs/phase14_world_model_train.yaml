@@ -1,0 +1,224 @@
+{
+  "phase": "14",
+  "use_rgb": false,
+  "architecture_freeze": {
+    "name": "AMF World Model Phase 14 frozen architecture",
+    "frozen_after": "phase13b_regime_expert_selector",
+    "components": [
+      "AMF residual/local transition cells",
+      "temporal-energy",
+      "identity/orientation",
+      "energy/constraint",
+      "AMF-LTM residual",
+      "Regime Expert Selector 13B",
+      "ridge safety fallback"
+    ],
+    "forbidden_without_bug": [
+      "new dense H_event/H_workspace feature concatenation",
+      "new physical features",
+      "selector formula changes",
+      "residual formula changes",
+      "test-driven weight calibration"
+    ]
+  },
+  "random_seed": 123,
+  "horizons": [
+    1,
+    5,
+    15,
+    30,
+    60,
+    120
+  ],
+  "scenes": [
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00000.tar"
+    },
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00001.tar"
+    },
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00002.tar"
+    },
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00003.tar"
+    },
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00004.tar"
+    },
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00005.tar"
+    },
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00006.tar"
+    },
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00007.tar"
+    },
+    {
+      "scene": "dominoes",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\dominoes\\physics-dominoes-00008.tar"
+    },
+    {
+      "scene": "objects_falling",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00000.tar"
+    },
+    {
+      "scene": "objects_falling",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00001.tar"
+    },
+    {
+      "scene": "objects_falling",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00002.tar"
+    },
+    {
+      "scene": "objects_falling",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00003.tar"
+    },
+    {
+      "scene": "objects_falling",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00004.tar"
+    },
+    {
+      "scene": "objects_falling",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00005.tar"
+    },
+    {
+      "scene": "objects_falling",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00006.tar"
+    },
+    {
+      "scene": "objects_falling",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\objects_falling\\physics-objects_falling-00007.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00000.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00001.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00002.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00003.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00004.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00005.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00006.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00007.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00008.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00009.tar"
+    },
+    {
+      "scene": "wrecking_ball",
+      "tier": 1,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\wrecking_ball\\physics-wrecking_ball-00010.tar"
+    },
+    {
+      "scene": "billiards",
+      "tier": 2,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\billiards\\physics-billiards-00000.tar"
+    },
+    {
+      "scene": "bowling",
+      "tier": 2,
+      "shard": "data\\physicalai_hf_cache\\datasets--nvidia--PhysicalAI-WorldModel-Synthetic-Physical-Interaction-Scenes\\snapshots\\ff9b2b0a93243d84925c6c7474ee8a5bc02886cb\\physics\\bowling\\physics-bowling-00000.tar"
+    }
+  ],
+  "split": {
+    "train_fraction": 0.75,
+    "split_path": "results\\phase13c_splits.json",
+    "split_unit": "sequence",
+    "no_test_calibration": true
+  },
+  "training": {
+    "stride": 60,
+    "checkpoint_interval": "scene_or_shard"
+  },
+  "model": {
+    "max_cells": 5000,
+    "memory_limit_mb": 512,
+    "memory_window": 20,
+    "ridge": 0.001,
+    "model_radius": 0.75,
+    "model_top_k": 24,
+    "ltm_radius": 1.25,
+    "ltm_top_k": 24,
+    "tie_tolerance": 0.1
+  },
+  "selector": {
+    "step": 0.5,
+    "min_group": 256,
+    "source": "phase13b_regime_expert_selector"
+  },
+  "checkpoint": {
+    "dir": "checkpoints/phase14",
+    "latest": "checkpoints/phase14/latest.ckpt",
+    "per_shard_pattern": "checkpoints/phase14/epoch_or_shard_<id>.ckpt"
+  },
+  "output_paths": {
+    "train_log_jsonl": "results/phase14_train_log.jsonl",
+    "metrics_live_json": "results/phase14_metrics_live.json",
+    "latest_json": "results/phase14_latest.json"
+  },
+  "preflight": {
+    "max_tracks_per_scene": null
+  }
+}
