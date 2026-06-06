@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import shutil
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 
-from huggingface_hub import HfApi, snapshot_download
+from huggingface_hub import HfApi, hf_hub_download, snapshot_download
 
 from phase13_scene_loader import SceneShard, scene_tier
 from phase13c_readiness import build_manifest, build_splits, make_config
@@ -57,7 +60,144 @@ def remote_size_summary() -> dict[str, Any]:
     }
 
 
-def download_physics_and_captions(local_dir: Path, include_captions: bool) -> Path:
+def remote_allowed_files(include_captions: bool) -> list[str]:
+    api = HfApi()
+    files = api.list_repo_files(repo_id=REPO_ID, repo_type="dataset")
+    wanted = [f for f in files if f.startswith("physics/") and f.endswith(".tar")]
+    if include_captions:
+        wanted.extend(f for f in files if f.startswith("captions/") and f.endswith(".tar"))
+    return sorted(wanted)
+
+
+def relative_allowed_path(path: Path) -> str | None:
+    parts = path.parts
+    lowered = [part.lower() for part in parts]
+    for prefix in ("physics", "captions"):
+        if prefix not in lowered:
+            continue
+        idx = lowered.index(prefix)
+        if len(parts) - idx != 3:
+            continue
+        if not parts[-1].endswith(".tar"):
+            continue
+        return Path(*parts[idx:]).as_posix()
+    return None
+
+
+def reuse_existing_allowed_files(
+    local_dir: Path,
+    search_roots: list[Path],
+    wanted: set[str],
+) -> dict[str, Any]:
+    reused = []
+    for root in search_roots:
+        if not root.exists():
+            continue
+        for source in root.rglob("*.tar"):
+            rel = relative_allowed_path(source)
+            if rel is None or rel not in wanted:
+                continue
+            target = local_dir / Path(rel)
+            if target.exists():
+                continue
+            target.parent.mkdir(parents=True, exist_ok=True)
+            try:
+                if source.resolve() == target.resolve():
+                    continue
+            except FileNotFoundError:
+                pass
+            try:
+                os.link(source, target)
+                method = "hardlink"
+            except OSError:
+                shutil.copy2(source, target)
+                method = "copy"
+            reused.append({"path": rel, "source": str(source), "method": method})
+    return {
+        "search_roots": [str(root) for root in search_roots],
+        "reused_count": len(reused),
+        "reused": reused[:200],
+    }
+
+
+def download_missing_allowed_files(local_dir: Path, wanted: list[str], workers: int) -> dict[str, Any]:
+    missing = [rel for rel in wanted if not (local_dir / Path(rel)).exists()]
+    if not missing:
+        return {"mode": "missing_only", "missing_before_download": 0, "downloaded_count": 0, "downloaded": []}
+
+    downloaded = []
+
+    def fetch(rel: str) -> str:
+        hf_hub_download(
+            repo_id=REPO_ID,
+            repo_type="dataset",
+            filename=rel,
+            local_dir=str(local_dir),
+        )
+        return rel
+
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as executor:
+        futures = {executor.submit(fetch, rel): rel for rel in missing}
+        for done, future in enumerate(as_completed(futures), start=1):
+            rel = future.result()
+            downloaded.append(rel)
+            print(
+                json.dumps(
+                    {
+                        "downloaded": done,
+                        "total_missing": len(missing),
+                        "path": rel,
+                    }
+                ),
+                flush=True,
+            )
+    return {
+        "mode": "missing_only",
+        "missing_before_download": len(missing),
+        "downloaded_count": len(downloaded),
+        "downloaded": downloaded,
+    }
+
+
+def download_physics_and_captions(
+    local_dir: Path,
+    include_captions: bool,
+    missing_only: bool,
+    workers: int,
+    reuse_roots: list[Path],
+) -> dict[str, Any]:
+    wanted = remote_allowed_files(include_captions)
+    reuse_report = reuse_existing_allowed_files(local_dir, reuse_roots, set(wanted)) if reuse_roots else None
+    if missing_only:
+        download_report = download_missing_allowed_files(local_dir, wanted, workers)
+    else:
+        patterns = [PHYSICS_PATTERN]
+        if include_captions:
+            patterns.append(CAPTIONS_PATTERN)
+        snapshot_download(
+            repo_id=REPO_ID,
+            repo_type="dataset",
+            local_dir=str(local_dir),
+            allow_patterns=patterns,
+            max_workers=max(1, workers),
+        )
+        download_report = {
+            "mode": "snapshot_download",
+            "wanted_count": len(wanted),
+            "downloaded_count": None,
+        }
+    missing_after = [rel for rel in wanted if not (local_dir / Path(rel)).exists()]
+    return {
+        "wanted_count": len(wanted),
+        "workers": max(1, workers),
+        "reuse_report": reuse_report,
+        "download": download_report,
+        "missing_after_count": len(missing_after),
+        "missing_after": missing_after[:200],
+    }
+
+
+def legacy_snapshot_download(local_dir: Path, include_captions: bool) -> Path:
     patterns = [PHYSICS_PATTERN]
     if include_captions:
         patterns.append(CAPTIONS_PATTERN)
@@ -144,8 +284,15 @@ def run_data_sync(args: argparse.Namespace) -> dict[str, Any]:
         if args.skip_remote_summary
         else remote_size_summary()
     )
+    download_report = None
     if args.download:
-        download_physics_and_captions(local_dir, include_captions=not args.no_captions)
+        download_report = download_physics_and_captions(
+            local_dir,
+            include_captions=not args.no_captions,
+            missing_only=args.missing_only,
+            workers=args.download_workers,
+            reuse_roots=[Path(root) for root in args.reuse_existing_from],
+        )
 
     shards = discover_local_physics(local_dir)
     if args.scenes:
@@ -178,6 +325,7 @@ def run_data_sync(args: argparse.Namespace) -> dict[str, Any]:
         "physics_shards_local": len(shards),
         "caption_shards_local": len(manifest["caption_records"]),
         "remote_size_summary": summary,
+        "download_report": download_report,
         "manifest_path": str(manifest_path),
         "splits_path": str(splits_path),
         "config_path": str(config_path),
@@ -195,6 +343,9 @@ def main() -> None:
     parser.add_argument("--results-dir", default="results")
     parser.add_argument("--config", default="configs/phase14_world_model_train.yaml")
     parser.add_argument("--download", action="store_true")
+    parser.add_argument("--missing-only", action="store_true")
+    parser.add_argument("--download-workers", type=int, default=8)
+    parser.add_argument("--reuse-existing-from", nargs="*", default=[])
     parser.add_argument("--no-captions", action="store_true")
     parser.add_argument("--skip-remote-summary", action="store_true")
     parser.add_argument("--limit-shards", type=int, default=0)
