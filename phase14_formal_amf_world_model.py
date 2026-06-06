@@ -35,8 +35,42 @@ ARCHITECTURE_FREEZE = {
 def maybe_limit_tracks(scene_data, max_tracks: int | None):
     if not max_tracks or len(scene_data.tracks) <= max_tracks:
         return scene_data
-    limited_tracks = scene_data.tracks[:max_tracks]
-    return replace(scene_data, tracks=limited_tracks)
+    buckets = [
+        scene_data.fit_sequences,
+        scene_data.validation_sequences,
+        scene_data.test_sequences,
+    ]
+    per_bucket = max(1, max_tracks // len(buckets))
+    limited_tracks = []
+    seen_sequences: set[str] = set()
+    for bucket in buckets:
+        count = 0
+        for track in scene_data.tracks:
+            if track.sequence not in bucket:
+                continue
+            limited_tracks.append(track)
+            seen_sequences.add(track.sequence)
+            count += 1
+            if count >= per_bucket:
+                break
+    if len(limited_tracks) < max_tracks:
+        used_ids = {id(track) for track in limited_tracks}
+        for track in scene_data.tracks:
+            if id(track) in used_ids:
+                continue
+            limited_tracks.append(track)
+            seen_sequences.add(track.sequence)
+            if len(limited_tracks) >= max_tracks:
+                break
+    return replace(
+        scene_data,
+        tracks=limited_tracks,
+        sequences=sorted(seen_sequences),
+        fit_sequences=scene_data.fit_sequences & seen_sequences,
+        validation_sequences=scene_data.validation_sequences & seen_sequences,
+        train_sequences=scene_data.train_sequences & seen_sequences,
+        test_sequences=scene_data.test_sequences & seen_sequences,
+    )
 
 
 def append_jsonl(path: Path, record: dict[str, Any]) -> None:
@@ -109,6 +143,7 @@ def scene_result_to_log_records(scene_result: dict[str, Any], split: str = "test
                 "time_seconds": scene_result["elapsed_seconds"],
                 "previous_best_model": previous_name,
                 "previous_best_mse": hrec["expert_metrics"][previous_name]["mse"],
+                "model_export_path": scene_result.get("model_export_path"),
             }
         )
     return records
@@ -120,6 +155,8 @@ def run_formal_world_model(config: dict[str, Any], resume: bool = False, stop_af
     log_path = Path(output_paths["train_log_jsonl"])
     latest_path = Path(output_paths["latest_json"])
     live_path = Path(output_paths["metrics_live_json"])
+    export_dir = Path(output_paths.get("model_export_dir", "models/phase14"))
+    export_index_path = export_dir / "model_index.json"
     checkpoint = load_checkpoint(checkpoint_dir) if resume else None
     completed = list(checkpoint.get("completed_shards", [])) if checkpoint else []
     partial_metrics = list(checkpoint.get("partial_metrics", [])) if checkpoint else []
@@ -153,6 +190,7 @@ def run_formal_world_model(config: dict[str, Any], resume: bool = False, stop_af
             selector_step=float(config["selector"]["step"]),
             min_group=int(config["selector"]["min_group"]),
             previous_matrix={},
+            export_dir=export_dir,
         )
         scene_results.append(scene_result)
         completed.append(shard_id)
@@ -166,6 +204,7 @@ def run_formal_world_model(config: dict[str, Any], resume: bool = False, stop_af
             "latest_scene": scene_name,
             "latest_shard": str(shard_path),
             "records": partial_metrics[-len(scene_result["horizon_results"]) :],
+            "model_export_path": scene_result.get("model_export_path"),
         }
         live_path.parent.mkdir(parents=True, exist_ok=True)
         live_path.write_text(json.dumps(live, indent=2), encoding="utf-8")
@@ -179,9 +218,25 @@ def run_formal_world_model(config: dict[str, Any], resume: bool = False, stop_af
         "completed_shards": completed,
         "scene_results": scene_results,
         "partial_metrics": partial_metrics,
+        "model_export_dir": str(export_dir),
+        "model_exports": [
+            scene.get("model_export_path")
+            for scene in scene_results
+            if scene.get("model_export_path")
+        ],
         "elapsed_seconds": time.time() - started,
         "no_test_calibration": True,
     }
+    export_dir.mkdir(parents=True, exist_ok=True)
+    export_index = {
+        "format": "phase14_amf_world_model_export_index_v1",
+        "architecture_freeze": ARCHITECTURE_FREEZE,
+        "completed_shards": completed,
+        "exports": result["model_exports"],
+        "latest_json": str(latest_path),
+        "checkpoint": str(checkpoint_dir / "latest.ckpt"),
+    }
+    export_index_path.write_text(json.dumps(export_index, indent=2), encoding="utf-8")
     latest_path.parent.mkdir(parents=True, exist_ok=True)
     latest_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
     return result

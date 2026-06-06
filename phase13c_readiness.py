@@ -207,6 +207,7 @@ def make_config(shards: list[SceneShard], splits_path: Path) -> dict[str, Any]:
             "train_log_jsonl": "results/phase14_train_log.jsonl",
             "metrics_live_json": "results/phase14_metrics_live.json",
             "latest_json": "results/phase14_latest.json",
+            "model_export_dir": "models/phase14",
         },
         "preflight": {
             "max_tracks_per_scene": None,

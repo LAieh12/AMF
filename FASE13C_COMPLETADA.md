@@ -82,6 +82,15 @@ phase14_formal_amf_world_model.py
 run_phase14.py
 ```
 
+Phase 14 exporta modelo reusable durante la run:
+
+```text
+models/phase14/<scene>_<shard>.pkl
+models/phase14/model_index.json
+```
+
+Cada export por shard contiene modelos expertos entrenados, memorias AMF residual, memoria LTM residual, pesos/context bins del selector y metadata de arquitectura congelada.
+
 Comando listo:
 
 ```powershell

@@ -122,6 +122,9 @@ def update_phase14_config(config: dict[str, Any], shards: list[SceneShard], spli
     for key in ("model", "selector", "training", "checkpoint", "output_paths"):
         if key in config:
             updated[key] = config[key]
+    updated.setdefault("output_paths", {})["model_export_dir"] = config.get("output_paths", {}).get(
+        "model_export_dir", "models/phase14"
+    )
     return updated
 
 

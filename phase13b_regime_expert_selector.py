@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import itertools
 import json
+import pickle
 import time
 from collections import Counter, defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -43,6 +44,7 @@ class LtmContext:
     memories_created: int
     retrieved_per_prediction: int
     memory_mb: float
+    memory: Any = field(repr=False)
 
 
 def weight_grid(expert_count: int, step: float) -> list[np.ndarray]:
@@ -133,6 +135,7 @@ def make_ltm_context(
         memories_created=int(len(val_target)),
         retrieved_per_prediction=int(min(top_k, len(val_target))),
         memory_mb=float((val_keys.nbytes + residual.nbytes) / (1024 * 1024)),
+        memory=memory,
     )
 
 
@@ -348,6 +351,7 @@ def evaluate_scene_selector(
     selector_step: float,
     min_group: int,
     previous_matrix: dict[str, dict[str, str]],
+    export_dir: Path | None = None,
 ) -> dict[str, Any]:
     started = time.time()
     fit_samples = make_samples(scene_data.tracks, scene_data.fit_sequences, horizons, stride, memory_window)
@@ -368,6 +372,7 @@ def evaluate_scene_selector(
     )
     weights_to_try = weight_grid(len(EXPERTS), selector_step)
     horizon_results: dict[str, Any] = {}
+    export_horizons: dict[str, Any] = {}
 
     for horizon in horizons:
         hname = f"h{horizon}"
@@ -490,6 +495,44 @@ def evaluate_scene_selector(
                 regime: dict(counter) for regime, counter in dominant_counts.items()
             },
         }
+        export_horizons[hname] = {
+            "previous_best_model": previous_name,
+            "selector_weights": selector["weights"],
+            "selector_validation_losses": selector["validation_losses"],
+            "selector_counts": selector["counts"],
+            "context_thresholds": thresholds,
+            "identity_orientation_weights": expert_report["identity_orientation_weights"],
+            "ltm": {
+                "alpha": ltm.alpha,
+                "threshold": ltm.threshold,
+                "optional_beta": beta,
+                "optional_beta_threshold": beta_threshold,
+                "memory": ltm.memory,
+            },
+            "expert_order": list(EXPERTS),
+        }
+    export_path = None
+    if export_dir is not None:
+        export_dir.mkdir(parents=True, exist_ok=True)
+        shard_id = f"{scene_data.shard.scene}_{scene_data.shard.tar_path.stem}"
+        export_path = export_dir / f"{shard_id}.pkl"
+        export_payload = {
+            "format": "phase14_amf_world_model_shard_export_v1",
+            "scene": scene_data.shard.scene,
+            "shard": str(scene_data.shard.tar_path),
+            "experts": list(EXPERTS),
+            "horizons": list(horizons),
+            "trained_expert_models": bundle.trained_models,
+            "horizon_state": export_horizons,
+            "notes": [
+                "Contains fitted Ridge/AMF residual memories for base experts.",
+                "Contains fitted LTM residual memory per horizon.",
+                "Selector weights were learned on validation only.",
+                "H_event/H_workspace remain routing/context state, not dense predictor features.",
+            ],
+        }
+        with export_path.open("wb") as handle:
+            pickle.dump(export_payload, handle, protocol=pickle.HIGHEST_PROTOCOL)
     return {
         "scene": scene_data.shard.scene,
         "tar_path": str(scene_data.shard.tar_path),
@@ -500,6 +543,7 @@ def evaluate_scene_selector(
         "train_sequences": len(scene_data.train_sequences),
         "test_sequences": len(scene_data.test_sequences),
         "horizon_results": horizon_results,
+        "model_export_path": str(export_path) if export_path else None,
         "elapsed_seconds": time.time() - started,
     }
 

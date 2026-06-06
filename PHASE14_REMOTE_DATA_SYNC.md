@@ -57,6 +57,15 @@ results/phase14_data_sync_report.json
 configs/phase14_world_model_train.yaml
 ```
 
+Phase 14 exports reusable model artifacts while it runs:
+
+```text
+models/phase14/<scene>_<shard>.pkl
+models/phase14/model_index.json
+```
+
+Each shard export contains fitted expert models, AMF residual memories, LTM residual memory, selector weights/context bins, and the frozen architecture metadata.
+
 Check that `forbidden_asset_check.passed` is `true` in:
 
 ```text

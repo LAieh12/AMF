@@ -18,12 +18,15 @@ def main() -> None:
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--stop-after-scenes", type=int, default=None)
     args = parser.parse_args()
-    result = run_formal_world_model(load_config(Path(args.config)), resume=args.resume, stop_after_scenes=args.stop_after_scenes)
+    config = load_config(Path(args.config))
+    result = run_formal_world_model(config, resume=args.resume, stop_after_scenes=args.stop_after_scenes)
     print(
         {
             "completed_shards": result["completed_shards"],
             "resume_used": result["resume_used"],
-            "latest_json": load_config(Path(args.config))["output_paths"]["latest_json"],
+            "latest_json": config["output_paths"]["latest_json"],
+            "model_export_dir": result["model_export_dir"],
+            "model_export_index": f"{result['model_export_dir']}/model_index.json",
         }
     )
 

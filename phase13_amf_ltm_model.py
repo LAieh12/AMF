@@ -42,6 +42,7 @@ class PredictionBundle:
     val_preds: dict[str, dict[int, np.ndarray]]
     test_preds: dict[str, dict[int, np.ndarray]]
     model_report: dict[str, Any]
+    trained_models: dict[str, dict[int, dict[str, Any]]]
 
 
 class LtmResidualMemory:
@@ -102,6 +103,7 @@ def fit_predictors(
     val_preds: dict[str, dict[int, np.ndarray]] = {name: {} for name in BASE_PREDICTORS}
     test_preds: dict[str, dict[int, np.ndarray]] = {name: {} for name in BASE_PREDICTORS}
     model_report: dict[str, Any] = {}
+    trained_models: dict[str, dict[int, dict[str, Any]]] = {name: {} for name in BASE_PREDICTORS}
 
     for predictor in BASE_PREDICTORS:
         model_report[predictor] = {}
@@ -136,6 +138,7 @@ def fit_predictors(
                 radius=radius,
                 top_k=top_k,
             )
+            trained_models[predictor][horizon] = final_model
             test_preds[predictor][horizon] = predict_family(
                 final_model,
                 test_samples.x_by_predictor[predictor][horizon],
@@ -198,7 +201,12 @@ def fit_predictors(
             "validation_mse": val_loss,
         }
 
-    return PredictionBundle(val_preds=val_preds, test_preds=test_preds, model_report=model_report)
+    return PredictionBundle(
+        val_preds=val_preds,
+        test_preds=test_preds,
+        model_report=model_report,
+        trained_models=trained_models,
+    )
 
 
 def calibrate_ltm_variant(
